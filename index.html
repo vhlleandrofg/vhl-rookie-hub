@@ -262,6 +262,7 @@ footer{padding:30px 0 50px;font-size:.88rem;color:var(--ink-soft)}
         <div class="panel">
           <h3>Your path</h3>
           <p>New players start in the VHLM, the minor league, where builds are capped at 400 TPE. From there you're drafted to the VHL.</p>
+          <p>Skater or goalie, earning TPE works exactly the same. Only building differs: see the <a href="#build" data-goto-pos="skater">skater</a> or <a href="#build" data-goto-pos="goalie">goalie</a> build guide.</p>
           <p style="margin:0">Along the way you'll pick up one-time bonuses: 10 TPE when you reach 100 TPE as a first-generation player, and another 10 automatically when you graduate to the VHL.</p>
         </div>
       </div>
@@ -314,49 +315,94 @@ footer{padding:30px 0 50px;font-size:.88rem;color:var(--ink-soft)}
   <!-- BUILD -->
   <section class="block" id="build">
     <div class="wrap">
-      <div class="head"><div><h2>Build your player</h2><p class="muted">How to spend TPE so your player actually performs.</p></div></div>
-
-      <div class="grid2">
-        <div class="panel">
-          <h3>How attributes work</h3>
-          <p>On the portal you upgrade detailed attributes like Deking or Poke Checking. Each one feeds one or more of the ratings the sim actually uses, such as Defense or Puck Handling.</p>
-          <p style="margin:0">Levels get more expensive as they climb, so the same TPE buys less the higher an attribute goes. That's why spreading TPE across the attributes that feed a rating beats maxing one.</p>
-        </div>
-        <div>
-          <h4 style="margin-bottom:8px">TPE cost per level</h4>
-          <div class="scroll-x"><table class="data" id="costTable"></table></div>
-          <p class="small muted" style="margin-top:8px">Maxing a single attribute costs 225 TPE in total.</p>
+      <div class="head">
+        <div><h2>Build your player</h2><p class="muted">How to spend TPE so your player actually performs. Skaters and goalies build very differently.</p></div>
+        <div class="filters" id="posToggle" role="tablist" aria-label="Position">
+          <button class="chip" type="button" role="tab" data-pos="skater" aria-selected="true">Skater</button>
+          <button class="chip" type="button" role="tab" data-pos="goalie" aria-selected="false">Goalie</button>
         </div>
       </div>
 
-      <h3 style="margin-top:36px">Which ratings matter</h3>
-      <p class="muted">Ranked by how much they help, with the attributes that build each one.</p>
-      <div id="attrTiers"></div>
+      <!-- SKATER VIEW -->
+      <div id="build-skater">
+        <div class="grid2">
+          <div class="panel">
+            <h3>How skater attributes work</h3>
+            <p>On the portal you upgrade detailed attributes like Deking or Poke Checking. Each one feeds one or more of the ratings the sim actually uses, such as Defense or Puck Handling.</p>
+            <p style="margin:0">Levels get more expensive as they climb, so the same TPE buys less the higher an attribute goes. That's why spreading TPE across the attributes that feed a rating beats maxing one.</p>
+          </div>
+          <div>
+            <h4 style="margin-bottom:8px">TPE cost per level</h4>
+            <div class="scroll-x"><table class="data cost-table"></table></div>
+            <p class="small muted" style="margin-top:8px">Maxing a single attribute costs 225 TPE in total.</p>
+          </div>
+        </div>
 
-      <div class="grid2" style="margin-top:36px">
-        <div>
-          <h3 style="margin-bottom:10px">Rules of thumb</h3>
-          <ol class="rules">
-            <li>Build Defense first. It improves positioning, which helps at both ends of the ice, and every strong build invests in it.</li>
-            <li>Raise attributes in rotation. For example, take Poke Checking to 70, then Defensive Coverage to 70, then Deking to 70, before pushing any past 70.</li>
-            <li>Keep Scoring and Passing apart. If they're too close, your player hesitates and produces less. Grape found a gap of at least 5 works; older guides suggest about 10.</li>
-            <li>Forwards and defensemen can use the same build. Defensemen can lean a little more into Defense, forwards into Scoring.</li>
-            <li>Build the player you'll enjoy. Staying active matters more than a perfect build.</li>
-          </ol>
+        <h3 style="margin-top:36px">Which ratings matter</h3>
+        <p class="muted">Ranked by how much they help, with the attributes that build each one.</p>
+        <div id="attrTiers"></div>
+
+        <div class="grid2" style="margin-top:36px">
+          <div>
+            <h3 style="margin-bottom:10px">Rules of thumb</h3>
+            <ol class="rules">
+              <li>Build Defense first. It improves positioning, which helps at both ends of the ice, and every strong build invests in it.</li>
+              <li>Raise attributes in rotation. For example, take Poke Checking to 70, then Defensive Coverage to 70, then Deking to 70, before pushing any past 70.</li>
+              <li>Keep Scoring and Passing apart. If they're too close, your player hesitates and produces less. Grape found a gap of at least 5 works; older guides suggest about 10.</li>
+              <li>Forwards and defensemen can use the same build. Defensemen can lean a little more into Defense, forwards into Scoring.</li>
+              <li>Build the player you'll enjoy. Staying active matters more than a perfect build.</li>
+            </ol>
+          </div>
+          <div>
+            <h3 style="margin-bottom:10px">A starter VHLM build</h3>
+            <p class="small muted">Grape's 2025 baseline for skaters. It uses 386 of the 400 VHLM TPE and reaches 70 in Puck Handling, Defense, Skating and Scoring, leaving 14 TPE to personalize.</p>
+            <div class="scroll-x"><table class="data" id="starterTable"></table></div>
+          </div>
         </div>
-        <div>
-          <h3 style="margin-bottom:10px">A starter VHLM build</h3>
-          <p class="small muted">Grape's 2025 baseline for skaters. It uses 386 of the 400 VHLM TPE and reaches 70 in Puck Handling, Defense, Skating and Scoring, leaving 14 TPE to personalize.</p>
-          <div class="scroll-x"><table class="data" id="starterTable"></table></div>
-        </div>
+        <p class="source">Sources: <a href="https://vhlforum.com/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/" target="_blank" rel="noopener">Grape's Ultimate Guide to STHS Attributes</a> (2025), <a href="https://vhlforum.com/topic/62854-player-build-guide/" target="_blank" rel="noopener">Player Build Guide</a> (Gustav), <a href="https://vhlforum.com/topic/126750-a-beginners-guide-to-tpe-allocation/" target="_blank" rel="noopener">A Beginner's Guide to TPE Allocation</a> (Grape, 2022)</p>
       </div>
 
-      <div class="panel" style="margin-top:28px">
-        <h3>Goalies</h3>
-        <p>Goalie builds weren't changed by the hybrid attribute system, so they're simpler. Put TPE into the four primary attributes first: Rebound Control, Style Control, Hand Speed and Reaction Time.</p>
-        <p style="margin:0">Then add to the secondary ones: Skating, Size and Agility. Leadership can be ignored, and Penalty Shot is low priority. A common approach is to study the builds of goalies ahead of you on the depth chart.</p>
+      <!-- GOALIE VIEW -->
+      <div id="build-goalie" hidden>
+        <div class="grid2">
+          <div class="panel">
+            <h3>How goalie attributes work</h3>
+            <p>Goalies are simpler than skaters. There are no in-between attributes: the TPE you apply goes straight into the ratings the sim uses, like Reaction Time or Rebound Control.</p>
+            <p style="margin:0">The same rising cost per level applies, so pushing one rating very high gets expensive fast. Balance matters here too.</p>
+          </div>
+          <div>
+            <h4 style="margin-bottom:8px">TPE cost per level</h4>
+            <div class="scroll-x"><table class="data cost-table"></table></div>
+            <p class="small muted" style="margin-top:8px">VattghernCZ's advice for the VHLM: don't take any rating past 80 yet, because levels above that cost 5 TPE or more each.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:36px">Which ratings matter</h3>
+        <p class="muted">Every goalie guide agrees on the same priorities.</p>
+        <div id="goalieTiers"></div>
+
+        <div class="grid2" style="margin-top:36px">
+          <div>
+            <h3 style="margin-bottom:10px">A simple build order</h3>
+            <ol class="steps">
+              <li><div><b>Primaries to 70</b>Rebound Control, Style Control, Hand Speed and Reaction Time. These are cheap up to 70.</div></li>
+              <li><div><b>Secondaries to 70</b>Skating, Size and Agility. Don't skip them: low secondaries hold back what your primaries can do.</div></li>
+              <li><div><b>Back to the primaries</b>Keep raising the four primaries until you reach the VHLM cap of 400 TPE.</div></li>
+            </ol>
+          </div>
+          <div>
+            <h3 style="margin-bottom:10px">Goalie tips</h3>
+            <ol class="rules">
+              <li>The height and weight you pick when creating your goalie have no effect in the sim. Only the Size rating does.</li>
+              <li>Keep secondaries below your primaries. They support the primaries rather than replace them.</li>
+              <li>Skip Leadership and Penalty Shot in the VHLM. Their effect is tiny.</li>
+              <li>Look at the builds of successful goalies on the portal. Goalie building has been stable for years, so copying a proven build is a sound approach.</li>
+            </ol>
+            <p class="small muted">Want exact numbers? VattghernCZ's guide includes a full example VHLM goalie build as an image.</p>
+          </div>
+        </div>
+        <p class="source">Sources: <a href="https://vhlforum.com/topic/155129-my-take-on-a-vhlm-build-guide-with-the-new-400-tpa-cap-taken-into-account-and-some-suggested-builds/" target="_blank" rel="noopener">My Take on a VHLM Build Guide</a> (VattghernCZ, 2025), <a href="https://vhlforum.com/topic/62854-player-build-guide/" target="_blank" rel="noopener">Player Build Guide</a> (Gustav), <a href="https://vhlforum.com/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/" target="_blank" rel="noopener">Grape's Ultimate Guide</a></p>
       </div>
-      <p class="source">Sources: <a href="https://vhlforum.com/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/" target="_blank" rel="noopener">Grape's Ultimate Guide to STHS Attributes</a> (2025), <a href="https://vhlforum.com/topic/62854-player-build-guide/" target="_blank" rel="noopener">Player Build Guide</a> (Gustav), <a href="https://vhlforum.com/topic/126750-a-beginners-guide-to-tpe-allocation/" target="_blank" rel="noopener">A Beginner's Guide to TPE Allocation</a> (Grape, 2022)</p>
     </div>
   </section>
 
@@ -518,6 +564,21 @@ const DATA = {
       { name:"Fighting", inputs:"Grit, Fighting", text:"Mostly just hurts your team." } ]}
   ],
 
+  goalieTiers: [
+    { tier:"Primary: build these first", cls:"t-primary", items:[
+      { name:"Rebound Control", inputs:"Goalie rating", text:"Holds onto the puck instead of leaving a rebound in front of an open net. Your center then needs to win the faceoff." },
+      { name:"Style Control", inputs:"Goalie rating", text:"Keeps your goalie consistent through a whole game, so one bad stretch doesn't blow it open." },
+      { name:"Hand Speed", inputs:"Goalie rating", text:"Glove quickness. One of the most important tools a goalie has." },
+      { name:"Reaction Time", inputs:"Goalie rating", text:"How fast your goalie moves to make the save in the first place. Matters more than Skating or Agility." } ]},
+    { tier:"Secondary: support the primaries", cls:"t-secondary", items:[
+      { name:"Size", inputs:"Goalie rating", text:"How much net you cover without moving. Often considered the most valuable secondary." },
+      { name:"Skating", inputs:"Goalie rating", text:"Movement in and out of the crease, including playing the puck." },
+      { name:"Agility", inputs:"Goalie rating", text:"Overall quickness. Helps the other ratings but can't replace them." } ]},
+    { tier:"Skip in the VHLM", cls:"t-skip", items:[
+      { name:"Penalty Shot", inputs:"Goalie rating", text:"Only affects penalty shots and shootouts, where your other ratings count too." },
+      { name:"Leadership", inputs:"Goalie rating", text:"A negligible effect on team morale." } ]}
+  ],
+
   starterBuild: {
     tpe: [ ["Deking",20], ["Stick Handling",70], ["Poke Checking",70], ["Defensive Coverage",60], ["Offensive Vision",80], ["Speed",36], ["Slap Shot",50] ],
     result: "Puck Handling 70, Defense 70, Skating 70, Scoring 70, Strength 67.6, Passing 64"
@@ -558,6 +619,7 @@ const DATA = {
     { name:"A Breakdown of Earning Opportunities", type:"TPE Guide", mode:"Forum", url:F+"/topic/164653-a-breakdown-of-earning-opportunities/", used:"Main source for Start here, How to claim, Ways to earn and Career tasks." },
     { name:"TPE & Point Tasks Tutorial", type:"TPE Guide", mode:"Forum", url:F+"/topic/98611-tpe-point-tasks-tutorial/", used:"Claiming steps, multi-week claims, reviewing and game recaps." },
     { name:"Grape's Ultimate Guide to STHS Attributes and BuildCrafting", type:"Build Guide", mode:"Forum", url:F+"/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/", used:"Rating tiers, level costs and the starter build." },
+    { name:"My Take on a VHLM Build Guide", type:"Build Guide", mode:"Forum", url:F+"/topic/155129-my-take-on-a-vhlm-build-guide-with-the-new-400-tpa-cap-taken-into-account-and-some-suggested-builds/", used:"Goalie build order and priorities; also has skater builds by role." },
     { name:"Player Build Guide", type:"Build Guide", mode:"Forum", url:F+"/topic/62854-player-build-guide/", used:"Goalie builds and the Scoring/Passing gap." },
     { name:"A Beginner's Guide to TPE Allocation", type:"Build Guide", mode:"Forum", url:F+"/topic/126750-a-beginners-guide-to-tpe-allocation/", used:"Level costs and spreading TPE across attributes." },
     { name:"Help for Finding Trivia Answers", type:"Trivia", mode:"Forum", url:F+"/topic/120402-help-for-finding-trivia-answers/", used:"The trivia section." },
@@ -650,16 +712,30 @@ function renderEarn(){
 
 /* ========================================================= build */
 function renderBuild(){
-  $("#costTable").innerHTML = `<thead><tr><th>Levels</th>${DATA.costBands.map(b => `<th>${b[0]}</th>`).join("")}</tr></thead>
+  const costHTML = `<thead><tr><th>Levels</th>${DATA.costBands.map(b => `<th>${b[0]}</th>`).join("")}</tr></thead>
     <tbody><tr><td>TPE per level</td>${DATA.costBands.map(b => `<td class="num">${b[1]}</td>`).join("")}</tr></tbody>`;
-  $("#attrTiers").innerHTML = DATA.attrTiers.map(t => `<div class="attr-tier"><h4>${esc(t.tier)}</h4><div class="attrs">
-    ${t.items.map(a => `<div class="attr ${t.cls}"><b>${esc(a.name)}</b><div class="inputs">Built by: ${esc(a.inputs)}</div><p>${esc(a.text)}</p></div>`).join("")}</div></div>`).join("");
+  document.querySelectorAll(".cost-table").forEach(t => t.innerHTML = costHTML);
+  const tiersHTML = (tiers, showInputs) => tiers.map(t => `<div class="attr-tier"><h4>${esc(t.tier)}</h4><div class="attrs">
+    ${t.items.map(a => `<div class="attr ${t.cls}"><b>${esc(a.name)}</b>${showInputs ? `<div class="inputs">Built by: ${esc(a.inputs)}</div>` : ""}<p>${esc(a.text)}</p></div>`).join("")}</div></div>`).join("");
+  $("#attrTiers").innerHTML = tiersHTML(DATA.attrTiers, true);
+  $("#goalieTiers").innerHTML = tiersHTML(DATA.goalieTiers, false);
   const sb = DATA.starterBuild, sum = sb.tpe.reduce((a,r) => a + r[1], 0);
   $("#starterTable").innerHTML = `<thead><tr><th>Attribute</th><th>TPE</th></tr></thead><tbody>
     ${sb.tpe.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td></tr>`).join("")}
     <tr><td><b>Total</b></td><td class="num">${sum}</td></tr></tbody>`;
   $("#starterTable").insertAdjacentHTML("afterend", `<p class="small muted" style="margin-top:8px">Result: ${esc(sb.result)}. Unbuilt ratings stay at 40.</p>`);
 }
+
+
+/* ========================================================= position toggle */
+function setPosition(pos){
+  $("#build-skater").hidden = pos !== "skater";
+  $("#build-goalie").hidden = pos !== "goalie";
+  $("#posToggle").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-selected", c.dataset.pos === pos));
+  store.set("vhl-position", pos);
+}
+$("#posToggle").querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => setPosition(c.dataset.pos)));
+document.querySelectorAll("[data-goto-pos]").forEach(a => a.addEventListener("click", () => setPosition(a.dataset.gotoPos)));
 
 /* ========================================================= timeline */
 function renderTimeline(){
@@ -710,6 +786,7 @@ $("#foot").innerHTML = `Made for first-generation VHL players. Rules last checke
 
 renderTiers(); renderChecklist(); renderEarn(); renderBuild(); renderTimeline();
 renderProjectionControls(); renderProjection(); renderTrivia(); renderResources();
+setPosition(store.get("vhl-position", "skater") === "goalie" ? "goalie" : "skater");
 </script>
 </body>
 </html>
