@@ -481,7 +481,7 @@ const DATA = {
 
   tasks: {
     practice:  { name:"Practice Facility", tpe:2, kind:"uncapped", note:"Button on Player Management" },
-    welfare:   { name:"Welfare", tpe:4, kind:"capped", note:"Button on Player Management; lowers this week's cap to 10" },
+    welfare:   { name:"Welfare", tpe:4, kind:"capped", note:"Button on Player Management; lowers this week's cap to 10 (Pension pays 5, but needs two past 700+ TPE players)" },
     trivia:    { name:"Trivia", tpe:2, kind:"capped", note:"Two questions on the portal, 1 TPE each", href:"#trivia", linkText:"Where to find answers" },
     press:     { name:"Press Conference", tpe:2, kind:"capped", note:"Answer your team's 6 questions" },
     vhlcom:    { name:"VHL.com task", tpe:2, kind:"capped", note:"150-word article or a simple graphic" },
@@ -503,8 +503,8 @@ const DATA = {
         how:"Graphics may use at most one AI-generated element, such as a background.", link:[F+"/forum/108-graphicsvideos/","Graphics/Videos forum"] },
       { name:"Podcast", tpe:"6", kind:"capped", req:"10+ minutes, VHL-related", text:"Often called the easiest full task, if you're comfortable being heard publicly.",
         how:"Longer podcasts and shows with several hosts have their own rules for multi-week claims.", link:[F+"/topic/25912-podcast-guidelines/","Podcast guidelines"] },
-      { name:"Welfare", tpe:"4", kind:"capped", req:"One button click", text:"For weeks you can't do a point task. 4 TPE on your first player; 5 once you've completed a full career.",
-        how:"Click Welfare on Player Management. It lowers your capped limit for that week from 12 to 10.", link:[P+"/players/playermgmt","Player Management"] },
+      { name:"Welfare / Pension", tpe:"4–5", kind:"capped", req:"One button click", text:"For weeks you can't do a point task. Welfare pays 4 TPE. Pension pays 5 and is unlocked once you've had two players reach 700+ TPE.",
+        how:"Click the button on Player Management. It lowers your capped limit for that week from 12 to 10. As a first-gen player you'll be claiming Welfare, so plan around 4 TPE.", link:[F+"/topic/31991-vhl-rule-book/","VHL Rule Book, section 10"] },
       { name:"Affiliate PT", tpe:"6", kind:"capped", req:"A point task done in the SBA or EFL", text:"Claim it in a week you don't do a VHL point task.",
         how:"You must claim it during the same week you completed it in the partner league." }
     ]},
@@ -622,6 +622,7 @@ const DATA = {
     { name:"My Take on a VHLM Build Guide", type:"Build Guide", mode:"Forum", url:F+"/topic/155129-my-take-on-a-vhlm-build-guide-with-the-new-400-tpa-cap-taken-into-account-and-some-suggested-builds/", used:"Goalie build order and priorities; also has skater builds by role." },
     { name:"Player Build Guide", type:"Build Guide", mode:"Forum", url:F+"/topic/62854-player-build-guide/", used:"Goalie builds and the Scoring/Passing gap." },
     { name:"A Beginner's Guide to TPE Allocation", type:"Build Guide", mode:"Forum", url:F+"/topic/126750-a-beginners-guide-to-tpe-allocation/", used:"Level costs and spreading TPE across attributes." },
+    { name:"VHL Rule Book", type:"Rules", mode:"Forum", url:F+"/topic/31991-vhl-rule-book/", used:"Section 10 covers earning TPE, including Welfare and Pension." },
     { name:"Help for Finding Trivia Answers", type:"Trivia", mode:"Forum", url:F+"/topic/120402-help-for-finding-trivia-answers/", used:"The trivia section." },
     { name:"Alex's Guide to Building", type:"Build Guide", mode:"Forum", url:F+"/topic/117307-alexs-guide-to-building/", used:"Not summarized here yet." },
     { name:"New Player TPE Checklist Guide", type:"TPE Guide", mode:"Forum", url:F+"/topic/123960-new-player-tpe-checklist-guide/", used:"Not summarized here yet." },
