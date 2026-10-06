@@ -2,490 +2,872 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>VHL Rookie Hub</title>
+<meta name="description" content="Everything a new VHL player needs: set up your player card, this week's checklist, Rookie Camp lessons and build guides.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+*{box-sizing:border-box}
+[hidden]{display:none!important}
 :root{
-  --ice:#EEF3F6; --ice-2:#E1E9EF; --paper:#FFFFFF;
-  --boards:#13263B; --boards-2:#1C3450;
-  --ink:#13263B; --ink-soft:#4A5E73; --line:#C9D5DF;
-  --red:#C8102E; --blue:#1F5FA8; --amber:#F2B233;
-  --capped:#1F5FA8; --uncapped:#1B8A5A; --warn:#9A5B00;
-  --display:"Saira Condensed","Arial Narrow","Roboto Condensed",sans-serif;
-  --body:"Saira",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ice:#F2F7FB; --snow:#FFFFFF; --frost:#E3EEF6; --frost-2:#CFDFEB;
+  --ink:#172A46; --ink-soft:#56677E;
+  --blue:#1F6FE0; --blue-soft:#E3EDFD;
+  --red:#E5383B; --red-soft:#FDE8E8;
+  --green:#14935F; --green-soft:#E0F4EA;
+  --gold:#FFB703; --gold-soft:#FFF3D3; --gold-ink:#7A5200;
+  --puck:#14181F;
+  --shadow:0 14px 34px -16px rgba(23,42,70,.35);
+  --display:"Fredoka","Varela Round","Nunito",system-ui,sans-serif;
+  --body:"Lexend",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --tabbar:66px;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ice:#0E1A27; --ice-2:#142333; --paper:#172A3D; --boards:#081320; --boards-2:#10233A;
-    --ink:#E6EEF4; --ink-soft:#9DB0C2; --line:#2A415A; --red:#E8384F; --blue:#6FA6E8;
-    --capped:#6FA6E8; --uncapped:#4CC38A; --warn:#E3A64A;
+    --ice:#0F1B2B; --snow:#172639; --frost:#22354E; --frost-2:#2E4563;
+    --ink:#EAF1F8; --ink-soft:#A3B5C9;
+    --blue:#6AA5FF; --blue-soft:#1B3255;
+    --red:#FF6B6E; --red-soft:#3B2029;
+    --green:#3FCB8E; --green-soft:#15372B;
+    --gold:#FFC53D; --gold-soft:#3A2F12; --gold-ink:#FFD976;
+    --puck:#05080C;
+    --shadow:0 14px 34px -16px rgba(0,0,0,.7);
+    color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --ice:#0E1A27; --ice-2:#142333; --paper:#172A3D; --boards:#081320; --boards-2:#10233A;
-  --ink:#E6EEF4; --ink-soft:#9DB0C2; --line:#2A415A; --red:#E8384F; --blue:#6FA6E8;
-  --capped:#6FA6E8; --uncapped:#4CC38A; --warn:#E3A64A;
+  --ice:#0F1B2B; --snow:#172639; --frost:#22354E; --frost-2:#2E4563;
+  --ink:#EAF1F8; --ink-soft:#A3B5C9;
+  --blue:#6AA5FF; --blue-soft:#1B3255;
+  --red:#FF6B6E; --red-soft:#3B2029;
+  --green:#3FCB8E; --green-soft:#15372B;
+  --gold:#FFC53D; --gold-soft:#3A2F12; --gold-ink:#FFD976;
+  --puck:#05080C;
+  --shadow:0 14px 34px -16px rgba(0,0,0,.7);
+  color-scheme:dark;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
-body{margin:0;background:var(--ice);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.55}
-a{color:var(--blue)}
-:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-h1,h2,h3,h4{font-family:var(--display);line-height:1.08;margin:0}
-h2{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:800}
-h3{font-size:1.35rem;font-weight:700}
-h4{font-size:1.1rem;font-weight:700}
-p{margin:0 0 .8em;max-width:70ch}
-.muted{color:var(--ink-soft)}
-.small{font-size:.88rem}
-button{font:inherit;cursor:pointer}
+html{scroll-padding-top:calc(84px + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+body{margin:0;background:var(--ice);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+a{color:var(--blue);text-underline-offset:2px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.1;margin:0}
+h1{font-size:clamp(2.1rem,5.2vw,3rem)}
+h2{font-size:clamp(1.45rem,3vw,1.85rem)}
+h3{font-size:1.22rem}
+h4{font-size:1.05rem}
+p{margin:0 0 .75em;max-width:66ch}
+button{font:inherit;color:inherit;cursor:pointer}
 table{border-collapse:collapse;width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.sub{color:var(--ink-soft);margin:6px 0 18px;max-width:62ch}
+.small{font-size:.88rem}
+.soft{color:var(--ink-soft)}
 .scroll-x{overflow-x:auto}
+.skip{position:absolute;left:-999px;top:8px}
+.skip:focus{left:12px;z-index:99;background:var(--snow);padding:8px 12px;border-radius:10px}
+.ic{width:20px;height:20px;flex:none}
 
-/* nav */
-.nav{position:sticky;top:0;z-index:10;background:var(--boards);border-bottom:4px solid var(--red)}
-.nav .wrap{display:flex;align-items:center;gap:14px;height:60px}
-.brand{font-family:var(--display);font-weight:800;font-size:1.3rem;color:#fff;text-decoration:none;white-space:nowrap}
-.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
-.nav ul::-webkit-scrollbar{display:none}
-.nav a.link{display:block;padding:6px 9px;color:#C9D8E6;text-decoration:none;border-radius:6px;white-space:nowrap;font-size:.9rem}
-.nav a.link:hover{color:#fff;background:rgba(255,255,255,.08)}
-.theme-toggle{background:transparent;border:1.5px solid #3A5775;color:#C9D8E6;border-radius:8px;padding:4px 10px;font-size:.85rem;white-space:nowrap}
+/* ---------- header + tabs ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ice);border-bottom:1.5px solid var(--frost)}
+@supports (backdrop-filter:blur(8px)){.top{background:color-mix(in srgb,var(--ice) 86%,transparent);backdrop-filter:blur(10px)}}
+.top .wrap{display:flex;align-items:center;gap:16px;height:66px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:600;font-size:1.3rem;white-space:nowrap}
+.brand svg{width:32px;height:32px}
+.tabs{display:flex;gap:4px;margin-left:auto}
+.tab{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;color:var(--ink-soft);text-decoration:none;font-weight:500;font-size:.98rem}
+.tab:hover{background:var(--frost);color:var(--ink)}
+.tab[aria-current="page"]{background:var(--ink);color:var(--snow)}
+.bottombar{display:none}
+@media (max-width:760px){
+  .top .tabs{display:none}
+  .top .wrap{height:58px}
+  body{padding-bottom:var(--tabbar)}
+  .bottombar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--snow);border-top:1.5px solid var(--frost);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));gap:2px}
+  .bottombar .tab{flex:1;flex-direction:column;justify-content:center;gap:2px;padding:6px 2px;border-radius:14px;font-size:.72rem;font-weight:600}
+  .bottombar .tab .ic{width:22px;height:22px}
+  .bottombar .tab[aria-current="page"]{background:var(--blue-soft);color:var(--blue)}
+}
 
-/* hero */
-.hero{background:var(--boards);color:#fff;padding:44px 0 52px;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:
-  radial-gradient(circle at 88% 30%, transparent 0 118px, rgba(200,16,46,.55) 118px 122px, transparent 122px),
-  linear-gradient(90deg, transparent 0 calc(100% - 180px), rgba(31,95,168,.35) calc(100% - 180px) calc(100% - 168px), transparent calc(100% - 168px))}
-.hero .wrap{position:relative}
-.hero h1{font-size:clamp(2.4rem,6.5vw,4.4rem);font-weight:800;max-width:14ch}
-.hero .lede{color:#C9D8E6;margin-top:14px;font-size:1.08rem}
-.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:28px 0 12px}
-@media (max-width:720px){.tiers{grid-template-columns:repeat(2,1fr)}}
-.tier{background:var(--boards-2);color:#fff;border:2px solid #2C4866;border-radius:10px;padding:12px 14px;text-align:left}
-.tier:hover{border-color:#5E7F9F}
-.tier[aria-pressed="true"]{border-color:var(--amber);background:#223E5E}
-.tier .time{font-family:var(--display);font-weight:800;font-size:1.6rem;display:block}
-.tier .nm{display:block;color:#C9D8E6;font-size:.9rem}
-.tier .pts{display:block;color:var(--amber);font-weight:600;font-size:.9rem;margin-top:2px}
-.capnote{color:#9DB0C2;font-size:.9rem;margin:0 0 18px}
-.board{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px;align-items:start}
-@media (max-width:820px){.board{grid-template-columns:1fr}}
-.checklist{background:var(--paper);color:var(--ink);border-radius:12px;padding:6px 0;box-shadow:0 0 0 1px var(--line)}
-.check{display:flex;gap:14px;align-items:flex-start;padding:14px 18px;border-bottom:1px solid var(--line)}
+/* ---------- views + sections ---------- */
+.view{padding-bottom:72px}
+.view[hidden]{display:none}
+.view-head{padding:34px 0 4px}
+.sec{margin-top:52px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.count{font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--ink-soft);white-space:nowrap}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.grid2{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- surfaces, buttons, chips, tags ---------- */
+.panel{background:var(--snow);border:1.5px solid var(--frost);border-radius:20px;padding:20px}
+.raise{border-color:transparent;box-shadow:var(--shadow)}
+.panel h3{margin-bottom:6px}
+.panel p:last-child{margin-bottom:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:11px 20px;background:var(--blue);color:#fff;font:600 1rem var(--body);text-decoration:none;cursor:pointer;transition:transform .12s, filter .12s}
+.btn:hover{filter:brightness(1.07)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--frost);color:var(--ink)}
+.btn.small{padding:7px 14px;font-size:.9rem}
+.btn[disabled]{opacity:.45;cursor:not-allowed;filter:none;transform:none}
+.linkbtn{background:none;border:0;padding:0;color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--frost-2);background:var(--snow);color:var(--ink);border-radius:999px;padding:7px 16px;font:500 .95rem var(--body);cursor:pointer}
+.chip:hover{border-color:var(--ink-soft)}
+.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--ink);color:var(--snow);border-color:var(--ink)}
+.tag{display:inline-block;font-size:.74rem;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap;vertical-align:2px}
+.tag.capped{background:var(--blue-soft);color:var(--blue)}
+.tag.uncapped{background:var(--green-soft);color:var(--green)}
+.tag.check-it{background:var(--gold-soft);color:var(--gold-ink)}
+.source{font-size:.84rem;color:var(--ink-soft);margin-top:18px;max-width:none}
+.callout{background:var(--gold-soft);border-radius:18px;padding:16px 20px}
+.callout p:last-child{margin:0}
+
+/* ---------- home ---------- */
+.home-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:28px;align-items:start;margin-top:22px}
+@media (max-width:880px){.home-grid{grid-template-columns:minmax(0,1fr)}}
+.home-grid > div > * + *{margin-top:22px}
+
+/* player card: the one bold element */
+.pcard{position:relative;background:var(--snow);border-radius:30px;box-shadow:var(--shadow);overflow:hidden}
+.pcard .band{height:92px;background:#1F6FE0;position:relative}
+.pcard .band::before{content:"";position:absolute;left:0;right:0;bottom:22px;height:5px;background:#fff;opacity:.9}
+.pcard .band::after{content:"";position:absolute;left:0;right:0;bottom:10px;height:9px;background:var(--red)}
+.pcard .edit{position:absolute;right:16px;top:14px;border:0;color:#fff;font:600 .9rem var(--body);background:rgba(255,255,255,.2);border-radius:999px;padding:6px 14px;cursor:pointer}
+.pcard .edit:hover{background:rgba(255,255,255,.32)}
+.pcard .mono{position:absolute;left:22px;top:46px;width:92px;height:92px;border-radius:50%;background:var(--puck);color:#fff;font-family:var(--display);font-weight:700;font-size:2.1rem;display:grid;place-items:center;border:6px solid var(--snow)}
+.pcard .who{padding:12px 22px 0 130px;min-height:62px}
+.pcard .who b{display:block;font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1.15;overflow-wrap:anywhere}
+.pcard .who span{color:var(--ink-soft);font-size:.95rem}
+.pcard .tpe{display:flex;align-items:baseline;gap:10px;padding:16px 22px 0}
+.pcard .tpe .n{font-family:var(--display);font-weight:700;font-size:4.4rem;line-height:.9;font-variant-numeric:tabular-nums}
+.pcard .tpe .u{font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--ink-soft)}
+.track{position:relative;margin:16px 22px 0;height:14px;border-radius:999px;background:var(--frost)}
+.track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--blue);transition:width .5s}
+.track .mark{position:absolute;top:-4px;width:4px;height:22px;border-radius:2px;background:var(--ink)}
+.marks{position:relative;height:22px;margin:6px 22px 0;font-size:.78rem;color:var(--ink-soft)}
+.marks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.marks span.end{transform:translateX(-100%)}
+.pcard .eta{padding:10px 22px 0;margin:0;font-size:.95rem}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:18px;border-top:1.5px dashed var(--frost-2)}
+.fact{padding:14px 12px 16px 22px}
+.fact + .fact{border-left:1.5px dashed var(--frost-2)}
+.fact small{display:block;color:var(--ink-soft);font-size:.78rem}
+.fact b{font-family:var(--display);font-weight:600;font-size:1.15rem}
+@media (max-width:420px){.fact{padding-left:14px}.pcard .tpe .n{font-size:3.6rem}}
+
+/* setup */
+.setup{border-radius:30px;padding:26px}
+.setup .stepno{font-family:var(--display);font-weight:600;color:var(--blue)}
+.setup h2{margin:6px 0 16px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.opt-big{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--snow);border:2px solid var(--frost-2);border-radius:16px;padding:14px 16px;font-weight:600;transition:border-color .12s, background .12s}
+.opt-big small{font-weight:400;color:var(--ink-soft)}
+.opt-big:hover{border-color:var(--blue)}
+.opt-big[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft)}
+.opt-big.right{border-color:var(--green);background:var(--green-soft)}
+.opt-big.wrong{border-color:var(--red);background:var(--red-soft)}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:600;margin-bottom:4px}
+.field .hint{display:block;font-size:.84rem;color:var(--ink-soft);margin-top:4px}
+.input,select{font:inherit;color:var(--ink);background:var(--ice);border:1.5px solid var(--frost-2);border-radius:12px;padding:10px 12px;width:100%}
+.input:focus,select:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px var(--blue-soft)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* next up */
+.next{display:flex;gap:16px;align-items:center}
+.next .ring-mini{flex:none}
+.next h3{margin-bottom:2px}
+.next p{margin:0 0 10px;color:var(--ink-soft)}
+
+/* first-week path */
+.progress{height:10px;background:var(--frost);border-radius:999px;overflow:hidden;margin:10px 0 16px}
+.progress div{height:100%;background:var(--green);border-radius:999px;transition:width .4s}
+.path{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--snow);border:1.5px solid var(--frost);border-radius:16px;padding:12px 14px}
+.step input{width:22px;height:22px;margin-top:3px;accent-color:var(--green)}
+.step .st{font-weight:600;cursor:pointer}
+.step.done{background:transparent}
+.step.done .st{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:var(--green);text-decoration-thickness:2px}
+.step .sd{font-size:.92rem;color:var(--ink-soft);margin-top:2px}
+.step.done .sd{display:none}
+
+/* camp mini + badges */
+.camp-mini .dots{margin:8px 0 12px}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dots i{width:28px;height:8px;border-radius:999px;background:var(--frost)}
+.dots i.on{background:var(--green)}
+.dots i.now{background:var(--blue)}
+.badges{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:480px){.badges{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.badge{text-align:center;font-size:.8rem;line-height:1.25}
+.badge .medal{width:64px;height:64px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#3D2A00;box-shadow:inset 0 -5px 0 rgba(0,0,0,.12)}
+.badge .medal .ic{width:28px;height:28px}
+.badge b{display:block;font-family:var(--display);font-weight:600;font-size:.95rem}
+.badge span{color:var(--ink-soft)}
+.badge.locked .medal{background:transparent;color:var(--ink-soft);border:2px dashed var(--frost-2);box-shadow:none}
+
+/* ---------- week ---------- */
+.deadline{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--gold-soft);border-radius:20px;padding:14px 18px;margin-top:18px}
+.deadline .ic{width:28px;height:28px;color:var(--gold-ink)}
+.deadline b{font-family:var(--display);font-weight:600;font-size:1.6rem;line-height:1}
+.deadline span{color:var(--gold-ink)}
+.tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (max-width:720px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tier{text-align:left;background:var(--snow);border:2px solid var(--frost);border-radius:18px;padding:12px 14px;transition:border-color .12s, transform .12s}
+.tier:hover{border-color:var(--frost-2)}
+.tier:active{transform:scale(.98)}
+.tier[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft)}
+.tier .time{display:block;font-family:var(--display);font-weight:600;font-size:1.45rem}
+.tier .nm{display:block;font-size:.88rem;color:var(--ink-soft)}
+.tier .pts{display:block;font-weight:600;font-size:.9rem;color:var(--blue);margin-top:2px}
+.capnote{font-size:.9rem;color:var(--ink-soft);margin:12px 0 0}
+.board{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:18px;align-items:start;margin-top:22px}
+@media (max-width:820px){.board{grid-template-columns:minmax(0,1fr)}}
+.checklist{padding:6px 0}
+.check{display:flex;gap:14px;align-items:center;padding:13px 18px;border-bottom:1.5px solid var(--frost);cursor:pointer}
 .check:last-child{border-bottom:0}
-.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--red);flex:none}
-.check label{flex:1;cursor:pointer}
+@media (max-width:420px){.check .ti{display:none}.check{padding:12px 14px;gap:12px}}
+.check input{width:24px;height:24px;accent-color:var(--green);flex:none;margin:0}
+.check .ti{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--frost);color:var(--ink);flex:none}
+.check .tx{flex:1;min-width:0}
 .check .t{font-weight:600}
-.check .n{display:block;font-size:.88rem;color:var(--ink-soft)}
-.check.done .t{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
-.check .val{font-family:var(--display);font-weight:800;font-size:1.5rem;min-width:2.2ch;text-align:right}
-.tag{display:inline-block;font-size:.74rem;font-weight:600;padding:0 8px;border-radius:99px;margin-left:6px;vertical-align:2px;border:1.5px solid currentColor;white-space:nowrap}
-.tag.capped{color:var(--capped)} .tag.uncapped{color:var(--uncapped)} .tag.check-it{color:var(--warn)}
-.scoreboard{background:#050B12;border-radius:12px;padding:18px;border:3px solid #2C4866;text-align:center}
-.scoreboard .lbl{color:#9DB0C2;font-size:.9rem}
-.digits{font-family:var(--display);font-weight:800;font-size:5.2rem;line-height:1;color:var(--amber);font-variant-numeric:tabular-nums}
-.digits small{font-size:2rem;color:#7F6320}
-.split{display:flex;justify-content:center;gap:16px;margin:10px 0 14px;font-size:.9rem;color:#C9D8E6;flex-wrap:wrap}
-.split b{font-family:var(--display);font-size:1.2rem;color:#fff}
-.btn-ghost{background:transparent;border:1.5px solid #5E7F9F;color:#C9D8E6;border-radius:8px;padding:6px 12px;font-size:.88rem}
-.btn-ghost:hover{color:#fff;border-color:#fff}
-.weeknote{font-size:.8rem;color:#7C93A8;margin:10px 0 0}
-
-/* sections */
-section.block{padding:60px 0;border-bottom:1px solid var(--line)}
-.head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
-.head p{margin:8px 0 0}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-@media (max-width:820px){.grid3,.grid2{grid-template-columns:1fr}}
-.ruled h3{border-top:4px solid var(--blue);padding-top:10px;margin-bottom:8px}
-.ruled > div:nth-child(2) h3{border-color:var(--red)}
-.ruled > div:nth-child(3) h3{border-color:var(--amber)}
-.panel{background:var(--paper);border-radius:12px;padding:20px;box-shadow:0 0 0 1px var(--line)}
-.panel h3{margin-bottom:8px}
-.source{font-size:.85rem;color:var(--ink-soft);margin-top:14px}
-.source a{white-space:nowrap}
-.callout{border-left:5px solid var(--amber);background:var(--paper);padding:14px 18px;border-radius:0 10px 10px 0;box-shadow:0 0 0 1px var(--line);margin-top:22px}
-.callout p:last-child{margin-bottom:0}
-
-/* steps */
+.check .n{display:block;font-size:.86rem;color:var(--ink-soft)}
+.check.done .t{text-decoration:line-through;text-decoration-color:var(--green);text-decoration-thickness:2px}
+.check.done .ti{background:var(--green-soft);color:var(--green)}
+.check .val{font-family:var(--display);font-weight:700;font-size:1.6rem;min-width:2ch;text-align:right}
+.jumbo{text-align:center}
+.ring{display:block;margin:0 auto}
+.ring .bg{stroke:var(--frost)}
+.ring .fg{stroke:var(--blue);transition:stroke-dashoffset .5s, stroke .3s}
+.ring.full .fg{stroke:var(--green)}
+.ring text{font-family:var(--display);fill:var(--ink)}
+.jumbo .lbl{font-family:var(--display);font-weight:600;font-size:1.1rem;margin-top:4px}
+.split{display:flex;justify-content:center;gap:16px;margin:6px 0 14px;font-size:.88rem;color:var(--ink-soft);flex-wrap:wrap}
+.split b{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
+.jumbo .btn{width:100%}
+.jumbo .note{font-size:.8rem;color:var(--ink-soft);margin:10px 0 0}
 .steps{list-style:none;counter-reset:s;margin:0;padding:0;display:grid;gap:10px}
-.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;background:var(--paper);border-radius:10px;padding:14px 16px;box-shadow:0 0 0 1px var(--line)}
-.steps li::before{content:counter(s);font-family:var(--display);font-weight:800;font-size:1.6rem;color:#fff;background:var(--red);border-radius:8px;display:grid;place-items:center;height:44px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.steps li::before{content:counter(s);font-family:var(--display);font-weight:700;font-size:1.25rem;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff}
 .steps b{display:block}
+.steps li div{padding-top:7px}
+.opt{display:flex;gap:10px;align-items:flex-start;margin:6px 0;font-size:.95rem}
+.opt input{margin-top:5px;accent-color:var(--blue)}
+input[type="range"]{width:100%;accent-color:var(--blue)}
+.big-n{font-family:var(--display);font-weight:700;font-size:4rem;line-height:1}
+.bar-row{display:grid;grid-template-columns:118px 1fr 46px;gap:10px;align-items:center;margin:8px 0;font-size:.9rem}
+.bar-track{height:12px;background:var(--frost);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;background:var(--frost-2);border-radius:999px;transition:width .3s}
+.bar-row.sel .bar-fill{background:var(--blue)}
+.bar-row b{font-family:var(--display);font-size:1.1rem;text-align:right}
 
-/* tabs + cards */
-.filters{display:flex;gap:6px;flex-wrap:wrap}
-.chip{background:var(--paper);color:var(--ink);border:1.5px solid var(--line);border-radius:99px;padding:5px 14px;font-size:.9rem}
-.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--ink);color:var(--ice);border-color:var(--ink)}
-.tab-blurb{margin:16px 0 4px}
-.tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;margin-top:12px}
-.task{background:var(--paper);border-radius:10px;padding:16px;border-left:5px solid var(--capped);box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column;gap:6px}
-.task.unc{border-left-color:var(--uncapped)}
-.task .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-.task .big{font-family:var(--display);font-weight:800;font-size:1.7rem;line-height:1;white-space:nowrap}
-.task .big span{font-size:.85rem;color:var(--ink-soft);margin-left:3px}
-.task .req{font-size:.85rem;font-weight:600;color:var(--ink-soft)}
+/* ---------- learn ---------- */
+.camp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.camp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.camp-grid{grid-template-columns:1fr}}
+.lesson{display:flex;gap:14px;align-items:center;text-align:left;background:var(--snow);border:2px solid var(--frost);border-radius:20px;padding:16px;transition:border-color .12s, transform .12s}
+.lesson:hover{border-color:var(--blue)}
+.lesson:active{transform:scale(.98)}
+.lesson .num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.2rem;background:var(--blue-soft);color:var(--blue);flex:none}
+.lesson.done .num{background:var(--green);color:#fff}
+.lesson b{display:block;font-family:var(--display);font-weight:600;font-size:1.12rem;line-height:1.2}
+.lesson span{font-size:.85rem;color:var(--ink-soft)}
+.player{border-radius:26px;padding:22px}
+.player .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.player .bar .soft{font-size:.9rem}
+.lc{min-height:180px}
+.lc h3{font-size:1.6rem;margin-bottom:10px}
+.lc p,.lc li{font-size:1.08rem}
+.lc ol{padding-left:22px;margin:0 0 .75em}
+.lc:focus{outline:none}
+.fb{border-radius:16px;padding:14px 16px;margin-top:14px}
+.fb.right{background:var(--green-soft)}
+.fb.wrong{background:var(--red-soft)}
+.fb b{font-family:var(--display);font-weight:600;font-size:1.15rem;display:block}
+.player .nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.rink-wrap{margin-top:14px}
+.rink-wrap svg{display:block;width:100%;height:auto}
+.rink-wrap .ice{fill:var(--snow);stroke:var(--frost-2);stroke-width:4}
+.rink-wrap text{font-family:var(--body);fill:var(--ink)}
+.rink-wrap .zone{font-family:var(--display);font-weight:600}
+.rink-wrap .line-lbl{fill:var(--ink-soft)}
+.rink-wrap .halo{paint-order:stroke;stroke:var(--snow);stroke-width:6px;stroke-linejoin:round}
+.legend{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.legend{grid-template-columns:1fr}}
+.legend li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;background:var(--snow);border:1.5px solid var(--frost);border-radius:16px;padding:12px 14px}
+.legend .dot{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:700}
+.legend b{display:block}
+.legend span{font-size:.88rem;color:var(--ink-soft)}
+.prefix-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.prefix-row .input{width:7em}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-top:14px}
+.task{background:var(--snow);border:1.5px solid var(--frost);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.task .top{display:flex;gap:12px;align-items:flex-start}
+.task .ti{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue);flex:none}
+.task.unc .ti{background:var(--green-soft);color:var(--green)}
+.task h4{flex:1;padding-top:8px}
+.task .big{font-family:var(--display);font-weight:700;font-size:1.6rem;line-height:1;white-space:nowrap;padding-top:6px}
+.task .big span{font-size:.8rem;color:var(--ink-soft);margin-left:2px;font-weight:500}
+.task .req{font-size:.86rem;color:var(--ink-soft)}
 .task p{font-size:.93rem;margin:0}
-.task details{font-size:.9rem;margin-top:4px}
+.task details{font-size:.9rem}
 .task summary{cursor:pointer;color:var(--blue);font-weight:600}
 .task details p{margin-top:6px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:14px}
+.idea{background:var(--snow);border-radius:20px;padding:16px;border:1.5px solid var(--frost)}
+.idea .ti{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--gold-soft);color:var(--gold-ink);margin-bottom:8px}
+.idea b{display:block;font-family:var(--display);font-weight:600;font-size:1.1rem;margin-bottom:2px}
+.idea p{font-size:.92rem;margin:0;color:var(--ink-soft)}
+.idea small{display:block;font-size:.8rem;color:var(--ink-soft);margin-bottom:2px}
 
-/* build */
+/* ---------- build ---------- */
 .attr-tier{margin-top:22px}
 .attr-tier > h4{margin-bottom:8px}
 .attrs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.attr{background:var(--paper);border-radius:10px;padding:14px;box-shadow:0 0 0 1px var(--line)}
-.attr b{font-family:var(--display);font-size:1.2rem}
+.attr{background:var(--snow);border-radius:18px;padding:14px 16px;border:1.5px solid var(--frost);border-left-width:6px}
+.attr b{font-family:var(--display);font-weight:600;font-size:1.15rem}
 .attr .inputs{font-size:.82rem;color:var(--ink-soft);margin:2px 0 6px}
 .attr p{font-size:.9rem;margin:0}
-.t-gold{border-top:5px solid var(--amber)} .t-primary{border-top:5px solid var(--red)} .t-secondary{border-top:5px solid var(--blue)} .t-situational{border-top:5px solid var(--ink-soft)} .t-skip{border-top:5px dashed var(--line)}
-.data{background:var(--paper);border-radius:10px;box-shadow:0 0 0 1px var(--line);overflow:hidden}
-.data th,.data td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:.93rem;white-space:nowrap}
-.data th{font-family:var(--display);font-size:1rem;background:var(--ice-2)}
+.t-gold{border-left-color:var(--gold)} .t-primary{border-left-color:var(--red)} .t-secondary{border-left-color:var(--blue)} .t-situational{border-left-color:var(--ink-soft)} .t-skip{border-left-color:var(--frost-2);border-left-style:dashed}
+.data{background:var(--snow);border-radius:16px;overflow:hidden;border:1.5px solid var(--frost)}
+.data th,.data td{padding:9px 12px;text-align:left;border-bottom:1.5px solid var(--frost);font-size:.93rem;white-space:nowrap}
+.data th{font-family:var(--display);font-weight:600;font-size:1rem;background:var(--frost)}
 .data tr:last-child td{border-bottom:0}
-.data td.num{font-family:var(--display);font-weight:700;font-size:1.1rem}
-.rules{margin:0;padding-left:20px}
+.data td.num{font-family:var(--display);font-weight:600;font-size:1.1rem}
+.cost-table th,.cost-table td{padding:8px 9px}
+.rules{margin:0;padding-left:22px}
 .rules li{margin-bottom:8px}
 
-/* timeline */
-.timeline{min-width:680px;display:grid;grid-template-columns:200px repeat(5,1fr);row-gap:10px;background:var(--paper);border-radius:12px;padding:18px;box-shadow:0 0 0 1px var(--line)}
-.tl-stage{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--ink-soft);padding:0 6px 8px;border-bottom:2px solid var(--line)}
-.tl-stage.first{border-bottom-color:transparent}
-.tl-name{font-weight:600;padding-right:10px;align-self:center;font-size:.95rem}
-.tl-name small{display:block;font-weight:400;color:var(--ink-soft)}
-.tl-bar{align-self:center;height:34px;border-radius:6px;background:var(--uncapped);color:#fff;display:flex;align-items:center;padding:0 10px;font-weight:600;font-size:.88rem;margin:0 3px}
-
-/* projection */
-.field{margin-bottom:18px}
-.field>label,.field>.fl{display:block;font-weight:600;margin-bottom:6px}
-select,input[type="search"]{font:inherit;color:var(--ink);background:var(--ice);border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
-input[type="range"]{width:100%;accent-color:var(--red)}
-.opt{display:flex;gap:10px;align-items:flex-start;margin:6px 0;font-size:.95rem}
-.opt input{margin-top:5px;accent-color:var(--red)}
-.result .digits{color:var(--ink);font-size:4.2rem}
-.bar-row{display:grid;grid-template-columns:120px 1fr 46px;gap:10px;align-items:center;margin:8px 0;font-size:.9rem}
-.bar-track{height:14px;background:var(--ice-2);border-radius:99px;overflow:hidden}
-.bar-fill{height:100%;background:var(--blue);border-radius:99px;transition:width .3s}
-.bar-row.sel .bar-fill{background:var(--red)}
-.bar-row b{font-family:var(--display);font-size:1.1rem;text-align:right}
-
-/* sources */
-.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.res a.card{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:var(--paper);border-radius:10px;padding:16px;box-shadow:0 0 0 1px var(--line)}
-.res a.card:hover{box-shadow:0 0 0 2px var(--blue)}
+/* ---------- more ---------- */
+.faq details{background:var(--snow);border:1.5px solid var(--frost);border-radius:16px;margin-bottom:8px}
+.faq summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--display);font-size:1.4rem;line-height:1;color:var(--blue)}
+.faq details[open] summary::after{content:"\2013"}
+.faq details p{padding:0 18px;margin:0 0 14px}
+details.fold{background:var(--snow);border:1.5px solid var(--frost);border-radius:20px;padding:18px 20px}
+details.fold > summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+details.fold > summary::-webkit-details-marker{display:none}
+details.fold > summary::after{content:"+";font-family:var(--display);font-size:2rem;font-weight:600;color:var(--blue);line-height:1}
+details.fold[open] > summary::after{content:"\2013"}
+details.fold > summary h2{font-size:1.4rem}
+details.fold > summary p{margin:4px 0 0;color:var(--ink-soft);font-size:.95rem}
+details.fold > summary + *{margin-top:18px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin:0}
+.gloss div{background:var(--ice);border-radius:14px;padding:12px 14px}
+.gloss dt{font-family:var(--display);font-weight:600;font-size:1.08rem}
+.gloss dd{margin:2px 0 0;font-size:.9rem;color:var(--ink-soft)}
+.help{background:#1F6FE0;color:#fff;border-radius:26px;padding:26px}
+.help h2{color:#fff}
+.help p{color:#fff;opacity:.92}
+.help a{color:#fff}
+.help .btn{background:#fff;color:#1F6FE0!important;margin:6px 0 14px}
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.res a.card{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:var(--ice);border-radius:14px;padding:14px}
+.res a.card:hover{outline:2px solid var(--blue)}
 .res .rname{font-weight:600;line-height:1.3}
-.res .meta{display:flex;gap:6px;flex-wrap:wrap;font-size:.8rem}
-.res .meta span{background:var(--ice-2);border-radius:5px;padding:1px 8px;color:var(--ink-soft)}
-.res .meta span.mode{background:var(--boards);color:#fff}
+.res .meta{display:flex;gap:6px;flex-wrap:wrap;font-size:.78rem}
+.res .meta span{background:var(--snow);border-radius:999px;padding:1px 9px;color:var(--ink-soft)}
 .res .used{font-size:.85rem;color:var(--ink-soft)}
-.empty{padding:24px;background:var(--paper);border-radius:10px;box-shadow:0 0 0 1px var(--line)}
-footer{padding:30px 0 50px;font-size:.88rem;color:var(--ink-soft)}
+.foot{font-size:.86rem;color:var(--ink-soft);margin-top:40px}
+
+/* ---------- glossary terms, toast, confetti ---------- */
+.g{border-bottom:2px dotted currentColor;cursor:help}
+#gtip{position:absolute;z-index:60;background:var(--ink);color:var(--snow);padding:10px 12px;border-radius:12px;font-size:.88rem;line-height:1.4;box-shadow:var(--shadow)}
+#gtip b{display:block;font-family:var(--display);font-weight:600;font-size:1.05rem}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,24px);opacity:0;pointer-events:none;z-index:70;background:var(--ink);color:var(--snow);padding:12px 18px;border-radius:999px;font-weight:500;box-shadow:var(--shadow);transition:opacity .25s, transform .25s;max-width:calc(100vw - 32px);text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:760px){#toast{bottom:calc(var(--tabbar) + 14px + env(safe-area-inset-bottom,0px))}}
+.confetti{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:65}
 </style>
 </head>
 <body>
-
-<nav class="nav" aria-label="Sections">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
   <div class="wrap">
-    <a class="brand" href="#top">VHL Rookie Hub</a>
-    <ul>
-      <li><a class="link" href="#checklist">This week</a></li>
-      <li><a class="link" href="#basics">Start here</a></li>
-      <li><a class="link" href="#claim">How to claim</a></li>
-      <li><a class="link" href="#earn">Ways to earn</a></li>
-      <li><a class="link" href="#build">Build your player</a></li>
-      <li><a class="link" href="#career">Career tasks</a></li>
-      <li><a class="link" href="#projection">Projection</a></li>
-      <li><a class="link" href="#trivia">Trivia help</a></li>
-      <li><a class="link" href="#sources">Sources</a></li>
-    </ul>
-    <button class="theme-toggle" id="themeBtn" type="button">Theme</button>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="wrap" id="checklist">
-    <h1>How much time do you have this week?</h1>
-    <p class="lede">Pick a time slot and work through the list. Every box you tick is TPE for your player.</p>
-    <div class="tiers" id="tiers" role="group" aria-label="Time available"></div>
-    <p class="capnote">Capped TPE tops out at 12 a week, or 10 in a week you take Welfare. Practice Facility is uncapped, so it always counts.</p>
-    <div class="board">
-      <div class="checklist" id="checkItems" aria-live="polite"></div>
-      <aside class="scoreboard" aria-label="TPE earned this week">
-        <div class="lbl" id="tierName">This week</div>
-        <div class="digits" id="scoreNow">0<small id="scoreMax">/0</small></div>
-        <div class="split">
-          <span>Capped <b id="sCap">0</b>/<span id="sCapMax">12</span></span>
-          <span>Uncapped <b id="sUnc">0</b></span>
-        </div>
-        <button class="btn-ghost" id="resetBtn" type="button">Clear ticks</button>
-        <p class="weeknote">Ticks are saved in this browser and clear each calendar week (Monday). Ticking a box doesn't claim anything; see How to claim.</p>
-      </aside>
-    </div>
+    <a class="brand" href="#home" aria-label="VHL Rookie Hub, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="19" rx="13" ry="6.5" fill="var(--puck)"/><rect x="3" y="12.5" width="26" height="6.5" fill="var(--puck)"/><ellipse cx="16" cy="12.5" rx="13" ry="6.5" fill="#3A4351"/><ellipse cx="16" cy="12.5" rx="8" ry="3.4" fill="none" stroke="var(--red)" stroke-width="1.6"/></svg>
+      <span>VHL Rookie Hub</span>
+    </a>
+    <nav class="tabs" id="topTabs" aria-label="Main"></nav>
   </div>
 </header>
 
-<main>
-  <!-- START HERE -->
-  <section class="block" id="basics">
-    <div class="wrap">
-      <div class="head"><div><h2>Start here</h2><p class="muted">The five ideas that make everything else on this page make sense.</p></div></div>
-      <div class="grid3 ruled">
-        <div>
-          <h3>It's a sim league</h3>
-          <p>You create a hockey player, and games are simulated by the STHS engine using your player's ratings. You never play the games yourself.</p>
-          <p>What you control is how your player grows: you earn points by taking part in the community, then spend them on attributes.</p>
-        </div>
-        <div>
-          <h3>TPE and TPA</h3>
-          <p>TPE (Total Points Earned) is everything your player has earned. TPA (Total Points Applied) is what you've actually spent on attributes.</p>
-          <p>Earned TPE does nothing until you apply it, so update your player regularly on the portal.</p>
-        </div>
-        <div>
-          <h3>Capped vs. uncapped</h3>
-          <p><span class="tag capped" style="margin:0">Capped</span> TPE is limited to 12 a week, and most of your growth comes from it. Taking Welfare lowers that week's limit to 10.</p>
-          <p><span class="tag uncapped" style="margin:0">Uncapped</span> TPE has no weekly limit. Practice Facility, career tasks, fantasy games and bonuses are all uncapped.</p>
+<main id="main" class="wrap">
+
+  <!-- ================= HOME ================= -->
+  <section class="view" data-view="home" id="view-home">
+    <div class="view-head">
+      <h1 id="hello">Hi, rookie.</h1>
+      <p class="sub" id="helloSub">Let's set up your player card. It takes three taps.</p>
+    </div>
+    <div class="home-grid">
+      <div>
+        <div id="cardSlot"></div>
+        <div id="badgesBox">
+          <div class="sec-head"><h2>Badges</h2><span class="count" id="badgeCount"></span></div>
+          <div class="badges" id="badges" style="margin-top:14px"></div>
         </div>
       </div>
-      <div class="grid2" style="margin-top:28px">
-        <div class="panel">
-          <h3>Forum vs. portal</h3>
-          <p>The <a href="https://vhlforum.com" target="_blank" rel="noopener">forum</a> is where you post things: articles, graphics, podcasts, press conference answers, and the team locker rooms.</p>
-          <p style="margin:0">The <a href="https://vhlportal.com" target="_blank" rel="noopener">portal</a> is where you manage your player: claiming TPE, clicking Practice Facility and Welfare, answering trivia, and applying TPE to attributes.</p>
-        </div>
-        <div class="panel">
-          <h3>Your path</h3>
-          <p>New players start in the VHLM, the minor league, where builds are capped at 400 TPE. From there you're drafted to the VHL.</p>
-          <p>Skater or goalie, earning TPE works exactly the same. Only building differs: see the <a href="#build" data-goto-pos="skater">skater</a> or <a href="#build" data-goto-pos="goalie">goalie</a> build guide.</p>
-          <p style="margin:0">Along the way you'll pick up one-time bonuses: 10 TPE when you reach 100 TPE as a first-generation player, and another 10 automatically when you graduate to the VHL.</p>
+      <div>
+        <div id="nextUp"></div>
+        <div id="campMini"></div>
+        <div id="first-week">
+          <div class="sec-head"><h2>Your first week</h2><span class="count" id="pathCount"></span></div>
+          <div class="progress"><div id="pathBar" style="width:0"></div></div>
+          <ol class="path" id="path"></ol>
+          <p class="source">Sources: <a href="https://vhlforum.com/topic/142556-why-and-how-to-join-the-vhl/" target="_blank" rel="noopener">Why (and How to) Join the VHL</a> (animal74), <a href="https://vhlforum.com/topic/50373-how-to-create-a-player/" target="_blank" rel="noopener">How to Create a Player</a> (Will), <a href="https://vhlforum.com/topic/164653-a-breakdown-of-earning-opportunities/" target="_blank" rel="noopener">A Breakdown of Earning Opportunities</a> (sadie)</p>
         </div>
       </div>
-      <div class="callout">
-        <p><b>Everything you submit must be your own work.</b> Under the Code of Conduct (section 1.2), you can't rely on AI to write articles, make graphics or record podcasts for TPE. If you used AI at all, say where and how, and show you still put in the required effort. Graphics may use one AI-generated element, such as a background, and no more.</p>
-      </div>
-      <p class="source">Sources: <a href="https://vhlforum.com/topic/164653-a-breakdown-of-earning-opportunities/" target="_blank" rel="noopener">A Breakdown of Earning Opportunities</a> (sadie, 2026), <a href="https://vhlforum.com/topic/98611-tpe-point-tasks-tutorial/" target="_blank" rel="noopener">TPE &amp; Point Tasks Tutorial</a> (Ricer13), <a href="https://vhlforum.com/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/" target="_blank" rel="noopener">Grape's Ultimate Guide</a> (2025)</p>
     </div>
   </section>
 
-  <!-- HOW TO CLAIM -->
-  <section class="block" id="claim">
-    <div class="wrap">
-      <div class="head"><div><h2>How to claim TPE</h2><p class="muted">Doing a task isn't enough; you have to claim it. It takes a minute once you've done it twice.</p></div></div>
+  <!-- ================= THIS WEEK ================= -->
+  <section class="view" data-view="week" id="view-week" hidden>
+    <div class="view-head">
+      <h1>This week</h1>
+      <p class="sub">Pick how much time you have, then tick tasks off as you do them.</p>
+    </div>
+    <div class="deadline" id="deadline"></div>
+
+    <div class="sec" style="margin-top:28px">
+      <h2>How much time do you have?</h2>
+      <div class="tiers" id="tiers" role="group" aria-label="Weekly routine"></div>
+      <p class="capnote"><span class="g" data-g="capped">Capped</span> TPE tops out at 12 a week, or 10 in a week you take <span class="g" data-g="welfare">Welfare</span> (11 with Pension). Practice Facility is uncapped, so it always counts.</p>
+    </div>
+
+    <div class="board">
+      <div class="panel checklist" id="checkItems" aria-live="polite"></div>
+      <aside class="panel raise jumbo" aria-label="TPE ticked this week">
+        <div id="ring"></div>
+        <div class="lbl" id="tierName"></div>
+        <div class="split"><span>Capped <b id="sCap">0</b>/<span id="sCapMax">12</span></span><span>Uncapped <b id="sUnc">0</b></span></div>
+        <button class="btn" id="addBtn" type="button">Add to my card</button>
+        <p class="note" id="addNote"></p>
+        <p class="note">Ticks are saved in this browser and clear when a new VHL week starts. Ticking a box doesn't claim anything.</p>
+        <button class="linkbtn small" id="resetBtn" type="button" style="margin-top:8px">Clear this week's ticks</button>
+      </aside>
+    </div>
+
+    <div class="sec" id="claim-steps">
+      <h2>How to claim</h2>
+      <p class="sub">Doing a task isn't enough: you claim it on the portal, and an <span class="g" data-g="updater">updater</span> reviews it.</p>
       <div class="grid2">
         <ol class="steps">
-          <li><div><b>Post your task on the forum</b>Put it in the right forum section, like Media Spots or your team's press conference thread.</div></li>
+          <li><div><b>Post your task on the forum</b>Use the right section, like Media Spots or your team's press conference thread.</div></li>
           <li><div><b>Copy the post's link</b>Click the three dots at the top right of your post, choose Share, and copy the link.</div></li>
-          <li><div><b>Open Player Management</b>On the portal, go to <a href="https://vhlportal.com/players/playermgmt" target="_blank" rel="noopener">Player Management</a> and choose Claim Capped or Claim Uncapped, depending on the task.</div></li>
-          <li><div><b>Fill in the claim</b>Pick the week you're claiming for, choose the task type, enter the TPE amount, and paste your link.</div></li>
-          <li><div><b>Submit</b>Your claim goes for approval. Once it's approved, apply the TPE to your attributes.</div></li>
+          <li><div><b>Open Player Management</b>On the portal, open <a href="https://vhlportal.com/players/playermgmt" target="_blank" rel="noopener">Player Management</a> and choose Claim Capped or Claim Uncapped.</div></li>
+          <li><div><b>Fill in the claim</b>Pick the week, choose the task type, enter the TPE, and paste your link.</div></li>
+          <li><div><b>Submit</b>An updater reviews it. Until then you can edit it under Pending Updates. Once it's approved, apply the TPE to your attributes.</div></li>
         </ol>
-        <div>
-          <div class="panel">
-            <h3>Button-click claims</h3>
-            <p style="margin:0">Practice Facility, Welfare and Training Camp don't need a post. They're buttons on your <a href="https://vhlportal.com/players/playermgmt" target="_blank" rel="noopener">Player Management</a> page. Trivia is claimed with a button on the trivia page after you answer correctly.</p>
-          </div>
-          <div class="panel" style="margin-top:14px">
-            <h3>Claiming one post over several weeks</h3>
-            <p style="margin:0">Each link can only be claimed once. For a long article worth several weeks, reply to your own post each week (for example, "claim 2 of 3 for week ending 5/18") and use that reply's link.</p>
-          </div>
+        <div style="display:grid;gap:14px;align-content:start">
+          <div class="panel"><h3>Button claims</h3><p>Practice Facility, Welfare and Training Camp are buttons on Player Management, with no post needed. Trivia has its own claim button once you answer correctly.</p></div>
+          <div class="panel"><h3>One post, several weeks</h3><p>Each link can be claimed once. For a long article worth several weeks, reply to your own post each week (for example, "claim 2 of 3 for week ending 5/18") and claim with that reply's link.</p></div>
         </div>
-      </div>
-      <p class="source">Sources: <a href="https://vhlforum.com/topic/164653-a-breakdown-of-earning-opportunities/" target="_blank" rel="noopener">A Breakdown of Earning Opportunities</a>, <a href="https://vhlforum.com/topic/98611-tpe-point-tasks-tutorial/" target="_blank" rel="noopener">TPE &amp; Point Tasks Tutorial</a></p>
-    </div>
-  </section>
-
-  <!-- WAYS TO EARN -->
-  <section class="block" id="earn">
-    <div class="wrap">
-      <div class="head">
-        <div><h2>Ways to earn</h2><p class="muted">Every task, what it pays, and what it takes. Open "How to do it" on any card for details.</p></div>
-      </div>
-      <div class="filters" id="earnTabs" role="tablist" aria-label="Earning categories"></div>
-      <p class="tab-blurb muted" id="earnBlurb"></p>
-      <div class="tasks" id="earnCards"></div>
-    </div>
-  </section>
-
-  <!-- BUILD -->
-  <section class="block" id="build">
-    <div class="wrap">
-      <div class="head">
-        <div><h2>Build your player</h2><p class="muted">How to spend TPE so your player actually performs. Skaters and goalies build very differently.</p></div>
-        <div class="filters" id="posToggle" role="tablist" aria-label="Position">
-          <button class="chip" type="button" role="tab" data-pos="skater" aria-selected="true">Skater</button>
-          <button class="chip" type="button" role="tab" data-pos="goalie" aria-selected="false">Goalie</button>
-        </div>
-      </div>
-
-      <!-- SKATER VIEW -->
-      <div id="build-skater">
-        <div class="grid2">
-          <div class="panel">
-            <h3>How skater attributes work</h3>
-            <p>On the portal you upgrade detailed attributes like Deking or Poke Checking. Each one feeds one or more of the ratings the sim actually uses, such as Defense or Puck Handling.</p>
-            <p style="margin:0">Levels get more expensive as they climb, so the same TPE buys less the higher an attribute goes. That's why spreading TPE across the attributes that feed a rating beats maxing one.</p>
-          </div>
-          <div>
-            <h4 style="margin-bottom:8px">TPE cost per level</h4>
-            <div class="scroll-x"><table class="data cost-table"></table></div>
-            <p class="small muted" style="margin-top:8px">Maxing a single attribute costs 225 TPE in total.</p>
-          </div>
-        </div>
-
-        <h3 style="margin-top:36px">Which ratings matter</h3>
-        <p class="muted">Ranked by how much they help, with the attributes that build each one.</p>
-        <div id="attrTiers"></div>
-
-        <div class="grid2" style="margin-top:36px">
-          <div>
-            <h3 style="margin-bottom:10px">Rules of thumb</h3>
-            <ol class="rules">
-              <li>Build Defense first. It improves positioning, which helps at both ends of the ice, and every strong build invests in it.</li>
-              <li>Raise attributes in rotation. For example, take Poke Checking to 70, then Defensive Coverage to 70, then Deking to 70, before pushing any past 70.</li>
-              <li>Keep Scoring and Passing apart. If they're too close, your player hesitates and produces less. Grape found a gap of at least 5 works; older guides suggest about 10.</li>
-              <li>Forwards and defensemen can use the same build. Defensemen can lean a little more into Defense, forwards into Scoring.</li>
-              <li>Build the player you'll enjoy. Staying active matters more than a perfect build.</li>
-            </ol>
-          </div>
-          <div>
-            <h3 style="margin-bottom:10px">A starter VHLM build</h3>
-            <p class="small muted">Grape's 2025 baseline for skaters. It uses 386 of the 400 VHLM TPE and reaches 70 in Puck Handling, Defense, Skating and Scoring, leaving 14 TPE to personalize.</p>
-            <div class="scroll-x"><table class="data" id="starterTable"></table></div>
-          </div>
-        </div>
-        <p class="source">Sources: <a href="https://vhlforum.com/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/" target="_blank" rel="noopener">Grape's Ultimate Guide to STHS Attributes</a> (2025), <a href="https://vhlforum.com/topic/62854-player-build-guide/" target="_blank" rel="noopener">Player Build Guide</a> (Gustav), <a href="https://vhlforum.com/topic/126750-a-beginners-guide-to-tpe-allocation/" target="_blank" rel="noopener">A Beginner's Guide to TPE Allocation</a> (Grape, 2022)</p>
-      </div>
-
-      <!-- GOALIE VIEW -->
-      <div id="build-goalie" hidden>
-        <div class="grid2">
-          <div class="panel">
-            <h3>How goalie attributes work</h3>
-            <p>Goalies are simpler than skaters. There are no in-between attributes: the TPE you apply goes straight into the ratings the sim uses, like Reaction Time or Rebound Control.</p>
-            <p style="margin:0">The same rising cost per level applies, so pushing one rating very high gets expensive fast. Balance matters here too.</p>
-          </div>
-          <div>
-            <h4 style="margin-bottom:8px">TPE cost per level</h4>
-            <div class="scroll-x"><table class="data cost-table"></table></div>
-            <p class="small muted" style="margin-top:8px">VattghernCZ's advice for the VHLM: don't take any rating past 80 yet, because levels above that cost 5 TPE or more each.</p>
-          </div>
-        </div>
-
-        <h3 style="margin-top:36px">Which ratings matter</h3>
-        <p class="muted">Every goalie guide agrees on the same priorities.</p>
-        <div id="goalieTiers"></div>
-
-        <div class="grid2" style="margin-top:36px">
-          <div>
-            <h3 style="margin-bottom:10px">A simple build order</h3>
-            <ol class="steps">
-              <li><div><b>Primaries to 70</b>Rebound Control, Style Control, Hand Speed and Reaction Time. These are cheap up to 70.</div></li>
-              <li><div><b>Secondaries to 70</b>Skating, Size and Agility. Don't skip them: low secondaries hold back what your primaries can do.</div></li>
-              <li><div><b>Back to the primaries</b>Keep raising the four primaries until you reach the VHLM cap of 400 TPE.</div></li>
-            </ol>
-          </div>
-          <div>
-            <h3 style="margin-bottom:10px">Goalie tips</h3>
-            <ol class="rules">
-              <li>The height and weight you pick when creating your goalie have no effect in the sim. Only the Size rating does.</li>
-              <li>Keep secondaries below your primaries. They support the primaries rather than replace them.</li>
-              <li>Skip Leadership and Penalty Shot in the VHLM. Their effect is tiny.</li>
-              <li>Look at the builds of successful goalies on the portal. Goalie building has been stable for years, so copying a proven build is a sound approach.</li>
-            </ol>
-            <p class="small muted">Want exact numbers? VattghernCZ's guide includes a full example VHLM goalie build as an image.</p>
-          </div>
-        </div>
-        <p class="source">Sources: <a href="https://vhlforum.com/topic/155129-my-take-on-a-vhlm-build-guide-with-the-new-400-tpa-cap-taken-into-account-and-some-suggested-builds/" target="_blank" rel="noopener">My Take on a VHLM Build Guide</a> (VattghernCZ, 2025), <a href="https://vhlforum.com/topic/62854-player-build-guide/" target="_blank" rel="noopener">Player Build Guide</a> (Gustav), <a href="https://vhlforum.com/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/" target="_blank" rel="noopener">Grape's Ultimate Guide</a></p>
       </div>
     </div>
-  </section>
 
-  <!-- CAREER -->
-  <section class="block" id="career">
-    <div class="wrap">
-      <div class="head"><div><h2>Career tasks and when they open</h2><p class="muted">Each can be claimed once per career, and all are uncapped. Miss a window and that TPE is gone.</p></div></div>
-      <div class="scroll-x"><div class="timeline" id="timeline"></div></div>
-      <p style="margin-top:14px" id="tlTotal"></p>
-      <p class="source">Source: <a href="https://vhlforum.com/topic/164653-a-breakdown-of-earning-opportunities/" target="_blank" rel="noopener">A Breakdown of Earning Opportunities</a></p>
-    </div>
-  </section>
-
-  <!-- PROJECTION -->
-  <section class="block" id="projection">
-    <div class="wrap">
-      <div class="head"><div><h2>TPE projection</h2><p class="muted">What steady weekly habits add up to, with the weekly cap applied.</p></div></div>
+    <div class="sec" id="plan">
+      <h2>Plan ahead</h2>
+      <p class="sub">What a steady routine adds up to, with the weekly cap applied.</p>
       <div class="grid2">
         <div class="panel">
           <div class="field"><label for="pTier">Weekly routine</label><select id="pTier"></select></div>
           <div class="field"><label for="pWeeks">Weeks: <span id="pWeeksOut">10</span></label><input type="range" id="pWeeks" min="1" max="52" value="10"></div>
-          <div class="field"><span class="fl">One-time TPE I'll also collect</span><div id="pExtras"></div></div>
+          <div class="field"><label>One-time TPE I'll also collect</label><div id="pExtras"></div></div>
         </div>
-        <div class="panel result" aria-live="polite">
-          <div class="muted">Estimated total</div>
-          <div class="digits" id="pTotal">0</div>
-          <div class="split" style="justify-content:flex-start;color:var(--ink-soft)">
-            <span>Capped <b id="pCap" style="color:var(--ink)">0</b></span>
-            <span>Uncapped <b id="pUnc" style="color:var(--ink)">0</b></span>
-          </div>
-          <div id="pBars" style="margin-top:18px"></div>
-          <p class="muted small" style="margin-top:14px">Assumes you complete the routine every week. Doesn't include fantasy games, training camp or store purchases beyond the ones you tick.</p>
+        <div class="panel raise" aria-live="polite">
+          <div class="soft">TPE earned in that time</div>
+          <div class="big-n" id="pTotal">0</div>
+          <div class="split" style="justify-content:flex-start"><span>Capped <b id="pCap">0</b></span><span>Uncapped <b id="pUnc">0</b></span></div>
+          <p id="pPace" style="margin-top:6px"></p>
+          <div id="pBars"></div>
+          <p class="small soft" style="margin-top:12px">Assumes you complete the routine every week. Doesn't include fantasy games, training camp or store purchases you don't tick.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TRIVIA -->
-  <section class="block" id="trivia">
-    <div class="wrap">
-      <div class="head"><div><h2>Finding trivia answers</h2><p class="muted">Trivia lives on the <a href="https://vhlportal.com/fantasy/trivia/" target="_blank" rel="noopener">portal</a>: two questions a week, 1 TPE each. The trick is knowing where to look.</p></div></div>
-      <div class="callout" style="margin-top:0;margin-bottom:22px">
-        <p><b>The most common trap:</b> the portal's records and career stats are unreliable for older seasons, especially before Season 47. If the portal's answer isn't one of the options, the portal is probably wrong, not the question.</p>
+  <!-- ================= LEARN ================= -->
+  <section class="view" data-view="learn" id="view-learn" hidden>
+    <div class="view-head">
+      <h1>Learn</h1>
+      <p class="sub">Start with Rookie Camp, then dig into your career path and everything you can earn.</p>
+    </div>
+
+    <div class="sec" id="camp" style="margin-top:22px">
+      <div class="sec-head"><div><h2>Rookie Camp</h2><p class="sub" style="margin-bottom:0">Six short lessons, each ending with one quick question. About ten minutes in total.</p></div><span class="count" id="campCount"></span></div>
+      <div class="camp-grid" id="campGrid" style="margin-top:16px"></div>
+      <div class="panel raise player" id="lessonPlayer" hidden></div>
+    </div>
+
+    <div class="sec" id="career">
+      <h2>Your career on the ice</h2>
+      <p class="sub">Your career runs from one end of the rink to the other. Four write-ups pay uncapped TPE, but each one is only open for part of the trip.</p>
+      <div class="panel prefix-row">
+        <label for="prefixIn" style="font-weight:600">Your <span class="g" data-g="prefix">prefix</span>: S</label>
+        <input class="input" type="number" id="prefixIn" min="1" max="999" inputmode="numeric">
+        <p id="prefixOut" style="margin:0;flex:1;min-width:220px" aria-live="polite"></p>
       </div>
+      <div class="rink-wrap" id="rink"></div>
+      <ul class="legend" id="rinkLegend"></ul>
+      <p style="margin-top:14px" id="tlTotal"></p>
+      <p class="source">Source: <a href="https://vhlforum.com/topic/164653-a-breakdown-of-earning-opportunities/" target="_blank" rel="noopener">A Breakdown of Earning Opportunities</a></p>
+    </div>
+
+    <div class="sec" id="library">
+      <h2>Ways to earn</h2>
+      <p class="sub">Every task, what it pays, and what it takes.</p>
+      <div class="chips" id="earnTabs" role="tablist" aria-label="Earning categories"></div>
+      <p class="soft" id="earnBlurb" style="margin:14px 0 0"></p>
+      <div class="cards" id="earnCards"></div>
+    </div>
+
+    <div class="sec" id="ideas">
+      <h2>Stuck on what to make?</h2>
+      <p class="sub">You don't need to know league history to earn TPE. These only need your own player and your first impressions.</p>
+      <div class="ideas" id="ideaList"></div>
+    </div>
+  </section>
+
+  <!-- ================= BUILD ================= -->
+  <section class="view" data-view="build" id="view-build" hidden>
+    <div class="view-head">
+      <h1>Build your player</h1>
+      <p class="sub">Where to spend your TPE so your player actually performs.</p>
+      <div class="chips" id="posToggle" role="tablist" aria-label="Position">
+        <button class="chip" type="button" role="tab" data-pos="skater" aria-selected="true">Skater</button>
+        <button class="chip" type="button" role="tab" data-pos="goalie" aria-selected="false">Goalie</button>
+      </div>
+    </div>
+    <div id="first-tpe"></div>
+
+    <div id="build-skater">
+      <div class="callout" style="margin-top:22px">
+        <h3 style="margin-bottom:6px">Your first TPE</h3>
+        <p>Start with attributes that feed Defense, the most important rating. A common first move is raising Deking and Defensive Coverage together: between them they also add Puck Handling and Skating. Centers can add Faceoffs. Every level up to 70 costs just 1 TPE, so nothing is wasted early on.</p>
+        <p>Earning less than about 10 TPE a week? Aim for a balanced build of around 200 TPE first, then add to it. Earning more? Work toward the 400 TPE starter build below from the start.</p>
+      </div>
+      <div class="sec grid2" style="margin-top:36px">
+        <div class="panel">
+          <h3>How skater attributes work</h3>
+          <p>On the portal you upgrade <span class="g" data-g="hybrid">hybrid attributes</span> like Deking or Poke Checking. Each one feeds one or more of the ratings the sim uses, such as Defense or Puck Handling.</p>
+          <p>Levels get pricier as they climb, so spreading TPE across the attributes that feed a rating beats maxing one.</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom:8px">TPE cost per level</h4>
+          <div class="scroll-x"><table class="data cost-table"></table></div>
+          <p class="small soft" style="margin-top:8px">Maxing a single attribute costs 225 TPE in total.</p>
+        </div>
+      </div>
+      <div class="sec">
+        <h2>Which ratings matter</h2>
+        <p class="sub">Ranked by how much they help, with the attributes that build each one.</p>
+        <div id="attrTiers"></div>
+      </div>
+      <div class="sec grid2">
+        <div>
+          <h2 style="margin-bottom:12px">Rules of thumb</h2>
+          <ol class="rules">
+            <li>Build Defense first. It improves positioning, which helps at both ends of the ice.</li>
+            <li>Raise attributes in rotation. For example, take Poke Checking to 70, then Defensive Coverage to 70, then Deking to 70, before pushing any past 70.</li>
+            <li>Keep Scoring and Passing apart, or your player hesitates and produces less. Grape found a gap of at least 5 works; older guides suggest about 10.</li>
+            <li>Forwards and defensemen can use the same build. Defensemen can lean a little more into Defense, forwards into Scoring.</li>
+            <li>Build the player you'll enjoy. Staying active matters more than a perfect build.</li>
+          </ol>
+        </div>
+        <div>
+          <h2 style="margin-bottom:6px">A starter VHLM build</h2>
+          <p class="small soft">Grape's 2025 baseline for skaters. It uses 386 of the 400 VHLM TPE and reaches 70 in Puck Handling, Defense, Skating and Scoring, leaving 14 TPE to personalize.</p>
+          <div class="scroll-x"><table class="data" id="starterTable"></table></div>
+          <p class="small soft" id="starterResult" style="margin-top:8px"></p>
+        </div>
+      </div>
+      <p class="source">Sources: <a href="https://vhlforum.com/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/" target="_blank" rel="noopener">Grape's Ultimate Guide to STHS Attributes</a> (2025), <a href="https://vhlforum.com/topic/62854-player-build-guide/" target="_blank" rel="noopener">Player Build Guide</a> (Gustav), <a href="https://vhlforum.com/topic/155129-my-take-on-a-vhlm-build-guide-with-the-new-400-tpa-cap-taken-into-account-and-some-suggested-builds/" target="_blank" rel="noopener">My Take on a VHLM Build Guide</a> (VattghernCZ)</p>
+    </div>
+
+    <div id="build-goalie" hidden>
+      <div class="callout" style="margin-top:22px">
+        <h3 style="margin-bottom:6px">Your first TPE</h3>
+        <p>Split your starting TPE evenly across the four primary ratings: Rebound Control, Style Control, Hand Speed and Reaction Time. Then follow the build order below. Every level up to 70 costs just 1 TPE.</p>
+      </div>
+      <div class="sec grid2" style="margin-top:36px">
+        <div class="panel">
+          <h3>How goalie attributes work</h3>
+          <p>Goalies are simpler than skaters. There are no hybrid attributes: the TPE you apply goes straight into the ratings the sim uses, like Reaction Time.</p>
+          <p>The same rising cost per level applies, so pushing one rating very high gets expensive fast.</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom:8px">TPE cost per level</h4>
+          <div class="scroll-x"><table class="data cost-table"></table></div>
+          <p class="small soft" style="margin-top:8px">VattghernCZ's advice for the VHLM: don't take any rating past 80 yet, because levels above that cost 5 TPE or more each.</p>
+        </div>
+      </div>
+      <div class="sec">
+        <h2>Which ratings matter</h2>
+        <p class="sub">Every goalie guide agrees on the same priorities.</p>
+        <div id="goalieTiers"></div>
+      </div>
+      <div class="sec grid2">
+        <div>
+          <h2 style="margin-bottom:14px">A simple build order</h2>
+          <ol class="steps">
+            <li><div><b>Primaries to 70</b>Rebound Control, Style Control, Hand Speed and Reaction Time. They're cheap up to 70.</div></li>
+            <li><div><b>Secondaries to 70</b>Skating, Size and Agility. Low secondaries hold back what your primaries can do.</div></li>
+            <li><div><b>Back to the primaries</b>Keep raising the four primaries until you reach the VHLM cap of 400 TPE.</div></li>
+          </ol>
+        </div>
+        <div>
+          <h2 style="margin-bottom:12px">Goalie tips</h2>
+          <ol class="rules">
+            <li>The height and weight you pick at creation have no effect in the sim. Only the Size rating does.</li>
+            <li>Keep secondaries below your primaries. They support the primaries rather than replace them.</li>
+            <li>Skip Leadership and Penalty Shot in the VHLM. Their effect is tiny.</li>
+            <li>Look at the builds of successful goalies on the portal. Copying a proven build is a sound approach.</li>
+          </ol>
+          <p class="small soft">VattghernCZ's guide includes a full example VHLM goalie build as an image.</p>
+        </div>
+      </div>
+      <p class="source">Sources: <a href="https://vhlforum.com/topic/155129-my-take-on-a-vhlm-build-guide-with-the-new-400-tpa-cap-taken-into-account-and-some-suggested-builds/" target="_blank" rel="noopener">My Take on a VHLM Build Guide</a> (VattghernCZ, 2025), <a href="https://vhlforum.com/topic/62854-player-build-guide/" target="_blank" rel="noopener">Player Build Guide</a> (Gustav), <a href="https://vhlforum.com/topic/156071-grapes-ultimate-guide-to-sths-attributes-and-buildcrafting/" target="_blank" rel="noopener">Grape's Ultimate Guide</a></p>
+    </div>
+
+    <div class="sec" id="fix">
+      <h2>Made a mistake? You can fix it</h2>
+      <p class="sub">Both options are in the <a href="https://vhlportal.com/store/" target="_blank" rel="noopener">Player Store</a>. Because the first reroll is free, an early mistake is never permanent.</p>
       <div class="grid2">
-        <div class="panel"><h3>Use the portal for</h3><div id="triviaPortal"></div></div>
-        <div class="panel"><h3>Use the forum for</h3><div id="triviaForum"></div></div>
+        <div class="panel"><h3>TPA Recall</h3><p>Take back up to 10 TPA from a single attribute that's at 70 or below, and spend it somewhere else. Costs $500,000; 2 per career.</p></div>
+        <div class="panel"><h3>TPA Reroll</h3><p>Reset every attribute and re-spend all your TPA on a new build. Off-season only; 2 per career. The first is free, the second costs $7,000,000.</p></div>
       </div>
-      <p style="margin-top:16px">If a question asks you to count how many times something happened, check the Hall of Fame forum first. Someone has often counted it already.</p>
-      <p class="source">Source: <a href="https://vhlforum.com/topic/120402-help-for-finding-trivia-answers/" target="_blank" rel="noopener">Help for Finding Trivia Answers</a> (MubbleFubbles, 2022)</p>
     </div>
   </section>
 
-  <!-- SOURCES -->
-  <section class="block" id="sources" style="border-bottom:0">
-    <div class="wrap">
-      <div class="head"><div><h2>Sources and further reading</h2><p class="muted">Everything on this page came from these guides. Open them for the full detail.</p></div></div>
-      <div class="res" id="resList"></div>
+  <!-- ================= MORE ================= -->
+  <section class="view" data-view="more" id="view-more" hidden>
+    <div class="view-head">
+      <h1>More</h1>
+      <p class="sub">Answers, definitions, and where to find a person who can help.</p>
     </div>
+
+    <div class="sec" id="faq" style="margin-top:22px">
+      <h2 style="margin-bottom:14px">Common worries</h2>
+      <div class="faq" id="faqList"></div>
+    </div>
+
+    <div class="sec" id="help">
+      <div class="help">
+        <h2>Stuck? Ask a person.</h2>
+        <p style="margin-top:10px">The fastest help is human. Ask in #newcomers-help on the VHL Discord, or in your team's locker room once you've joined a VHLM team. GMs and teammates expect rookie questions.</p>
+        <a class="btn" href="https://discord.gg/5GrtbQctHe" target="_blank" rel="noopener">Join the VHL Discord</a>
+        <p style="margin:0">Also useful: the <a href="https://vhlforum.com/forum/251-new-member-guide/" target="_blank" rel="noopener">New Member Guide</a> forum, the <a href="https://vhlforum.com/topic/31991-vhl-rule-book/" target="_blank" rel="noopener">VHL Rule Book</a>, and the <a href="https://vhlforum.com/topic/110979-vhl-code-of-conduct/" target="_blank" rel="noopener">Code of Conduct</a>.</p>
+      </div>
+    </div>
+
+    <div class="sec" id="trivia">
+      <details class="fold">
+        <summary><div><h2>Finding trivia answers</h2><p>Two questions a week on the <a href="https://vhlportal.com/fantasy/trivia/" target="_blank" rel="noopener">portal</a>, 1 TPE each. Here's where to look.</p></div></summary>
+        <div>
+          <div class="callout" style="margin-bottom:16px"><p><b>The most common trap:</b> the portal's records and career stats are unreliable for older seasons, especially before Season 47. If the portal's answer isn't one of the options, the portal is probably wrong, not the question.</p></div>
+          <div class="grid2">
+            <div><h3>Use the portal for</h3><div id="triviaPortal"></div></div>
+            <div><h3>Use the forum for</h3><div id="triviaForum"></div></div>
+          </div>
+          <p style="margin-top:14px">If a question asks you to count how many times something happened, check the Hall of Fame forum first. Someone has often counted it already.</p>
+          <p class="source">Source: <a href="https://vhlforum.com/topic/120402-help-for-finding-trivia-answers/" target="_blank" rel="noopener">Help for Finding Trivia Answers</a> (MubbleFubbles, 2022)</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="sec" id="glossary" style="margin-top:14px">
+      <details class="fold">
+        <summary><div><h2>Glossary</h2><p>Every term on this site in plain English. Dotted-underlined words anywhere can be tapped for a quick definition.</p></div></summary>
+        <dl class="gloss" id="glossList"></dl>
+      </details>
+    </div>
+
+    <div class="sec" id="sources" style="margin-top:14px">
+      <details class="fold">
+        <summary><div><h2>Sources and further reading</h2><p>Everything here came from these guides. Open them for the full detail.</p></div></summary>
+        <div class="res" id="resList"></div>
+      </details>
+    </div>
+
+    <div class="sec" id="settings">
+      <h2 style="margin-bottom:12px">Settings</h2>
+      <div class="panel">
+        <div class="row" style="justify-content:space-between">
+          <div><b>Appearance</b><div class="small soft">Follow your device, or pick one.</div></div>
+          <div class="chips" id="themeChips" role="group" aria-label="Appearance">
+            <button class="chip" type="button" data-theme-set="auto">Auto</button>
+            <button class="chip" type="button" data-theme-set="light">Light</button>
+            <button class="chip" type="button" data-theme-set="dark">Dark</button>
+          </div>
+        </div>
+        <hr style="border:0;border-top:1.5px solid var(--frost);margin:16px 0">
+        <div class="row" style="justify-content:space-between">
+          <div><b>Start over</b><div class="small soft">Clears your card, ticks, lessons and badges from this browser.</div></div>
+          <button class="btn ghost small" type="button" id="resetAll">Clear everything</button>
+        </div>
+      </div>
+    </div>
+    <p class="foot" id="foot"></p>
   </section>
 </main>
 
-<footer><div class="wrap" id="foot"></div></footer>
+<nav class="bottombar" id="bottomTabs" aria-label="Main"></nav>
+<div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-/* =========================================================
-   CONTENT: edit this block when rules or links change.
-   ========================================================= */
 const F = "https://vhlforum.com";
 const P = "https://vhlportal.com";
 
 const DATA = {
+  lessons: [
+    { id:"how", title:"How the VHL works", cards:[
+      { t:"It's a sim league", h:`<p>You create a hockey player. The <span class="g" data-g="sths">STHS</span> simulator plays every game using your player's ratings, so you never play the games yourself.</p><p>What you control is how your player grows.</p>` },
+      { t:"Earn it, then spend it", h:`<p>You earn <span class="g" data-g="tpe">TPE</span> by taking part: writing, graphics, podcasts and quick weekly tasks.</p><p>You spend it on attributes, and what you've spent is your <span class="g" data-g="tpa">TPA</span>. Earned TPE does nothing until you apply it.</p>` },
+      { t:"Two sites, one account", h:`<p>The <b>forum</b> is where you post your work and talk with your team.</p><p>The <b>portal</b> is where you manage your player: claim TPE, click weekly buttons, answer trivia and apply TPE.</p>` },
+      { t:"Your path", h:`<p>Everyone starts in the <span class="g" data-g="vhlm">VHLM</span>, the minor league, where builds are capped at 400 TPE.</p><p>Your season <span class="g" data-g="prefix">prefix</span> (like S108) tells you which VHL draft you're in, and you can play until 8 seasons after it.</p>` }
+    ], q:{ text:"What is TPA?", opts:["The TPE you've earned this week","The TPE you've spent on attributes","Your team's points in the standings","Your trivia score"], a:1,
+      why:"TPA is Total Points Applied: what you've actually spent. TPE you haven't applied doesn't help your player yet." } },
+
+    { id:"cap", title:"The weekly cap", cards:[
+      { t:"Capped TPE", h:`<p>Most of your growth is <span class="g" data-g="capped">capped</span>: you can earn up to 12 of it each week.</p>` },
+      { t:"Welfare and Pension", h:`<p>No time for a point task? Welfare is one click for 4 TPE, but that week's cap drops to 10.</p><p>Pension pays 5 and caps the week at 11. It unlocks once you've had two players reach 700+ TPE.</p>` },
+      { t:"Uncapped TPE", h:`<p>Some TPE has no limit and stacks on top of your 12: Practice Facility (2 every week), career tasks, fantasy games and bonuses.</p>` },
+      { t:"Use it or lose it", h:`<p>Each week stands alone. If you miss one, you can't claim it later, so a little every week beats a lot once a month.</p>` }
+    ], q:{ text:"Which of these is uncapped?", opts:["Press Conference","Media Spot","Practice Facility","Trivia"], a:2,
+      why:"Practice Facility gives 2 uncapped TPE every week, on top of the 12 capped TPE you can earn." } },
+
+    { id:"claim", title:"Claiming TPE", cards:[
+      { t:"Doing isn't claiming", h:`<p>Finishing a task doesn't add TPE on its own. You <span class="g" data-g="claim">claim</span> it on the portal, then an <span class="g" data-g="updater">updater</span> on the league staff reviews it.</p>` },
+      { t:"Claim in four moves", h:`<ol><li>Post your task on the forum.</li><li>Copy the post's link (three dots, then Share).</li><li>Open Player Management and choose Claim Capped or Claim Uncapped.</li><li>Fill in the week, task, TPE and link, then submit.</li></ol>` },
+      { t:"Buttons need no claim", h:`<p>Practice Facility, Welfare and Training Camp are buttons on Player Management. Trivia has its own claim button once you answer correctly.</p>` },
+      { t:"Beat the deadline", h:`<p>The VHL week runs Monday 00:00 to Sunday 23:59, Pacific Time.</p><p>For you, this week closes on <b>{deadline}</b>.</p>` }
+    ], q:{ text:"You submitted a claim, but your TPE hasn't changed. Why?", opts:["You need to submit it again","An updater still has to review it","Claims only count on Mondays","TPE only updates at the end of the season"], a:1,
+      why:"Every claim is reviewed by an updater first. Until then you can still edit it under Pending Updates." } },
+
+    { id:"earn", title:"Ways to earn", cards:[
+      { t:"One point task a week", h:`<p>Your big weekly task is worth 6 TPE: a 500-word article, a graphic, or a 10-minute podcast.</p><p>Welfare and Affiliate PT count as your one.</p>` },
+      { t:"Small extras", h:`<p>Fill the other half of your cap with up to 6 TPE of supplemental tasks: a press conference, trivia, or a short VHL.com article, graphic or radio show.</p>` },
+      { t:"Your own work only", h:`<p>Everything you submit must be yours. You can't rely on AI to produce your tasks, and graphics may use at most one AI-generated element.</p>` },
+      { t:"Not a writer?", h:`<p>Practice Facility, Welfare and trivia need no writing, and a press conference is a sentence or two per answer. Point tasks can be graphics or podcasts too.</p>` }
+    ], q:{ text:"How many point tasks can you claim in one week?", opts:["One","Two","Three","As many as you like"], a:0,
+      why:"One per week. Welfare and Affiliate PT count as that one, and the smaller supplemental tasks go on top." } },
+
+    { id:"career", title:"Your career", cards:[
+      { t:"Career tasks", h:`<p>Four write-ups you can claim once per career, all uncapped: Biography (8), Prospect Scouting Report (5), Rookie Experience (5) and Career Reflection (5).</p>` },
+      { t:"Watch the windows", h:`<p>Biography: any time. Prospect Scouting Report: before your first VHL game. Rookie Experience: from your VHL draft to the end of your first season. Career Reflection: from your 4th VHL season.</p>` },
+      { t:"Bonuses along the way", h:`<p>10 TPE at 100 TPE for first-gen players, 10 more when you graduate to the VHL, and 10 at every training camp once you're under VHL contract.</p>` }
+    ], q:{ text:"When can you write your Career Reflection?", opts:["Any time","Before your first VHL game","From your 4th VHL season","Only in the VHLM"], a:2,
+      why:"Career Reflection opens from your 4th VHL season. The Biography is the one you can write any time." } },
+
+    { id:"build", title:"Building basics", cards:[
+      { t:"Attributes feed ratings", h:`<p>Skaters buy <span class="g" data-g="hybrid">hybrid attributes</span> like Deking, and each one feeds ratings the sim uses, like Defense.</p><p>Goalies put TPE straight into their ratings.</p>` },
+      { t:"Costs climb", h:`<p>Every level up to 70 costs 1 TPE. After that each level costs more: 2, then 3, 5, 8 and finally 10 TPE.</p>` },
+      { t:"Where to start", h:`<p>Skaters: Defense is the most important rating, so build the attributes that feed it first.</p><p>Goalies: start with Rebound Control, Style Control, Hand Speed and Reaction Time.</p>` },
+      { t:"Mistakes aren't forever", h:`<p>A TPA Recall moves up to 10 TPA out of one attribute. A TPA Reroll resets your whole build, and your first one is free.</p>` }
+    ], q:{ text:"How much does each attribute level up to 70 cost?", opts:["1 TPE","2 TPE","5 TPE","10 TPE"], a:0,
+      why:"1 TPE per level up to 70, which is why spreading TPE across attributes early is so efficient." } }
+  ],
+
+  badges: [
+    { id:"card", name:"Rookie card", how:"Set up your player card", icon:"card" },
+    { id:"camp", name:"Camp graduate", how:"Pass all six Rookie Camp lessons", icon:"learn" },
+    { id:"firstweek", name:"Week one", how:"Finish all nine first-week steps", icon:"flag" },
+    { id:"fullweek", name:"Full week", how:"Tick every task in a Welfare Plus week or bigger", icon:"check" },
+    { id:"maxweek", name:"Max Earner", how:"Tick every task in a Max Earner week", icon:"trophy" }
+  ],
+
+  positions: { forward:"Forward", defense:"Defense", goalie:"Goalie" },
+
   lastUpdated: "September 2026",
+  startTPE: 30,
+  vhlmCap: 400,
+  seasonWeeks: 10,
+  draftExample: { createdFrom: 106, draft: 108 },
+  careerSeasons: 8,   // a player is retired automatically after season (prefix + 8)
   capNormal: 12,
   capWelfare: 10,
 
+
+  firstWeek: [
+    { id:"account", title:"Create a forum account", html:`Sign up at <a href="https://vhlforum.com/register/" target="_blank" rel="noopener">vhlforum.com</a>. The same account logs you in to the <span class="g" data-g="portal">portal</span>.` },
+    { id:"player", title:"Create your player", html:`On the portal, open <a href="https://vhlportal.com/tools/create" target="_blank" rel="noopener">Create a Player</a> and fill in the short form: name, position, height, weight and nationality. Any name works as long as it isn't offensive, and your nationality decides your World Cup team. If someone recruited you, add them so they get credit. Your player is automatically given a season <span class="g" data-g="prefix">prefix</span>, such as S107, which tells you your VHL draft class and how long your player can play.` },
+    { id:"apply", title:"Spend your starting TPE", html:`Your player is created as soon as you submit the form, and you start with 30 TPE to apply, or <a href="https://vhlforum.com/topic/81291-starting-tpe-adjustment-for-late-joiners/" target="_blank" rel="noopener">more if you join late</a>. Not sure where to put it? See <a href="#first-tpe">Your first TPE</a>.` },
+    { id:"discord", title:"Join the VHL Discord", html:`Join the <a href="https://discord.gg/5GrtbQctHe" target="_blank" rel="noopener">VHL Discord</a> and ask anything in #newcomers-help. Most day-to-day league chat happens there.` },
+    { id:"team", title:"Find your VHLM team", html:`Go to the <a href="https://vhlportal.com/teams/waivers" target="_blank" rel="noopener">VHLM waivers page</a> on the portal and express interest in the <span class="g" data-g="vhlm">VHLM</span> teams you'd like to join. Once you're on a team, join its <span class="g" data-g="lockerroom">locker room</span>.` },
+    { id:"clicks", title:"Grab your free weekly TPE", html:`On <a href="https://vhlportal.com/players/playermgmt" target="_blank" rel="noopener">Player Management</a>, click Practice Facility for 2 <span class="g" data-g="uncapped">uncapped</span> TPE. Then answer the week's <a href="#trivia">trivia</a> for up to 2 more. Both take a minute.` },
+    { id:"bio", title:"Write your Biography", html:`Your best first writing task: 800+ words (or a 15-minute podcast) about your player's life before the VHL, worth 8 uncapped TPE. It's about your own player, so you don't need to know the league yet. Post it in the <a href="https://vhlforum.com/forum/110-biography/" target="_blank" rel="noopener">Biography forum</a>.` },
+    { id:"claim", title:"Claim everything before Sunday night", html:`Claim each task on Player Management (<a href="#claim">how to claim</a>). The week closes Sunday 23:59 Pacific Time; <a href="#checklist">This week</a> shows your local deadline.` },
+    { id:"bonus", title:"Reach 100 TPE for your first-gen bonus", html:`At 100 TPE, comment "+10 [player name]" in the <a href="https://vhlforum.com/topic/49868-first-generation-bonus/" target="_blank" rel="noopener">First-Generation Bonus thread</a> and claim 10 uncapped TPE.` }
+  ],
+
+  ideas: [
+    { fmt:"Article", title:"Why I picked my position", text:"Describe the player you're building and why. It's good practice for thinking about your build." },
+    { fmt:"Article", title:"My first week in the VHL", text:"What surprised you, what confused you, and what helped. Your fresh perspective is something veterans don't have." },
+    { fmt:"Article", title:"Meet my VHLM team", text:"Introduce your team and teammates using their portal pages. You'll learn the roster as you write." },
+    { fmt:"Article", title:"Interview a teammate", text:"Ask a teammate or your GM a few questions. Their answers count toward your word count." },
+    { fmt:"Article", title:"My build, explained", text:"Walk through where you put your first TPE and why. Writing it out is a great way to learn the attributes." },
+    { fmt:"Graphic", title:"Your player card", text:"A simple card for your own player is the classic VHL.com graphic, worth 2 TPE." },
+    { fmt:"Podcast", title:"Rookies talk", text:"Record 5 to 10 minutes with another new player about your first weeks." }
+  ],
+
+  faq: [
+    { q:"Do I need to know a lot about hockey?", a:`No. The sim plays every game for you. What matters is showing up each week, and plenty of tasks (graphics, podcasts, trivia, press conferences) don't need deep hockey knowledge.` },
+    { q:"I'm not a writer. Can I still keep up?", a:`Yes. Practice Facility, Welfare and trivia need no writing at all, and a press conference is a sentence or two per answer. Point tasks can also be graphics or podcasts instead of articles.` },
+    { q:"When is the weekly deadline?", a:`The VHL week runs from Monday 00:00 to Sunday 23:59, Pacific Time. <span id="faqDeadline"></span>` },
+    { q:"What happens if I miss a week?", a:`Nothing, apart from missing that week's TPE. Each week is capped on its own, so you can't go back and claim for a week that has ended. Just pick up again the next week.` },
+    { q:"I submitted a claim, but my TPE hasn't changed.", a:`Every claim is approved by an <span class="g" data-g="updater">updater</span> before the TPE is added. Until then you can still edit it under the Pending Updates tab in Player Management.` },
+    { q:"I put TPE in the wrong place. Can I fix it?", a:`Yes. A TPA Recall moves up to 10 TPA out of one attribute, and a TPA Reroll resets your whole build, with the first one free. See <a href="#fix">Made a mistake?</a>` },
+    { q:"How long until I play in the VHL?", a:`A season lasts about 10 weeks. Most players are drafted by a VHL team after about one season in the VHLM, then move up after the season in which they reach the 400 TPE cap, usually about two seasons in. The <a href="#projection">projection</a> shows how fast your routine gets you there.` },
+    { q:"Which VHL draft will I be in?", a:`Check your player's <span class="g" data-g="prefix">prefix</span>. Every new player is automatically given a season tag, such as S107, shown on their player page on the portal. It tells you which VHL draft class you're in: an S107 player goes into the Season 107 VHL draft. The prefix depends on when you create your player, with the trade deadline as the cutoff; for example, players created from the Season ${'$'}{DRAFT_FROM} trade deadline onward are S${'$'}{DRAFT_TO}.` },
+    { q:"How long can my player play?", a:`Your prefix tells you that too. A player can play until 8 seasons after their prefix season and is then retired automatically: an S94 player retires after Season 102, and an S107 player after Season 115. You can also choose to retire earlier, at any time. Try the <a href="#career">career window</a> tool with your own prefix.` },
+    { q:"Can I do press conferences before I'm on a team?", a:`You can, but most players start once they've joined a team, since each team posts its own questions.` },
+    { q:"Do I need to download the sim?", a:`No. Everything happens on the forum, the portal and Discord.` },
+    { q:"Can I use AI to help?", a:`Not to produce your work. Everything you submit for TPE must be your own; see the "Your own work only" card in <a href="#lesson-earn">Rookie Camp</a>.` }
+  ],
+
+  glossary: {
+    tpe: ["TPE", "Total Points Earned: every point your player has earned. You spend it to improve attributes."],
+    tpa: ["TPA", "Total Points Applied: the TPE you've actually spent on attributes."],
+    capped: ["Capped TPE", "TPE that counts toward the weekly limit of 12, or 10 in a week you take Welfare (11 with Pension)."],
+    uncapped: ["Uncapped TPE", "TPE with no weekly limit, like Practice Facility, career tasks and bonuses."],
+    pt: ["Point Task (PT)", "The main weekly task: a 500-word article, a graphic or a 10-minute podcast, worth 6 capped TPE."],
+    pc: ["Press Conference (PC)", "Your team's weekly questions. Answer 6 for 2 capped TPE."],
+    welfare: ["Welfare", "A button worth 4 capped TPE for weeks you can't do a point task. It lowers that week's cap to 10. Pension pays 5 and lowers the cap to 11."],
+    pf: ["Practice Facility", "A weekly button on Player Management worth 2 uncapped TPE."],
+    vhlcom: ["VHL.com tasks", "Short weekly tasks: a 150-word article, a simple graphic, or a 5-minute podcast (VHL.com Radio)."],
+    vhl: ["VHL", "The Victory Hockey League: the main league every player is working toward."],
+    vhlm: ["VHLM", "The minor league where every new player starts. Builds there are capped at 400 TPE."],
+    sths: ["STHS", "The hockey simulator that plays every game using your player's ratings."],
+    portal: ["Portal", "vhlportal.com, where you manage your player, claim TPE, answer trivia and apply TPE."],
+    gm: ["GM / AGM", "The (Assistant) General Manager: the member who runs a team and signs players."],
+    lockerroom: ["Locker room", "Your team's private space, usually a Discord channel, for chat and help."],
+    updater: ["Updater", "A member of the league staff who reviews and grades TPE claims, working with the Head of Point Tasks."],
+    claim: ["Claim", "Telling the portal you've done a task, so the TPE can be approved and added."],
+    we: ["W.E.", "Short for \"week ending\". Members use it to say which week a claim is for."],
+    firstgen: ["First-gen", "A member on their first player. First-gen players get extra bonuses."],
+    hybrid: ["Hybrid attributes", "The skater attributes you buy on the portal, like Deking. Each feeds one or more sim ratings."],
+    draft: ["VHL draft", "Where VHL teams pick new players, usually after about one season in the VHLM."],
+    prefix: ["Prefix", "The season tag every new player gets automatically, such as S107. It tells you your VHL draft class, and your player retires automatically 8 seasons later (S107 retires after S115)."],
+    waivers: ["Waivers", "The portal page where new players express interest in joining a VHLM team."],
+    sim: ["Sim", "A simulated game or day of games. Results are posted on the forum and portal."]
+  },
+
   tasks: {
-    practice:  { name:"Practice Facility", tpe:2, kind:"uncapped", note:"Button on Player Management" },
-    welfare:   { name:"Welfare", tpe:4, kind:"capped", note:"Button on Player Management; lowers this week's cap to 10 (Pension pays 5, but needs two past 700+ TPE players)" },
+    practice:  { name:"Practice Facility", g:"pf", tpe:2, kind:"uncapped", note:"Button on Player Management" },
+    welfare:   { name:"Welfare", g:"welfare", tpe:4, kind:"capped", note:"Button on Player Management; lowers this week's cap to 10 (Pension pays 5 and caps the week at 11, but needs two past 700+ TPE players)" },
     trivia:    { name:"Trivia", tpe:2, kind:"capped", note:"Two questions on the portal, 1 TPE each", href:"#trivia", linkText:"Where to find answers" },
-    press:     { name:"Press Conference", tpe:2, kind:"capped", note:"Answer your team's 6 questions" },
-    vhlcom:    { name:"VHL.com task", tpe:2, kind:"capped", note:"150-word article or a simple graphic" },
-    pointtask: { name:"Point Task", tpe:6, kind:"capped", note:"500-word article, graphic, or 10-minute podcast", href:"#earn", linkText:"Options" }
+    press:     { name:"Press Conference", g:"pc", tpe:2, kind:"capped", note:"Answer your team's 6 questions" },
+    vhlcom:    { name:"VHL.com task", g:"vhlcom", tpe:2, kind:"capped", note:"150-word article or a simple graphic" },
+    pointtask: { name:"Point Task", g:"pt", tpe:6, kind:"capped", note:"500-word article, graphic, or 10-minute podcast", href:"#earn", linkText:"Options" }
   },
 
   tiers: [
@@ -504,7 +886,7 @@ const DATA = {
       { name:"Podcast", tpe:"6", kind:"capped", req:"10+ minutes, VHL-related", text:"Often called the easiest full task, if you're comfortable being heard publicly.",
         how:"Longer podcasts and shows with several hosts have their own rules for multi-week claims.", link:[F+"/topic/25912-podcast-guidelines/","Podcast guidelines"] },
       { name:"Welfare / Pension", tpe:"4–5", kind:"capped", req:"One button click", text:"For weeks you can't do a point task. Welfare pays 4 TPE. Pension pays 5 and is unlocked once you've had two players reach 700+ TPE.",
-        how:"Click the button on Player Management. It lowers your capped limit for that week from 12 to 10. As a first-gen player you'll be claiming Welfare, so plan around 4 TPE.", link:[F+"/topic/31991-vhl-rule-book/","VHL Rule Book, section 10"] },
+        how:"Click the button on Player Management. Welfare lowers your capped limit for that week from 12 to 10; Pension lowers it to 11. As a first-gen player you'll be claiming Welfare, so plan around 4 TPE.", link:[F+"/topic/31991-vhl-rule-book/","VHL Rule Book, section 10"] },
       { name:"Affiliate PT", tpe:"6", kind:"capped", req:"A point task done in the SBA or EFL", text:"Claim it in a week you don't do a VHL point task.",
         how:"You must claim it during the same week you completed it in the partner league." }
     ]},
@@ -622,6 +1004,9 @@ const DATA = {
     { name:"My Take on a VHLM Build Guide", type:"Build Guide", mode:"Forum", url:F+"/topic/155129-my-take-on-a-vhlm-build-guide-with-the-new-400-tpa-cap-taken-into-account-and-some-suggested-builds/", used:"Goalie build order and priorities; also has skater builds by role." },
     { name:"Player Build Guide", type:"Build Guide", mode:"Forum", url:F+"/topic/62854-player-build-guide/", used:"Goalie builds and the Scoring/Passing gap." },
     { name:"A Beginner's Guide to TPE Allocation", type:"Build Guide", mode:"Forum", url:F+"/topic/126750-a-beginners-guide-to-tpe-allocation/", used:"Level costs and spreading TPE across attributes." },
+    { name:"Why (and How to) Join the VHL", type:"Beginner Guide", mode:"Forum", url:F+"/topic/142556-why-and-how-to-join-the-vhl/", used:"First-week steps and joining a VHLM team." },
+    { name:"How to Create a Player", type:"Beginner Guide", mode:"Forum", url:F+"/topic/50373-how-to-create-a-player/", used:"Player creation." },
+    { name:"How to Update with VHL Portal", type:"Beginner Guide", mode:"Forum", url:F+"/topic/50312-how-to-update-with-vhl-portal/", used:"Claim approval and pending updates." },
     { name:"VHL Rule Book", type:"Rules", mode:"Forum", url:F+"/topic/31991-vhl-rule-book/", used:"Section 10 covers earning TPE, including Welfare and Pension." },
     { name:"Help for Finding Trivia Answers", type:"Trivia", mode:"Forum", url:F+"/topic/120402-help-for-finding-trivia-answers/", used:"The trivia section." },
     { name:"Alex's Guide to Building", type:"Build Guide", mode:"Forum", url:F+"/topic/117307-alexs-guide-to-building/", used:"Not summarized here yet." },
@@ -636,18 +1021,102 @@ const DATA = {
   ]
 };
 
+
 /* ========================================================= helpers */
-const $ = s => document.querySelector(s);
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const G = (key, label) => `<span class="g" data-g="${key}">${esc(label)}</span>`;
 const ext = (url, text) => `<a href="${url}" target="_blank" rel="noopener">${esc(text)}</a>`;
 const store = {
   get(k, f){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; }catch(e){ return f; } },
-  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
-function weekKey(){
-  const d = new Date(); d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
-  return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+const reduceMotion = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const ICONS = {
+  home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5h4v5"/>',
+  week:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m8.5 15.5 2.5 2.5 4.5-4.5"/>',
+  learn:'<path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9v5"/>',
+  build:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',
+  more:'<circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
+  click:'<path d="m9 9 10 4-4.2 1.4L13.4 19z"/><path d="M5 3v2M3 5h2M5.8 7.8 4.4 9.2M9.2 4.4 7.8 5.8"/>',
+  pen:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/><path d="m14 7 3 3"/>',
+  mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/>',
+  brush:'<path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-.9-.6-1.3-.6-2.1 0-.9.7-1.6 1.6-1.6H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11.5" r="1.1" fill="currentColor"/><circle cx="10" cy="7.5" r="1.1" fill="currentColor"/><circle cx="14.5" cy="7.5" r="1.1" fill="currentColor"/>',
+  quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.6"/><path d="M12 17h.01"/>',
+  chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  star:'<path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/>',
+  card:'<rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M8 17c.8-1.9 2.2-3 4-3s3.2 1.1 4 3"/>',
+  trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7M10 17h4"/>',
+  flag:'<path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  back:'<path d="M19 12H5M11 6l-6 6 6 6"/>'
+};
+const icon = (n, cls = "ic") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[n] || ""}</svg>`;
+const TASK_ICONS = { practice:"target", welfare:"click", trivia:"quiz", press:"chat", vhlcom:"pen", pointtask:"pen" };
+function iconFor(name){
+  const n = name.toLowerCase();
+  if (n.includes("graphic")) return "brush";
+  if (n.includes("podcast") || n.includes("radio")) return "mic";
+  if (n.includes("press")) return "chat";
+  if (n.includes("trivia")) return "quiz";
+  if (n.includes("practice")) return "target";
+  if (n.includes("welfare")) return "click";
+  if (n.includes("affiliate")) return "flag";
+  if (n.includes("review")) return "book";
+  if (n.includes("store") || n.includes("donation")) return "card";
+  if (n.includes("bonus") || n.includes("camp") || n.includes("recruit")) return "trophy";
+  if (n.includes("fantasy") || n.includes("vhfl") || n.includes("coach") || n.includes("prediction")) return "star";
+  return "pen";
 }
+
+/* ========================================================= VHL week (Pacific Time) */
+const TZ = "America/Los_Angeles";
+function ptParts(date){
+  const f = new Intl.DateTimeFormat("en-US", { timeZone:TZ, year:"numeric", month:"2-digit", day:"2-digit",
+    hour:"2-digit", minute:"2-digit", second:"2-digit", hourCycle:"h23", weekday:"short" });
+  const o = {}; f.formatToParts(date).forEach(p => o[p.type] = p.value);
+  return { y:+o.year, m:+o.month, d:+o.day, h:+o.hour % 24, mi:+o.minute, s:+o.second,
+    wd:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(o.weekday) };
+}
+function ptOffset(date){ const p = ptParts(date); return Date.UTC(p.y, p.m-1, p.d, p.h, p.mi, p.s) - Math.floor(date.getTime()/1000)*1000; }
+function ptWallToDate(y, m, d, h, mi, s){
+  const wall = Date.UTC(y, m-1, d, h, mi, s);
+  let t = wall - ptOffset(new Date(wall));
+  t = wall - ptOffset(new Date(t));
+  return new Date(t);
+}
+function vhlWeek(){
+  const p = ptParts(new Date()), back = (p.wd + 6) % 7;
+  const mon = new Date(Date.UTC(p.y, p.m-1, p.d - back));
+  const sun = new Date(Date.UTC(p.y, p.m-1, p.d - back + 6));
+  return { key: mon.toISOString().slice(0,10),
+           end: ptWallToDate(sun.getUTCFullYear(), sun.getUTCMonth()+1, sun.getUTCDate(), 23, 59, 59) };
+}
+const localDeadline = () => vhlWeek().end.toLocaleString(undefined, { weekday:"long", hour:"numeric", minute:"2-digit" });
+function timeLeft(){
+  const ms = Math.max(0, vhlWeek().end - new Date());
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4);
+  return d > 0 ? `${d}d ${h}h` : `${h}h ${m}m`;
+}
+
+/* ========================================================= state */
+let profile = store.get("vhl-profile", null);   // {created,pos,tier,name,prefix,tpe}
+let badges = store.get("vhl-badges", {});
+let camp = store.get("vhl-camp", {});
+let pathDone = store.get("vhl-first", {});
+let state = store.get("vhl-week", {});
+const wk0 = vhlWeek().key;
+if (state.week !== wk0) state = { week: wk0, tier: state.tier || (profile && profile.tier) || "welfare", done: {}, added: 0 };
+const saveProfile = () => store.set("vhl-profile", profile);
+const saveWeek = () => store.set("vhl-week", state);
+const tierById = id => DATA.tiers.find(t => t.id === id) || DATA.tiers[1];
 function capFor(tier){ return tier.items.includes("welfare") ? DATA.capWelfare : DATA.capNormal; }
 function totalsFor(tier, ids){
   let cap = 0, unc = 0;
@@ -655,139 +1124,610 @@ function totalsFor(tier, ids){
   cap = Math.min(cap, capFor(tier));
   return { cap, unc, total: cap + unc };
 }
+const isGoalie = () => profile && profile.pos === "goalie";
 
-/* ========================================================= theme */
-(function(){
-  const saved = store.get("vhl-theme", null);
-  if (saved) document.documentElement.setAttribute("data-theme", saved);
-  $("#themeBtn").addEventListener("click", () => {
-    const cur = document.documentElement.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    const next = cur === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next); store.set("vhl-theme", next);
-  });
-})();
+/* ========================================================= toast, confetti, badges */
+function toast(html){
+  const t = $("#toast"); t.innerHTML = html; t.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 3400);
+}
+function confetti(){
+  if (reduceMotion()) return;
+  const c = document.createElement("canvas"); c.className = "confetti"; document.body.appendChild(c);
+  const W = innerWidth, H = innerHeight, dpr = Math.min(2, devicePixelRatio || 1);
+  c.width = W * dpr; c.height = H * dpr; const x = c.getContext("2d"); if (!x){ c.remove(); return; } x.scale(dpr, dpr);
+  const cs = getComputedStyle(document.documentElement);
+  const cols = ["--blue","--red","--gold","--green"].map(v => cs.getPropertyValue(v).trim() || "#1F6FE0");
+  const P = Array.from({ length: 80 }, () => ({ x: W/2 + (Math.random()-.5)*160, y: H*.38, vx: (Math.random()-.5)*13, vy: -Math.random()*13-5,
+    r: Math.random()*6.3, vr: (Math.random()-.5)*.35, w: 7+Math.random()*6, h: 10+Math.random()*9, c: cols[Math.floor(Math.random()*cols.length)], puck: Math.random() < .16 }));
+  const t0 = performance.now(); let last = t0;
+  (function frame(t){
+    const dt = Math.min(32, t - last) / 16; last = t; x.clearRect(0, 0, W, H);
+    P.forEach(p => { p.vy += .38*dt; p.x += p.vx*dt; p.y += p.vy*dt; p.r += p.vr*dt;
+      x.save(); x.translate(p.x, p.y); x.rotate(p.r);
+      if (p.puck){ x.fillStyle = "#14181F"; x.beginPath(); x.ellipse(0, 0, 9, 5.5, 0, 0, Math.PI*2); x.fill(); }
+      else { x.fillStyle = p.c; x.fillRect(-p.w/2, -p.h/2, p.w, p.h); }
+      x.restore(); });
+    if (t - t0 < 1900) requestAnimationFrame(frame); else c.remove();
+  })(t0);
+}
+function award(id){
+  if (badges[id]) return false;
+  const b = DATA.badges.find(x => x.id === id); if (!b) return false;
+  badges[id] = Date.now(); store.set("vhl-badges", badges);
+  setTimeout(() => { toast(`Badge earned: <b>${esc(b.name)}</b>`); confetti(); }, 250);
+  renderBadges();
+  return true;
+}
 
-/* ========================================================= checklist */
-const wk = weekKey();
-let state = store.get("vhl-week", {});
-if (state.week !== wk) state = { week: wk, tier: state.tier || "welfare", done: {} };
+/* ========================================================= router */
+const VIEWS = ["home","week","learn","build","more"];
+const VIEW_LABELS = { home:"Home", week:"This week", learn:"Learn", build:"Build", more:"More" };
+const ALIAS = { top:"home", start:"first-week", checklist:"week", claim:"lesson-claim", basics:"lesson-how", earn:"library", projection:"plan" };
+let currentView = null;
+function renderTabs(){
+  const html = VIEWS.map(v => `<a class="tab" href="#${v}" data-view="${v}">${icon(v)}<span>${VIEW_LABELS[v]}</span></a>`).join("");
+  $("#topTabs").innerHTML = html; $("#bottomTabs").innerHTML = html;
+}
+function showView(v){
+  const changed = currentView !== v;
+  $$(".view").forEach(s => s.hidden = s.dataset.view !== v);
+  $$(".tab").forEach(t => t.dataset.view === v ? t.setAttribute("aria-current", "page") : t.removeAttribute("aria-current"));
+  currentView = v;
+  document.title = (v === "home" ? "" : VIEW_LABELS[v] + " | ") + "VHL Rookie Hub";
+  if (v === "learn") drawRink();
+  if (v === "home") renderHome();
+  hideTip();
+  return changed;
+}
+function go(raw){
+  let h = decodeURIComponent((raw || "").replace(/^#/, "")) || "home";
+  if (ALIAS[h]) h = ALIAS[h];
+  if (h.startsWith("lesson-")){
+    showView("learn"); openLesson(h.slice(7));
+    requestAnimationFrame(() => $("#camp").scrollIntoView({ block:"start" })); return;
+  }
+  if (VIEWS.includes(h)){ showView(h); window.scrollTo(0, 0); return; }
+  const el = document.getElementById(h);
+  if (el){
+    const v = el.closest("[data-view]"); if (v) showView(v.dataset.view);
+    const d = el.matches("details") ? el : (el.closest("details") || el.querySelector("details.fold"));
+    if (d) d.open = true;
+    requestAnimationFrame(() => el.scrollIntoView({ block:"start" })); return;
+  }
+  showView("home"); window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", () => go(location.hash));
+
+/* ========================================================= home: setup + player card */
+let setup = null;   // {step, created, pos, tier} while the setup flow is open
+function startSetup(fromStep){
+  setup = { step: fromStep || 0, created: profile ? profile.created : null, pos: profile ? profile.pos : null, tier: profile ? profile.tier : null };
+  renderHome();
+}
+function renderSetup(){
+  const s = setup;
+  const q = [
+    { h:"Have you created your player yet?", key:"created", opts:[ [true,"Yes, I have a player","Let's track it"], [false,"Not yet","I'll show you how"] ] },
+    { h:"What position do you play?", key:"pos", opts:Object.entries(DATA.positions).map(([k,v]) => [k, v, k === "goalie" ? "Builds work differently" : "Skater"]) },
+    { h:"How much time can you give each week?", key:"tier", opts:DATA.tiers.map(t => [t.id, t.time, `${t.name}, ${totalsFor(t).total} TPE`]) }
+  ];
+  if (s.step < 3){
+    const cur = q[s.step];
+    return `<div class="panel raise setup">
+      <div class="stepno">Step ${s.step + 1} of 3</div>
+      <h2>${esc(cur.h)}</h2>
+      <div class="opts">${cur.opts.map(o => `<button class="opt-big" type="button" data-act="pick" data-key="${cur.key}" data-val="${esc(String(o[0]))}" aria-pressed="${s[cur.key] === o[0]}">${esc(o[1])}<small>${esc(o[2])}</small></button>`).join("")}</div>
+      ${s.step > 0 ? `<button class="linkbtn small" type="button" data-act="back" style="margin-top:14px">Back</button>` : ""}
+    </div>`;
+  }
+  const p = profile || {};
+  return `<div class="panel raise setup">
+    <div class="stepno">Almost done</div>
+    <h2>Fill in your card</h2>
+    <p class="soft">All optional, and it stays in this browser.</p>
+    <div class="field"><label for="fName">Player name</label><input class="input" id="fName" maxlength="40" autocomplete="off" value="${esc(p.name || "")}" placeholder="Your player's name"></div>
+    ${s.created ? `<div class="grid2" style="gap:12px">
+      <div class="field"><label for="fPrefix">Season prefix</label><input class="input" id="fPrefix" type="number" inputmode="numeric" min="1" max="999" value="${esc(p.prefix || "")}" placeholder="e.g. 107"><span class="hint">Shown on your player page, like S107.</span></div>
+      <div class="field"><label for="fTpe">Current TPE</label><input class="input" id="fTpe" type="number" inputmode="numeric" min="0" max="5000" value="${esc(p.tpe != null ? p.tpe : DATA.startTPE)}"><span class="hint">From your player page.</span></div>
+    </div>` : `<p class="small soft">Your prefix and TPE appear once you create your player. You can add them later with Edit card.</p>`}
+    <div class="row" style="margin-top:6px">
+      <button class="btn" type="button" data-act="save">Save my card</button>
+      <button class="linkbtn" type="button" data-act="back">Back</button>
+    </div>
+  </div>`;
+}
+function onSetupClick(e){
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const act = b.dataset.act;
+  if (act === "pick"){
+    let v = b.dataset.val; if (v === "true") v = true; else if (v === "false") v = false;
+    setup[b.dataset.key] = v; setup.step++;
+    if (setup.step === 3 && !setup.created && !profile) { /* still show the details step for the name */ }
+    renderHome(); focusSetup(); return;
+  }
+  if (act === "back"){ setup.step = Math.max(0, setup.step - 1); renderHome(); focusSetup(); return; }
+  if (act === "save"){
+    const name = ($("#fName") && $("#fName").value.trim()) || "";
+    const prefRaw = $("#fPrefix") ? parseInt($("#fPrefix").value, 10) : NaN;
+    const tpeRaw = $("#fTpe") ? parseInt($("#fTpe").value, 10) : NaN;
+    profile = { created: !!setup.created, pos: setup.pos || "forward", tier: setup.tier || "welfare", name,
+      prefix: prefRaw > 0 && prefRaw < 1000 ? prefRaw : null,
+      tpe: tpeRaw >= 0 && tpeRaw <= 5000 ? tpeRaw : DATA.startTPE };
+    saveProfile(); setup = null;
+    state.tier = profile.tier; saveWeek();
+    if (profile.created){ pathDone.account = true; pathDone.player = true; store.set("vhl-first", pathDone); }
+    setPosition(isGoalie() ? "goalie" : "skater", true);
+    renderHome(); renderTiers(); renderChecklist(); syncPrefix(); renderProjection();
+    award("card");
+    const top = $("#cardSlot").getBoundingClientRect().top;
+    if (top < 0) $("#cardSlot").scrollIntoView({ block:"start" });
+    return;
+  }
+  if (act === "edit"){ startSetup(3); focusSetup(); return; }
+  if (act === "redo"){ startSetup(0); focusSetup(); return; }
+}
+function focusSetup(){ const h = $("#cardSlot h2"); if (h){ h.setAttribute("tabindex", "-1"); h.focus({ preventScroll:true }); } }
+function initials(name){
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return "";
+  return (parts[0][0] + (parts.length > 1 ? parts[parts.length-1][0] : "")).toUpperCase();
+}
+function renderCard(){
+  const p = profile, tier = tierById(p.tier), weekly = totalsFor(tier).total;
+  const tpe = p.tpe != null ? p.tpe : DATA.startTPE, cap = DATA.vhlmCap;
+  const pct = Math.min(100, tpe / cap * 100);
+  let eta;
+  if (!p.created) eta = `Create your player to start at ${DATA.startTPE} TPE.`;
+  else if (tpe >= cap) eta = `You've reached the ${cap} TPE VHLM cap. Next stop: the VHL.`;
+  else {
+    const wTo = Math.ceil((cap - tpe) / weekly);
+    const bonus = tpe < 100 ? ` First-gen bonus at 100 TPE in about ${Math.ceil((100 - tpe) / weekly)} weeks.` : "";
+    eta = `At ${weekly} TPE a week, you'll hit the ${cap} cap in about <b>${wTo} weeks</b>.${bonus}`;
+  }
+  const mono = initials(p.name || "") || "VHL";
+  return `<article class="pcard" aria-label="Your player card">
+    <div class="band"><button class="edit" type="button" data-act="edit">Edit card</button></div>
+    <div class="mono" aria-hidden="true" style="${mono.length > 2 ? "font-size:1.5rem" : ""}">${esc(mono)}</div>
+    <div class="who"><b>${esc(p.name || "Your player")}</b><span>${esc(DATA.positions[p.pos] || "Player")}${p.prefix ? `, S${p.prefix}` : (p.created ? ", add your prefix with Edit card" : ", not created yet")}</span></div>
+    <div class="tpe"><span class="n">${tpe}</span><span class="u">TPE</span></div>
+    <div class="track" role="img" aria-label="${tpe} of ${cap} TPE toward the VHLM cap"><div class="fill" style="width:${pct}%"></div><div class="mark" style="left:calc(${100 / cap * 100}% - 2px)"></div></div>
+    <div class="marks"><span style="left:${100 / cap * 100}%">100 bonus</span><span class="end" style="left:100%">${cap} cap</span></div>
+    <p class="eta">${eta}</p>
+    <div class="facts">
+      <div class="fact"><small>VHL draft</small><b>${p.prefix ? "S" + p.prefix : "Not set"}</b></div>
+      <div class="fact"><small>Retires after</small><b>${p.prefix ? "S" + (p.prefix + DATA.careerSeasons) : "Not set"}</b></div>
+      <div class="fact"><small>Routine</small><b>${esc(tier.name.replace("The ", ""))}</b></div>
+    </div>
+  </article>`;
+}
+function renderHome(){
+  const name = profile && profile.name ? profile.name.trim().split(/\s+/)[0] : "";
+  $("#hello").textContent = setup && !profile ? "Hi, rookie." : (name ? `Hi, ${name}.` : (profile ? "Welcome back." : "Hi, rookie."));
+  $("#helloSub").textContent = profile && !setup ? "Here's where your player stands and what to do next." : "Let's set up your player card. It takes three taps.";
+  if (!profile && !setup) setup = { step: 0, created: null, pos: null, tier: null };
+  $("#cardSlot").innerHTML = setup ? renderSetup() : renderCard();
+  renderNextUp(); renderPath(); renderCampMini(); renderBadges(); initTerms();
+}
+
+/* ========================================================= home: next up, camp mini, badges, first week */
+function ringSVG(done, total, size, stroke, full){
+  const r = (size - stroke) / 2, c = 2 * Math.PI * r, off = c * (1 - (total ? Math.min(1, done / total) : 0));
+  return `<svg class="ring ${full ? "full" : ""}" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true">
+    <circle class="bg" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke-width="${stroke}"/>
+    <circle class="fg" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${off.toFixed(2)}" transform="rotate(-90 ${size/2} ${size/2})"/>
+  </svg>`;
+}
+function weekProgress(){
+  const tier = tierById(state.tier), ids = tier.items.filter(id => state.done[id]);
+  return { tier, n: ids.length, m: tier.items.length, now: totalsFor(tier, ids), max: totalsFor(tier) };
+}
+function renderNextUp(){
+  const box = $("#nextUp");
+  if (!profile){ box.innerHTML = ""; return; }
+  if (!profile.created){
+    box.innerHTML = `<div class="panel next"><div style="flex:1"><h3>Next up: create your player</h3><p>Steps 1 to 3 below take about five minutes. Then come back and add your details to your card.</p><a class="btn small" href="#first-week">Show me the steps</a></div></div>`;
+    return;
+  }
+  const w = weekProgress();
+  box.innerHTML = `<div class="panel next">
+    <div class="ring-mini">${ringSVG(w.n, w.m, 76, 9, w.n === w.m)}</div>
+    <div style="flex:1;min-width:0"><h3>This week: ${w.n} of ${w.m} done</h3><p>${w.now.total} of ${w.max.total} TPE ticked. Claims close in ${timeLeft()}.</p><a class="btn small" href="#week">Open this week</a></div>
+  </div>`;
+}
+function renderCampMini(){
+  const done = DATA.lessons.filter(l => camp[l.id]).length, total = DATA.lessons.length;
+  const next = DATA.lessons.find(l => !camp[l.id]);
+  $("#campMini").innerHTML = `<div class="panel camp-mini">
+    <div class="sec-head"><h3>Rookie Camp</h3><span class="count">${done} of ${total}</span></div>
+    <div class="dots">${DATA.lessons.map(l => `<i class="${camp[l.id] ? "on" : (next && next.id === l.id ? "now" : "")}"></i>`).join("")}</div>
+    ${next ? `<p class="soft" style="margin-bottom:12px">Next lesson: ${esc(next.title)}. About two minutes, with one quick question at the end.</p><a class="btn small" href="#lesson-${next.id}">${done ? "Continue camp" : "Start camp"}</a>`
+           : `<p class="soft" style="margin-bottom:12px">You've passed every lesson. Revisit any of them in Learn.</p><a class="btn ghost small" href="#camp">Review lessons</a>`}
+  </div>`;
+}
+function renderBadges(){
+  const n = DATA.badges.filter(b => badges[b.id]).length;
+  $("#badgeCount").textContent = `${n} of ${DATA.badges.length}`;
+  $("#badges").innerHTML = DATA.badges.map(b => `<div class="badge ${badges[b.id] ? "" : "locked"}">
+    <div class="medal">${icon(badges[b.id] ? b.icon : "lock")}</div><b>${esc(b.name)}</b><span>${esc(b.how)}</span></div>`).join("");
+}
+ICONS.lock = '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>';
+function renderPath(){
+  const steps = DATA.firstWeek, n = steps.filter(x => pathDone[x.id]).length;
+  $("#path").innerHTML = steps.map((x, i) => `<li class="step ${pathDone[x.id] ? "done" : ""}">
+    <input type="checkbox" id="p-${x.id}" data-id="${x.id}" ${pathDone[x.id] ? "checked" : ""}>
+    <div><label class="st" for="p-${x.id}">${i + 1}. ${esc(x.title)}</label><div class="sd">${x.html}</div></div></li>`).join("");
+  $("#pathBar").style.width = (n / steps.length * 100) + "%";
+  $("#pathCount").textContent = `${n} of ${steps.length}`;
+  initTerms();
+}
+function onPathChange(e){
+  const i = e.target.closest("input[data-id]"); if (!i) return;
+  pathDone[i.dataset.id] = i.checked; store.set("vhl-first", pathDone); renderPath();
+  if (DATA.firstWeek.every(x => pathDone[x.id])) award("firstweek");
+}
+
+/* ========================================================= week */
+function renderDeadline(){
+  const w = vhlWeek();
+  if (state.week !== w.key){ state = { week: w.key, tier: state.tier, done: {}, added: 0 }; saveWeek(); renderChecklist(); }
+  $("#deadline").innerHTML = `${icon("clock")}<div><span>This week's claims close in</span><br><b>${timeLeft()}</b></div><div style="flex:1;min-width:200px"><span>Sunday 23:59 Pacific Time, which is <strong>${esc(localDeadline())}</strong> where you are.</span></div>`;
+  const fd = $("#faqDeadline"); if (fd) fd.textContent = `For you, that's ${localDeadline()}.`;
+}
 function renderTiers(){
-  $("#tiers").innerHTML = DATA.tiers.map(t => `<button class="tier" type="button" data-id="${t.id}" aria-pressed="${t.id===state.tier}">
+  $("#tiers").innerHTML = DATA.tiers.map(t => `<button class="tier" type="button" data-id="${t.id}" aria-pressed="${t.id === state.tier}">
     <span class="time">${esc(t.time)}</span><span class="nm">${esc(t.name)}</span><span class="pts">${totalsFor(t).total} TPE</span></button>`).join("");
-  $("#tiers").querySelectorAll(".tier").forEach(b => b.addEventListener("click", () => { state.tier = b.dataset.id; store.set("vhl-week", state); renderTiers(); renderChecklist(); }));
+}
+function onTierClick(e){
+  const b = e.target.closest(".tier"); if (!b) return;
+  state.tier = b.dataset.id; saveWeek();
+  if (profile){ profile.tier = state.tier; saveProfile(); }
+  renderTiers(); renderChecklist();
 }
 function renderChecklist(){
-  const tier = DATA.tiers.find(t => t.id === state.tier) || DATA.tiers[1];
+  const tier = tierById(state.tier);
   $("#checkItems").innerHTML = tier.items.map(id => {
     const t = DATA.tasks[id], on = !!state.done[id];
     const link = t.href ? ` <a href="${t.href}">${esc(t.linkText)}</a>` : "";
-    return `<div class="check ${on?'done':''}"><input type="checkbox" id="c-${id}" data-id="${id}" ${on?'checked':''}>
-      <label for="c-${id}"><span class="t">${esc(t.name)}</span><span class="tag ${t.kind}">${t.kind==='capped'?'Capped':'Uncapped'}</span>
-      <span class="n">${esc(t.note)}.${link}</span></label><span class="val">${t.tpe}</span></div>`;
+    return `<label class="check ${on ? "done" : ""}" for="c-${id}">
+      <input type="checkbox" id="c-${id}" data-id="${id}" ${on ? "checked" : ""}>
+      <span class="ti">${icon(TASK_ICONS[id] || "pen")}</span>
+      <span class="tx"><span class="t">${t.g ? G(t.g, t.name) : esc(t.name)}</span> <span class="tag ${t.kind}">${t.kind === "capped" ? "Capped" : "Uncapped"}</span>
+      <span class="n">${esc(t.note)}.${link}</span></span>
+      <span class="val">${t.tpe}</span></label>`;
   }).join("");
-  $("#checkItems").querySelectorAll("input").forEach(i => i.addEventListener("change", () => { state.done[i.dataset.id] = i.checked; store.set("vhl-week", state); renderChecklist(); }));
-  const doneIds = tier.items.filter(id => state.done[id]);
-  const now = totalsFor(tier, doneIds);
+  const w = weekProgress();
+  $("#ring").innerHTML = ringSVG(w.now.total, w.max.total, 168, 16, w.n === w.m) .replace("</svg>",
+    `<text x="84" y="88" text-anchor="middle" font-size="48" font-weight="700">${w.now.total}</text><text x="84" y="116" text-anchor="middle" font-size="16" style="fill:var(--ink-soft)">of ${w.max.total} TPE</text></svg>`);
   $("#tierName").textContent = tier.name;
-  $("#scoreNow").firstChild.nodeValue = now.total;
-  $("#scoreMax").textContent = "/" + totalsFor(tier).total;
-  $("#sCap").textContent = now.cap; $("#sCapMax").textContent = capFor(tier); $("#sUnc").textContent = now.unc;
+  $("#sCap").textContent = w.now.cap; $("#sCapMax").textContent = capFor(tier); $("#sUnc").textContent = w.now.unc;
+  const pending = w.now.total - (state.added || 0), btn = $("#addBtn"), note = $("#addNote");
+  if (!profile){ btn.disabled = true; btn.textContent = "Add to my card"; note.innerHTML = `<a href="#home">Set up your player card</a> to track your TPE.`; }
+  else if (!profile.created){ btn.disabled = true; btn.textContent = "Add to my card"; note.textContent = "Create your player first, then track your TPE here."; }
+  else if (pending > 0){ btn.disabled = false; btn.textContent = `Add ${pending} TPE to my card`; note.textContent = "Do this once your claims are in."; }
+  else { btn.disabled = true; btn.textContent = "Add to my card"; note.textContent = state.added ? `Added ${state.added} TPE to your card this week.` : "Tick tasks as you do them."; }
+  initTerms();
 }
-$("#resetBtn").addEventListener("click", () => { state.done = {}; store.set("vhl-week", state); renderChecklist(); });
+function onCheckChange(e){
+  const i = e.target.closest("input[data-id]"); if (!i) return;
+  state.done[i.dataset.id] = i.checked; saveWeek(); renderChecklist(); renderNextUp();
+  const w = weekProgress();
+  if (i.checked && w.n === w.m && !state.celebrated){
+    state.celebrated = true; saveWeek();
+    const gotBadge = (w.tier.id === "max" && award("maxweek")) | (w.m >= 4 && award("fullweek"));
+    if (!gotBadge){ toast(`Full week: <b>${w.max.total} TPE</b> ticked. Now claim it all.`); confetti(); }
+  }
+}
+function onAdd(){
+  if (!profile) return;
+  const w = weekProgress(), pending = w.now.total - (state.added || 0);
+  if (pending <= 0) return;
+  profile.tpe = (profile.tpe != null ? profile.tpe : DATA.startTPE) + pending; saveProfile();
+  state.added = w.now.total; saveWeek();
+  renderChecklist(); renderProjection();
+  toast(`Added ${pending} TPE. Your card shows <b>${profile.tpe}</b>.`);
+}
 
-/* ========================================================= earn */
+/* ========================================================= projection */
+function renderProjectionControls(){
+  $("#pTier").innerHTML = DATA.tiers.map(t => `<option value="${t.id}">${esc(t.name)} (${esc(t.time)}, ${totalsFor(t).total} a week)</option>`).join("");
+  $("#pTier").value = (profile && profile.tier) || "welfare";
+  $("#pExtras").innerHTML = DATA.extras.map((x, i) => `<label class="opt"><input type="checkbox" data-i="${i}"> <span>${esc(x.name)} (+${x.tpe})</span></label>`).join("");
+  ["#pTier", "#pWeeks"].forEach(s => $(s).addEventListener("input", renderProjection));
+  $("#pExtras").addEventListener("change", renderProjection);
+}
+function renderProjection(){
+  const weeks = +$("#pWeeks").value; $("#pWeeksOut").textContent = weeks;
+  const tier = tierById($("#pTier").value);
+  const extra = $$("#pExtras input:checked").reduce((a, i) => a + DATA.extras[+i.dataset.i].tpe, 0);
+  const tt = totalsFor(tier);
+  const cap = tt.cap * weeks, unc = tt.unc * weeks + extra;
+  $("#pTotal").textContent = cap + unc; $("#pCap").textContent = cap; $("#pUnc").textContent = unc;
+  const start = profile && profile.created && profile.tpe != null ? profile.tpe : DATA.startTPE;
+  const need = DATA.vhlmCap - start - extra, wks = Math.max(0, Math.ceil(need / tt.total));
+  const from = start === DATA.startTPE ? `Starting from the ${DATA.startTPE} TPE every new player gets` : `Starting from your ${start} TPE`;
+  $("#pPace").innerHTML = wks > 0
+    ? `${from}, this routine reaches the ${DATA.vhlmCap} TPE VHLM cap in about <b>${wks} weeks</b>, roughly ${(wks / DATA.seasonWeeks).toFixed(1)} seasons.`
+    : `That gets you to the ${DATA.vhlmCap} TPE VHLM cap.`;
+  const rows = DATA.tiers.map(t => ({ t, v: totalsFor(t).total * weeks + extra }));
+  const max = Math.max(...rows.map(r => r.v)) || 1;
+  $("#pBars").innerHTML = `<div class="small soft">Same weeks, every routine</div>` + rows.map(r => `<div class="bar-row ${r.t.id === tier.id ? "sel" : ""}"><span>${esc(r.t.name.replace("The ", ""))}</span>
+    <div class="bar-track"><div class="bar-fill" style="width:${(r.v / max * 100).toFixed(1)}%"></div></div><b>${r.v}</b></div>`).join("");
+}
+
+/* ========================================================= learn: rookie camp */
+let lesson = null;  // {id, i, picked}
+function renderCamp(){
+  const done = DATA.lessons.filter(l => camp[l.id]).length;
+  $("#campCount").textContent = `${done} of ${DATA.lessons.length} passed`;
+  $("#campGrid").innerHTML = DATA.lessons.map((l, i) => `<button class="lesson ${camp[l.id] ? "done" : ""}" type="button" data-id="${l.id}">
+    <span class="num">${camp[l.id] ? icon("check") : i + 1}</span>
+    <span><b>${esc(l.title)}</b><span>${camp[l.id] ? "Passed" : `${l.cards.length} cards and a quick check`}</span></span></button>`).join("");
+}
+function openLesson(id){
+  if (!DATA.lessons.some(l => l.id === id)) return;
+  lesson = { id, i: 0, picked: null }; renderLesson();
+}
+function closeLesson(){
+  lesson = null; $("#lessonPlayer").hidden = true; $("#campGrid").hidden = false; renderCamp();
+}
+function fillTokens(h){ return h.replace("{deadline}", esc(localDeadline())); }
+function renderLesson(){
+  const L = DATA.lessons.find(x => x.id === lesson.id), idx = DATA.lessons.indexOf(L);
+  const total = L.cards.length + 1, onQuiz = lesson.i >= L.cards.length;
+  $("#campGrid").hidden = true; const P = $("#lessonPlayer"); P.hidden = false;
+  const dots = `<div class="dots" aria-hidden="true">${Array.from({ length: total }, (_, k) => `<i class="${k < lesson.i ? "on" : (k === lesson.i ? "now" : "")}"></i>`).join("")}</div>`;
+  let body, nav;
+  if (!onQuiz){
+    const c = L.cards[lesson.i];
+    body = `<div class="lc" tabindex="-1"><h3>${esc(c.t)}</h3>${fillTokens(c.h)}</div>`;
+    nav = `<button class="btn ghost" type="button" data-l="prev" ${lesson.i === 0 ? "disabled" : ""}>${icon("back")}Back</button>
+           <button class="btn" type="button" data-l="next">${lesson.i === L.cards.length - 1 ? "Quick check" : "Next"}${icon("arrow")}</button>`;
+  } else {
+    const q = L.q, p = lesson.picked, answered = p !== null, right = p === q.a;
+    body = `<div class="lc" tabindex="-1"><h3>Quick check</h3><p>${esc(q.text)}</p>
+      <div class="opts" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">${q.opts.map((o, k) => {
+        const cls = answered ? (k === q.a && right ? "right" : (k === p ? "wrong" : "")) : "";
+        return `<button class="opt-big ${cls}" type="button" data-pick="${k}" ${answered ? "disabled" : ""}>${esc(o)}</button>`; }).join("")}</div>
+      ${answered ? `<div class="fb ${right ? "right" : "wrong"}" role="status"><b>${right ? "That's it." : "Not quite."}</b>${right ? esc(q.why) : "Have another look at the cards, or try a different answer."}</div>` : ""}
+    </div>`;
+    nav = `<button class="btn ghost" type="button" data-l="prev">${icon("back")}Back</button>` +
+      (answered ? (right ? `<button class="btn" type="button" data-l="finish">Finish lesson${icon("check")}</button>` : `<button class="btn" type="button" data-l="retry">Try again</button>`) : "");
+  }
+  P.innerHTML = `<div class="bar"><button class="linkbtn small" type="button" data-l="close">Back to all lessons</button><span class="soft">Lesson ${idx + 1} of ${DATA.lessons.length}: ${esc(L.title)}</span></div>
+    ${dots}${body}<div class="nav">${nav}</div>`;
+  initTerms();
+}
+function onPlayerClick(e){
+  const pick = e.target.closest("[data-pick]");
+  if (pick){ lesson.picked = +pick.dataset.pick; renderLesson(); return; }
+  const b = e.target.closest("[data-l]"); if (!b) return;
+  const L = DATA.lessons.find(x => x.id === lesson.id), a = b.dataset.l;
+  if (a === "close"){ closeLesson(); return; }
+  if (a === "next"){ lesson.i = Math.min(L.cards.length, lesson.i + 1); }
+  if (a === "prev"){ lesson.i = Math.max(0, lesson.i - 1); lesson.picked = null; }
+  if (a === "retry"){ lesson.picked = null; }
+  if (a === "finish"){
+    const first = !camp[L.id];
+    camp[L.id] = true; store.set("vhl-camp", camp);
+    closeLesson(); renderCampMini();
+    const all = DATA.lessons.every(l => camp[l.id]);
+    if (all && award("camp")) {} else if (first) toast(`Lesson passed: <b>${esc(L.title)}</b>`);
+    $("#camp").scrollIntoView({ block:"start" });
+    return;
+  }
+  renderLesson();
+  const lc = $("#lessonPlayer .lc"); if (lc) lc.focus({ preventScroll:true });
+  const top = $("#lessonPlayer").getBoundingClientRect().top;
+  if (top < 70) $("#lessonPlayer").scrollIntoView({ block:"start" });
+}
+
+/* ========================================================= learn: rink timeline */
+const RINK = { g1:.06, b1:.33, r:.5, b2:.67, g2:.94 };
+const RINK_TASKS = [
+  { n:1, name:"Biography", tpe:8, a:.06, b:.94, col:"--green", window:"Any time" },
+  { n:2, name:"Prospect Scouting Report", tpe:5, a:.06, b:.355, col:"--blue", window:"Before your first VHL game" },
+  { n:3, name:"Rookie Experience", tpe:5, a:.33, b:.5, col:"--gold", dark:true, window:"From your VHL draft to the end of your first season" },
+  { n:4, name:"Career Reflection", tpe:5, a:.67, b:.94, col:"--red", window:"From your 4th VHL season" }
+];
+function currentPrefix(){ const v = parseInt($("#prefixIn").value, 10); return v > 0 ? v : DATA.draftExample.draft; }
+function rinkSVG(vertical, p){
+  const zones = [ ["VHLM", RINK.g1, RINK.b1], ["Season 1", RINK.b1, RINK.r], ["Seasons 2–3", RINK.r, RINK.b2], ["Season 4 onward", RINK.b2, RINK.g2] ];
+  const lines = [ ["You start here", RINK.g1], [`VHL draft|S${p}`, RINK.b1], ["Season 4", RINK.b2], [`Retires after|S${p + DATA.careerSeasons}`, RINK.g2] ];
+  const label = `Career timeline: VHLM, then the S${p} VHL draft, first VHL season, seasons 2 and 3, then season 4 onward until retirement after S${p + DATA.careerSeasons}. Career task windows are listed below.`;
+  if (!vertical){
+    const W = 1000, H = 420, X0 = 20, Y0 = 46, RW = 960, RH = 300, ax = a => X0 + a * RW;
+    let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">`;
+    s += `<rect class="ice" x="${X0}" y="${Y0}" width="${RW}" height="${RH}" rx="140"/>`;
+    s += `<circle cx="${ax(.5)}" cy="${Y0 + RH/2}" r="52" fill="none" stroke="var(--blue)" stroke-width="3" opacity=".5"/>`;
+    [[.17,.28],[.17,.72],[.83,.28],[.83,.72]].forEach(([a,c]) => s += `<circle cx="${ax(a)}" cy="${Y0 + c*RH}" r="40" fill="none" stroke="var(--red)" stroke-width="2.5" opacity=".35"/>`);
+    s += `<path d="M${ax(RINK.g1)} ${Y0+RH/2-30} a30 30 0 0 1 0 60z" fill="var(--blue-soft)"/><path d="M${ax(RINK.g2)} ${Y0+RH/2-30} a30 30 0 0 0 0 60z" fill="var(--blue-soft)"/>`;
+    [[RINK.g1,"--red",3],[RINK.b1,"--blue",11],[RINK.r,"--red",7],[RINK.b2,"--blue",11],[RINK.g2,"--red",3]].forEach(([a,c,w]) =>
+      s += `<line x1="${ax(a)}" y1="${Y0+6}" x2="${ax(a)}" y2="${Y0+RH-6}" stroke="var(${c})" stroke-width="${w}" opacity=".8"/>`);
+    zones.forEach(([t,a,b]) => s += `<text class="zone" x="${ax((a+b)/2)}" y="30" text-anchor="middle" font-size="20">${esc(t)}</text>`);
+    lines.forEach(([t,a], i) => s += `<text class="line-lbl" x="${i === 0 ? X0 + 10 : (i === 3 ? X0 + RW - 10 : ax(a))}" y="${Y0 + RH + 34}" text-anchor="${i === 0 ? "start" : (i === 3 ? "end" : "middle")}" font-size="18">${esc(t.replace("after|", "after ").replace("|", ", "))}</text>`);
+    RINK_TASKS.forEach((t, i) => {
+      const y = Y0 + RH * (.2 + i * .2), x1 = ax(t.a) + (t.a <= RINK.g1 ? 8 : 0), x2 = ax(t.b) - (t.b >= RINK.g2 ? 8 : 0), txt = `${t.name}, ${t.tpe} TPE`;
+      const fits = txt.length * 9 + 30 < x2 - x1, fg = t.dark ? "#3D2A00" : "#fff";
+      s += `<rect x="${x1}" y="${y - 18}" width="${x2 - x1}" height="36" rx="18" fill="var(${t.col})"/>`;
+      s += fits ? `<text x="${x1 + 16}" y="${y + 6}" font-size="17" font-weight="600" style="fill:${fg}">${esc(txt)}</text>`
+                : `<text class="halo" x="${x2 + 12}" y="${y + 6}" font-size="17" font-weight="600">${esc(txt)}</text>`;
+    });
+    return s + `</svg>`;
+  }
+  const W = 420, H = 1000, GX = 150, X0 = 160, Y0 = 20, RW = 250, RH = 960, ay = a => Y0 + a * RH;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">`;
+  s += `<rect class="ice" x="${X0}" y="${Y0}" width="${RW}" height="${RH}" rx="110"/>`;
+  s += `<circle cx="${X0 + RW/2}" cy="${ay(.5)}" r="46" fill="none" stroke="var(--blue)" stroke-width="3" opacity=".5"/>`;
+  [[.17,.28],[.17,.72],[.83,.28],[.83,.72]].forEach(([a,c]) => s += `<circle cx="${X0 + c*RW}" cy="${ay(a)}" r="34" fill="none" stroke="var(--red)" stroke-width="2.5" opacity=".35"/>`);
+  [[RINK.g1,"--red",3],[RINK.b1,"--blue",11],[RINK.r,"--red",7],[RINK.b2,"--blue",11],[RINK.g2,"--red",3]].forEach(([a,c,w]) =>
+    s += `<line x1="${X0+6}" y1="${ay(a)}" x2="${X0+RW-6}" y2="${ay(a)}" stroke="var(${c})" stroke-width="${w}" opacity=".8"/>`);
+  zones.forEach(([t,a,b]) => {
+    const words = t.split(" "), mid = ay((a+b)/2), lines2 = words.length > 2 ? [words.slice(0,2).join(" "), words.slice(2).join(" ")] : (t.length > 9 ? words : [t]);
+    lines2.forEach((ln, k) => s += `<text class="zone" x="${GX - 6}" y="${mid + k*24 - (lines2.length-1)*12}" text-anchor="end" font-size="21">${esc(ln)}</text>`);
+  });
+  lines.forEach(([t,a], i) => {
+    const y = i === 0 ? ay(a) + 22 : (i === 3 ? ay(a) - 10 : ay(a) + 6);
+    const words = t.split("|");
+    words.forEach((w, k) => s += `<text class="line-lbl" x="${GX - 6}" y="${y + k*20}" text-anchor="end" font-size="16">${esc(w)}</text>`);
+  });
+  RINK_TASKS.forEach((t, i) => {
+    const x = X0 + RW * (.2 + i * .2), y1 = ay(t.a) + (t.a <= RINK.g1 ? 8 : 0), y2 = ay(t.b) - (t.b >= RINK.g2 ? 8 : 0), fg = t.dark ? "#3D2A00" : "#fff";
+    s += `<rect x="${x - 15}" y="${y1}" width="30" height="${y2 - y1}" rx="15" fill="var(${t.col})"/>`;
+    s += `<text x="${x}" y="${y1 + 22}" text-anchor="middle" font-size="17" font-weight="700" style="fill:${fg}">${t.n}</text>`;
+  });
+  return s + `</svg>`;
+}
+function drawRink(){
+  const host = $("#rink"); if (!host || host.offsetParent === null) return;
+  const p = currentPrefix();
+  host.innerHTML = rinkSVG(host.clientWidth < 620, p);
+  $("#rinkLegend").innerHTML = RINK_TASKS.map(t => `<li><span class="dot" style="background:var(${t.col});${t.dark ? "color:#3D2A00" : ""}">${t.n}</span><div><b>${esc(t.name)}, ${t.tpe} uncapped TPE</b><span>${esc(t.window)}</span></div></li>`).join("");
+  const last = p + DATA.careerSeasons;
+  $("#prefixOut").innerHTML = `An S${p} player is in the <b>Season ${p} VHL draft</b> and can play through <b>Season ${last}</b>, then retires automatically. You can retire earlier at any time.`;
+}
+function syncPrefix(){
+  $("#prefixIn").value = (profile && profile.prefix) || store.get("vhl-prefix", DATA.draftExample.draft);
+  if (currentView === "learn") drawRink();
+}
+let rinkTimer;
+window.addEventListener("resize", () => { clearTimeout(rinkTimer); rinkTimer = setTimeout(() => { if (currentView === "learn") drawRink(); }, 150); hideTip(); });
+
+/* ========================================================= learn: library + ideas */
 let earnTab = DATA.earn[0].id;
 function renderEarn(){
-  $("#earnTabs").innerHTML = DATA.earn.map(g => `<button class="chip" type="button" role="tab" aria-selected="${g.id===earnTab}" data-id="${g.id}">${esc(g.label)}</button>`).join("");
-  $("#earnTabs").querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => { earnTab = c.dataset.id; renderEarn(); }));
+  $("#earnTabs").innerHTML = DATA.earn.map(g => `<button class="chip" type="button" role="tab" aria-selected="${g.id === earnTab}" data-id="${g.id}">${esc(g.label)}</button>`).join("");
   const g = DATA.earn.find(x => x.id === earnTab);
   $("#earnBlurb").textContent = g.blurb;
   $("#earnCards").innerHTML = g.items.map(t => {
     const extra = (t.how || t.link) ? `<details><summary>How to do it</summary>${t.how ? `<p>${esc(t.how)}</p>` : ""}${t.link ? `<p>${ext(t.link[0], t.link[1])}</p>` : ""}</details>` : "";
-    return `<article class="task ${t.kind==='uncapped'?'unc':''}">
-      <div class="top"><h4>${esc(t.name)}</h4><div class="big">${esc(t.tpe)}<span>TPE</span></div></div>
-      <div class="req">${esc(t.req)} <span class="tag ${t.kind}">${t.kind==='capped'?'Capped':'Uncapped'}</span>${t.check?'<span class="tag check-it">Confirm value</span>':''}</div>
+    return `<article class="task ${t.kind === "uncapped" ? "unc" : ""}">
+      <div class="top"><span class="ti">${icon(iconFor(t.name))}</span><h4>${esc(t.name)}</h4><div class="big">${esc(t.tpe)}<span>TPE</span></div></div>
+      <div class="req">${esc(t.req)} <span class="tag ${t.kind}">${t.kind === "capped" ? "Capped" : "Uncapped"}</span>${t.check ? ' <span class="tag check-it">Confirm value</span>' : ""}</div>
       <p>${esc(t.text)}</p>${extra}</article>`;
   }).join("");
+}
+function renderIdeas(){
+  const ic = { Article:"pen", Graphic:"brush", Podcast:"mic" };
+  $("#ideaList").innerHTML = DATA.ideas.map(x => `<div class="idea"><span class="ti">${icon(ic[x.fmt] || "pen")}</span><small>${esc(x.fmt)}</small><b>${esc(x.title)}</b><p>${esc(x.text)}</p></div>`).join("");
 }
 
 /* ========================================================= build */
 function renderBuild(){
   const costHTML = `<thead><tr><th>Levels</th>${DATA.costBands.map(b => `<th>${b[0]}</th>`).join("")}</tr></thead>
     <tbody><tr><td>TPE per level</td>${DATA.costBands.map(b => `<td class="num">${b[1]}</td>`).join("")}</tr></tbody>`;
-  document.querySelectorAll(".cost-table").forEach(t => t.innerHTML = costHTML);
+  $$(".cost-table").forEach(t => t.innerHTML = costHTML);
   const tiersHTML = (tiers, showInputs) => tiers.map(t => `<div class="attr-tier"><h4>${esc(t.tier)}</h4><div class="attrs">
     ${t.items.map(a => `<div class="attr ${t.cls}"><b>${esc(a.name)}</b>${showInputs ? `<div class="inputs">Built by: ${esc(a.inputs)}</div>` : ""}<p>${esc(a.text)}</p></div>`).join("")}</div></div>`).join("");
   $("#attrTiers").innerHTML = tiersHTML(DATA.attrTiers, true);
   $("#goalieTiers").innerHTML = tiersHTML(DATA.goalieTiers, false);
-  const sb = DATA.starterBuild, sum = sb.tpe.reduce((a,r) => a + r[1], 0);
+  const sb = DATA.starterBuild, sum = sb.tpe.reduce((a, r) => a + r[1], 0);
   $("#starterTable").innerHTML = `<thead><tr><th>Attribute</th><th>TPE</th></tr></thead><tbody>
     ${sb.tpe.map(r => `<tr><td>${esc(r[0])}</td><td class="num">${r[1]}</td></tr>`).join("")}
     <tr><td><b>Total</b></td><td class="num">${sum}</td></tr></tbody>`;
-  $("#starterTable").insertAdjacentHTML("afterend", `<p class="small muted" style="margin-top:8px">Result: ${esc(sb.result)}. Unbuilt ratings stay at 40.</p>`);
+  $("#starterResult").textContent = `Result: ${sb.result}. Unbuilt ratings stay at 40.`;
 }
-
-
-/* ========================================================= position toggle */
-function setPosition(pos){
+function setPosition(pos, fromProfile){
   $("#build-skater").hidden = pos !== "skater";
   $("#build-goalie").hidden = pos !== "goalie";
-  $("#posToggle").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-selected", c.dataset.pos === pos));
+  $$("#posToggle .chip").forEach(c => c.setAttribute("aria-selected", c.dataset.pos === pos));
   store.set("vhl-position", pos);
-}
-$("#posToggle").querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => setPosition(c.dataset.pos)));
-document.querySelectorAll("[data-goto-pos]").forEach(a => a.addEventListener("click", () => setPosition(a.dataset.gotoPos)));
-
-/* ========================================================= timeline */
-function renderTimeline(){
-  let html = `<div class="tl-stage first"></div>` + DATA.stages.map(s => `<div class="tl-stage">${esc(s)}</div>`).join("");
-  DATA.career.forEach((c, i) => {
-    const row = i + 2;
-    html += `<div class="tl-name" style="grid-row:${row};grid-column:1">${esc(c.name)}<small>${esc(c.window)}</small></div>`;
-    html += `<div class="tl-bar" style="grid-row:${row};grid-column:${c.from+1} / ${c.to+2}">${c.tpe} TPE</div>`;
-  });
-  $("#timeline").innerHTML = html;
-  const sum = DATA.career.reduce((a,c) => a + c.tpe, 0);
-  $("#tlTotal").innerHTML = `Together they're worth <strong>${sum} uncapped TPE</strong>, and you can write the Biography and Prospect Scouting Report while still in the VHLM. Post them in: ${DATA.careerLinks.map(l => ext(l[0], l[1])).join(", ")}.`;
+  if (!fromProfile && profile){
+    if (pos === "goalie" && profile.pos !== "goalie"){ profile.pos = "goalie"; saveProfile(); }
+    if (pos === "skater" && profile.pos === "goalie"){ profile.pos = "forward"; saveProfile(); }
+  }
 }
 
-/* ========================================================= projection */
-function renderProjectionControls(){
-  $("#pTier").innerHTML = DATA.tiers.map(t => `<option value="${t.id}">${esc(t.name)} (${esc(t.time)}, ${totalsFor(t).total}/week)</option>`).join("");
-  $("#pTier").value = "welfare";
-  $("#pExtras").innerHTML = DATA.extras.map((x,i) => `<label class="opt"><input type="checkbox" data-i="${i}"> <span>${esc(x.name)} (+${x.tpe})</span></label>`).join("");
-  ["#pTier","#pWeeks"].forEach(s => $(s).addEventListener("input", renderProjection));
-  $("#pExtras").addEventListener("change", renderProjection);
+/* ========================================================= more */
+function renderFaq(){
+  $("#faqList").innerHTML = DATA.faq.map(x => `<details><summary>${esc(x.q)}</summary><p>${x.a
+    .replace("${DRAFT_FROM}", DATA.draftExample.createdFrom).replace("${DRAFT_TO}", DATA.draftExample.draft)}</p></details>`).join("");
 }
-function renderProjection(){
-  const weeks = +$("#pWeeks").value; $("#pWeeksOut").textContent = weeks;
-  const tier = DATA.tiers.find(t => t.id === $("#pTier").value);
-  const extra = [...$("#pExtras").querySelectorAll("input:checked")].reduce((a,i) => a + DATA.extras[+i.dataset.i].tpe, 0);
-  const tt = totalsFor(tier);
-  const cap = tt.cap * weeks, unc = tt.unc * weeks + extra;
-  $("#pTotal").textContent = cap + unc; $("#pCap").textContent = cap; $("#pUnc").textContent = unc;
-  const rows = DATA.tiers.map(t => ({ t, v: totalsFor(t).total * weeks + extra }));
-  const max = Math.max(...rows.map(r => r.v)) || 1;
-  $("#pBars").innerHTML = `<div class="muted small">Same weeks, every routine</div>` + rows.map(r => `<div class="bar-row ${r.t.id===tier.id?'sel':''}"><span>${esc(r.t.name)}</span>
-    <div class="bar-track"><div class="bar-fill" style="width:${(r.v/max*100).toFixed(1)}%"></div></div><b>${r.v}</b></div>`).join("");
-}
-
-/* ========================================================= trivia + sources */
 function renderTrivia(){
   const list = arr => `<ul class="rules" style="margin-top:6px">${arr.map(r => `<li>${ext(r[1], r[0])}</li>`).join("")}</ul>`;
   $("#triviaPortal").innerHTML = list(DATA.triviaPortal);
   $("#triviaForum").innerHTML = list(DATA.triviaForum);
 }
+function renderGlossary(){
+  $("#glossList").innerHTML = Object.values(DATA.glossary).sort((a, b) => a[0].localeCompare(b[0]))
+    .map(g => `<div><dt>${esc(g[0])}</dt><dd>${esc(g[1])}</dd></div>`).join("");
+}
 function renderResources(){
   $("#resList").innerHTML = DATA.resources.map(r => `<a class="card" href="${r.url}" target="_blank" rel="noopener">
-    <span class="rname">${esc(r.name)}</span><span class="meta"><span class="mode">${esc(r.mode)}</span><span>${esc(r.type)}</span></span>
+    <span class="rname">${esc(r.name)}</span><span class="meta"><span>${esc(r.mode)}</span><span>${esc(r.type)}</span></span>
     <span class="used">${esc(r.used)}</span></a>`).join("");
 }
-$("#foot").innerHTML = `Made for first-generation VHL players. Rules last checked ${esc(DATA.lastUpdated)}. If this page and an official forum rule disagree, the forum wins. ${ext("https://vhlforum.com","vhlforum.com")} · ${ext("https://vhlportal.com","vhlportal.com")}`;
+function applyTheme(t){
+  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  else document.documentElement.removeAttribute("data-theme");
+  store.set("vhl-theme", t || "auto");
+  $$("#themeChips .chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.themeSet === (t || "auto")));
+}
+let resetArmed = false;
+function onResetAll(e){
+  const b = e.currentTarget;
+  if (!resetArmed){ resetArmed = true; b.textContent = "Tap again to clear"; setTimeout(() => { resetArmed = false; b.textContent = "Clear everything"; }, 4000); return; }
+  ["vhl-profile","vhl-badges","vhl-camp","vhl-first","vhl-week","vhl-position","vhl-prefix"].forEach(store.del);
+  location.hash = "#home"; location.reload();
+}
 
-renderTiers(); renderChecklist(); renderEarn(); renderBuild(); renderTimeline();
-renderProjectionControls(); renderProjection(); renderTrivia(); renderResources();
-setPosition(store.get("vhl-position", "skater") === "goalie" ? "goalie" : "skater");
+/* ========================================================= glossary tooltips */
+const tip = document.createElement("div");
+tip.id = "gtip"; tip.hidden = true; tip.setAttribute("role", "tooltip"); document.body.appendChild(tip);
+let tipFor = null;
+function initTerms(){
+  $$(".g:not([tabindex])").forEach(el => { el.setAttribute("tabindex", "0"); el.setAttribute("role", "button"); el.setAttribute("aria-label", el.textContent + ": show definition"); });
+}
+function showTip(el){
+  const g = DATA.glossary[el.dataset.g]; if (!g) return;
+  tip.innerHTML = `<b>${esc(g[0])}</b>${esc(g[1])}`; tip.hidden = false; tipFor = el;
+  const w = Math.min(280, innerWidth - 24); tip.style.width = w + "px";
+  const r = el.getBoundingClientRect();
+  const left = Math.max(scrollX + 12, Math.min(r.left + scrollX, scrollX + innerWidth - w - 12));
+  tip.style.left = left + "px"; tip.style.top = (r.bottom + scrollY + 8) + "px";
+}
+function hideTip(){ tip.hidden = true; tipFor = null; }
+document.addEventListener("click", e => {
+  const el = e.target.closest(".g");
+  if (el){ e.preventDefault(); e.stopPropagation(); tipFor === el ? hideTip() : showTip(el); return; }
+  if (!e.target.closest("#gtip")) hideTip();
+  const a = e.target.closest('a[href^="#"]');
+  if (a && a.getAttribute("href") === location.hash){ e.preventDefault(); go(location.hash); }
+}, true);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") hideTip();
+  if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("g")){ e.preventDefault(); tipFor === e.target ? hideTip() : showTip(e.target); }
+});
+
+/* ========================================================= init */
+renderTabs();
+applyTheme(store.get("vhl-theme", "auto"));
+$("#cardSlot").addEventListener("click", onSetupClick);
+$("#path").addEventListener("change", onPathChange);
+$("#tiers").addEventListener("click", onTierClick);
+$("#checkItems").addEventListener("change", onCheckChange);
+$("#addBtn").addEventListener("click", onAdd);
+$("#resetBtn").addEventListener("click", () => { state.done = {}; state.celebrated = false; saveWeek(); renderChecklist(); renderNextUp(); });
+$("#campGrid").addEventListener("click", e => { const b = e.target.closest(".lesson"); if (b) openLesson(b.dataset.id); });
+$("#lessonPlayer").addEventListener("click", onPlayerClick);
+$("#earnTabs").addEventListener("click", e => { const c = e.target.closest(".chip"); if (c){ earnTab = c.dataset.id; renderEarn(); } });
+$("#posToggle").addEventListener("click", e => { const c = e.target.closest(".chip"); if (c) setPosition(c.dataset.pos); });
+$("#prefixIn").addEventListener("input", () => {
+  const v = parseInt($("#prefixIn").value, 10);
+  if (v > 0 && v < 1000){ store.set("vhl-prefix", v); if (profile && profile.created){ profile.prefix = v; saveProfile(); } drawRink(); }
+});
+$("#themeChips").addEventListener("click", e => { const c = e.target.closest("[data-theme-set]"); if (c) applyTheme(c.dataset.themeSet); });
+$("#resetAll").addEventListener("click", onResetAll);
+$("#foot").innerHTML = `Made for first-generation VHL players. Rules last checked ${esc(DATA.lastUpdated)}. If this site and an official forum rule disagree, the forum wins. ${ext("https://vhlforum.com", "vhlforum.com")} and ${ext("https://vhlportal.com", "vhlportal.com")}.`;
+
+renderTiers(); renderChecklist(); renderDeadline();
+renderProjectionControls(); renderProjection();
+renderCamp(); renderEarn(); renderIdeas(); syncPrefix();
+renderBuild(); setPosition(profile ? (isGoalie() ? "goalie" : "skater") : (store.get("vhl-position", "skater") === "goalie" ? "goalie" : "skater"), true);
+renderFaq(); renderTrivia(); renderGlossary(); renderResources();
+go(location.hash);
+initTerms();
+setInterval(() => { renderDeadline(); if (currentView === "home") renderNextUp(); }, 60000);
 </script>
 </body>
 </html>
