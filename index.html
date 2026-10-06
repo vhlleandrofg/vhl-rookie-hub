@@ -75,9 +75,9 @@ table{border-collapse:collapse;width:100%}
 .ic{width:20px;height:20px;flex:none}
 
 /* ---------- header + tabs ---------- */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ice);border-bottom:1.5px solid var(--frost)}
-@supports (backdrop-filter:blur(8px)){.top{background:color-mix(in srgb,var(--ice) 86%,transparent);backdrop-filter:blur(10px)}}
-.top .wrap{display:flex;align-items:center;gap:16px;height:66px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ice);border-bottom:1.5px solid var(--frost)}
+@supports (backdrop-filter:blur(8px)){header.top{background:color-mix(in srgb,var(--ice) 86%,transparent);backdrop-filter:blur(10px)}}
+header.top .wrap{display:flex;align-items:center;gap:16px;height:66px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:600;font-size:1.3rem;white-space:nowrap}
 .brand svg{width:32px;height:32px}
 .tabs{display:flex;gap:4px;margin-left:auto}
@@ -86,8 +86,8 @@ table{border-collapse:collapse;width:100%}
 .tab[aria-current="page"]{background:var(--ink);color:var(--snow)}
 .bottombar{display:none}
 @media (max-width:760px){
-  .top .tabs{display:none}
-  .top .wrap{height:58px}
+  header.top .tabs{display:none}
+  header.top .wrap{height:58px}
   body{padding-bottom:var(--tabbar)}
   .bottombar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--snow);border-top:1.5px solid var(--frost);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));gap:2px}
   .bottombar .tab{flex:1;flex-direction:column;justify-content:center;gap:2px;padding:6px 2px;border-radius:14px;font-size:.72rem;font-weight:600}
@@ -314,6 +314,7 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
 .task.unc .ti{background:var(--green-soft);color:var(--green)}
 .task h4{flex:1;padding-top:8px}
 .task .big{font-family:var(--display);font-weight:700;font-size:1.6rem;line-height:1;white-space:nowrap;padding-top:6px}
+.task .big.long{font-size:1.15rem;padding-top:9px}
 .task .big span{font-size:.8rem;color:var(--ink-soft);margin-left:2px;font-weight:500}
 .task .req{font-size:.86rem;color:var(--ink-soft)}
 .task p{font-size:.93rem;margin:0}
@@ -465,7 +466,7 @@ details.fold > summary + *{margin-top:18px}
           <li><div><b>Copy the post's link</b>Click the three dots at the top right of your post, choose Share, and copy the link.</div></li>
           <li><div><b>Open Player Management</b>On the portal, open <a href="https://vhlportal.com/players/playermgmt" target="_blank" rel="noopener">Player Management</a> and choose Claim Capped or Claim Uncapped.</div></li>
           <li><div><b>Fill in the claim</b>Pick the week, choose the task type, enter the TPE, and paste your link.</div></li>
-          <li><div><b>Submit</b>An updater reviews it. Until then you can edit it under Pending Updates. Once it's approved, apply the TPE to your attributes.</div></li>
+          <li><div><b>Submit</b>An updater reviews it. Spot a mistake before then? Revoke the claim and submit it again. Once it's approved, apply the TPE to your attributes.</div></li>
         </ol>
         <div style="display:grid;gap:14px;align-content:start">
           <div class="panel"><h3>Button claims</h3><p>Practice Facility, Welfare and Training Camp are buttons on Player Management, with no post needed. Trivia has its own claim button once you answer correctly.</p></div>
@@ -751,20 +752,20 @@ const DATA = {
       { t:"Buttons need no claim", h:`<p>Practice Facility, Welfare and Training Camp are buttons on Player Management. Trivia has its own claim button once you answer correctly.</p>` },
       { t:"Beat the deadline", h:`<p>The VHL week runs Monday 00:00 to Sunday 23:59, Pacific Time.</p><p>For you, this week closes on <b>{deadline}</b>.</p>` }
     ], q:{ text:"You submitted a claim, but your TPE hasn't changed. Why?", opts:["You need to submit it again","An updater still has to review it","Claims only count on Mondays","TPE only updates at the end of the season"], a:1,
-      why:"Every claim is reviewed by an updater first. Until then you can still edit it under Pending Updates." } },
+      why:"Every claim is reviewed by an updater first. If you spot a mistake before then, revoke the claim and submit it again." } },
 
     { id:"earn", title:"Ways to earn", cards:[
-      { t:"One point task a week", h:`<p>Your big weekly task is worth 6 TPE: a 500-word article, a graphic, or a 10-minute podcast.</p><p>Welfare and Affiliate PT count as your one.</p>` },
-      { t:"Small extras", h:`<p>Fill the other half of your cap with up to 6 TPE of supplemental tasks: a press conference, trivia, or a short VHL.com article, graphic or radio show.</p>` },
-      { t:"Your own work only", h:`<p>Everything you submit must be yours. You can't rely on AI to produce your tasks, and graphics may use at most one AI-generated element.</p>` },
+      { t:"One point task a week", h:`<p>Your big weekly task is worth 6 TPE: a 500-word article, a graphic, or a 10-minute podcast.</p><p>Welfare (or Pension) counts as your one.</p>` },
+      { t:"Small extras", h:`<p>Fill the other half of your cap with up to 6 TPE of supplemental tasks: a press conference, trivia, reviews, game recaps, and up to two VHL.com articles, graphics or radio shows.</p>` },
+      { t:"Your own work only", h:`<p>Everything you submit must be yours. AI is allowed in only two ways: translating your own writing from another language, or creating one element of a graphic. Either way, say how you used it.</p>` },
       { t:"Not a writer?", h:`<p>Practice Facility, Welfare and trivia need no writing, and a press conference is a sentence or two per answer. Point tasks can be graphics or podcasts too.</p>` }
     ], q:{ text:"How many point tasks can you claim in one week?", opts:["One","Two","Three","As many as you like"], a:0,
-      why:"One per week. Welfare and Affiliate PT count as that one, and the smaller supplemental tasks go on top." } },
+      why:"One per week. Welfare or Pension counts as that one, and the smaller supplemental tasks go on top." } },
 
     { id:"career", title:"Your career", cards:[
       { t:"Career tasks", h:`<p>Four write-ups you can claim once per career, all uncapped: Biography (8), Prospect Scouting Report (5), Rookie Experience (5) and Career Reflection (5).</p>` },
       { t:"Watch the windows", h:`<p>Biography: any time. Prospect Scouting Report: before your first VHL game. Rookie Experience: from your VHL draft to the end of your first season. Career Reflection: from your 4th VHL season.</p>` },
-      { t:"Bonuses along the way", h:`<p>10 TPE at 100 TPE for first-gen players, 10 more when you graduate to the VHL, and 10 at every training camp once you're under VHL contract.</p>` }
+      { t:"Bonuses along the way", h:`<p>10 TPE at 100 TPE for first-gen players, 10 more when you graduate to the VHL, and 10 at training camp every pre-season once you're signed to a VHL team.</p>` }
     ], q:{ text:"When can you write your Career Reflection?", opts:["Any time","Before your first VHL game","From your 4th VHL season","Only in the VHLM"], a:2,
       why:"Career Reflection opens from your 4th VHL season. The Biography is the one you can write any time." } },
 
@@ -800,7 +801,7 @@ const DATA = {
   firstWeek: [
     { id:"account", title:"Create a forum account", html:`Sign up at <a href="https://vhlforum.com/register/" target="_blank" rel="noopener">vhlforum.com</a>. The same account logs you in to the <span class="g" data-g="portal">portal</span>.` },
     { id:"player", title:"Create your player", html:`On the portal, open <a href="https://vhlportal.com/tools/create" target="_blank" rel="noopener">Create a Player</a> and fill in the short form: name, position, height, weight and nationality. Any name works as long as it isn't offensive, and your nationality decides your World Cup team. If someone recruited you, add them so they get credit. Your player is automatically given a season <span class="g" data-g="prefix">prefix</span>, such as S107, which tells you your VHL draft class and how long your player can play.` },
-    { id:"apply", title:"Spend your starting TPE", html:`Your player is created as soon as you submit the form, and you start with 30 TPE to apply, or <a href="https://vhlforum.com/topic/81291-starting-tpe-adjustment-for-late-joiners/" target="_blank" rel="noopener">more if you join late</a>. Not sure where to put it? See <a href="#first-tpe">Your first TPE</a>.` },
+    { id:"apply", title:"Spend your starting TPE", html:`Your player is created as soon as you submit the form, and you start with 30 TPE to apply. Joining after your draft class opened? You get <a href="https://vhlforum.com/topic/81291-starting-tpe-adjustment-for-late-joiners/" target="_blank" rel="noopener">6 extra TPE for every week that has passed</a>. Not sure where to put it? See <a href="#first-tpe">Your first TPE</a>.` },
     { id:"discord", title:"Join the VHL Discord", html:`Join the <a href="https://discord.gg/5GrtbQctHe" target="_blank" rel="noopener">VHL Discord</a> and ask anything in #newcomers-help. Most day-to-day league chat happens there.` },
     { id:"team", title:"Find your VHLM team", html:`Go to the <a href="https://vhlportal.com/teams/waivers" target="_blank" rel="noopener">VHLM waivers page</a> on the portal and express interest in the <span class="g" data-g="vhlm">VHLM</span> teams you'd like to join. Once you're on a team, join its <span class="g" data-g="lockerroom">locker room</span>.` },
     { id:"clicks", title:"Grab your free weekly TPE", html:`On <a href="https://vhlportal.com/players/playermgmt" target="_blank" rel="noopener">Player Management</a>, click Practice Facility for 2 <span class="g" data-g="uncapped">uncapped</span> TPE. Then answer the week's <a href="#trivia">trivia</a> for up to 2 more. Both take a minute.` },
@@ -823,15 +824,17 @@ const DATA = {
     { q:"Do I need to know a lot about hockey?", a:`No. The sim plays every game for you. What matters is showing up each week, and plenty of tasks (graphics, podcasts, trivia, press conferences) don't need deep hockey knowledge.` },
     { q:"I'm not a writer. Can I still keep up?", a:`Yes. Practice Facility, Welfare and trivia need no writing at all, and a press conference is a sentence or two per answer. Point tasks can also be graphics or podcasts instead of articles.` },
     { q:"When is the weekly deadline?", a:`The VHL week runs from Monday 00:00 to Sunday 23:59, Pacific Time. <span id="faqDeadline"></span>` },
-    { q:"What happens if I miss a week?", a:`Nothing, apart from missing that week's TPE. Each week is capped on its own, so you can't go back and claim for a week that has ended. Just pick up again the next week.` },
-    { q:"I submitted a claim, but my TPE hasn't changed.", a:`Every claim is approved by an <span class="g" data-g="updater">updater</span> before the TPE is added. Until then you can still edit it under the Pending Updates tab in Player Management.` },
+    { q:"What happens if I miss a week?", a:`Nothing, apart from missing that week's TPE. Each week is capped on its own, so you can't go back and claim for a week that has ended. If you need more time, message a commissioner <b>before</b> the week ends to ask for an extension.` },
+    { q:"I submitted a claim, but my TPE hasn't changed.", a:`Every claim is approved by an <span class="g" data-g="updater">updater</span> before the TPE is added. If you spot a mistake before then, revoke the claim and submit it again.` },
     { q:"I put TPE in the wrong place. Can I fix it?", a:`Yes. A TPA Recall moves up to 10 TPA out of one attribute, and a TPA Reroll resets your whole build, with the first one free. See <a href="#fix">Made a mistake?</a>` },
     { q:"How long until I play in the VHL?", a:`A season lasts about 10 weeks. Most players are drafted by a VHL team after about one season in the VHLM, then move up after the season in which they reach the 400 TPE cap, usually about two seasons in. The <a href="#projection">projection</a> shows how fast your routine gets you there.` },
     { q:"Which VHL draft will I be in?", a:`Check your player's <span class="g" data-g="prefix">prefix</span>. Every new player is automatically given a season tag, such as S107, shown on their player page on the portal. It tells you which VHL draft class you're in: an S107 player goes into the Season 107 VHL draft. The prefix depends on when you create your player, with the trade deadline as the cutoff; for example, players created from the Season ${'$'}{DRAFT_FROM} trade deadline onward are S${'$'}{DRAFT_TO}.` },
-    { q:"How long can my player play?", a:`Your prefix tells you that too. A player can play until 8 seasons after their prefix season and is then retired automatically: an S94 player retires after Season 102, and an S107 player after Season 115. You can also choose to retire earlier, at any time. Try the <a href="#career">career window</a> tool with your own prefix.` },
+    { q:"How long can my player play?", a:`Your prefix tells you that too. Careers last 9 VHL seasons, starting with your draft season: an S94 player plays from Season 94 through Season 102, then retires automatically. VHLM seasons before your draft season don't count. You can also choose to retire earlier, at any time. Try the <a href="#career">career window</a> tool with your own prefix.` },
+    { q:"Can I change my position?", a:`First-gen players can switch to or from goalie at no cost within one month of creating their player. Forwards and defensemen can switch once per career with the Position Switch in the Player Store ($7,000,000), during the off-season.` },
+    { q:"Where does store money come from?", a:`Your contracts. Each season's salary is added to your bank balance at the start of that season, and the league sometimes gives extra cash for special occasions. See what you can buy in <a href="#library">Ways to earn</a>, under Player Store.` },
     { q:"Can I do press conferences before I'm on a team?", a:`You can, but most players start once they've joined a team, since each team posts its own questions.` },
     { q:"Do I need to download the sim?", a:`No. Everything happens on the forum, the portal and Discord.` },
-    { q:"Can I use AI to help?", a:`Not to produce your work. Everything you submit for TPE must be your own; see the "Your own work only" card in <a href="#lesson-earn">Rookie Camp</a>.` }
+    { q:"Can I use AI to help?", a:`Only in two ways: translating your own writing from another language (post the original, the translation and the tool's name), or generating one element of a graphic, like the background (describe how you used it). Anything else counts as cheating under the Code of Conduct.` }
   ],
 
   glossary: {
@@ -848,17 +851,19 @@ const DATA = {
     vhlm: ["VHLM", "The minor league where every new player starts. Builds there are capped at 400 TPE."],
     sths: ["STHS", "The hockey simulator that plays every game using your player's ratings."],
     portal: ["Portal", "vhlportal.com, where you manage your player, claim TPE, answer trivia and apply TPE."],
-    gm: ["GM / AGM", "The (Assistant) General Manager: the member who runs a team and signs players."],
-    lockerroom: ["Locker room", "Your team's private space, usually a Discord channel, for chat and help."],
+    gm: ["GM / AGM", "The General Manager and Assistant General Manager: the members in charge of a team, much like in real hockey."],
+    lockerroom: ["Locker room", "Your team's private space, often called the LR, usually on Discord."],
     updater: ["Updater", "A member of the league staff who reviews and grades TPE claims, working with the Head of Point Tasks."],
     claim: ["Claim", "Telling the portal you've done a task, so the TPE can be approved and added."],
-    we: ["W.E.", "Short for \"week ending\". Members use it to say which week a claim is for."],
     firstgen: ["First-gen", "A member on their first player. First-gen players get extra bonuses."],
     hybrid: ["Hybrid attributes", "The skater attributes you buy on the portal, like Deking. Each feeds one or more sim ratings."],
     draft: ["VHL draft", "Where VHL teams pick new players, usually after about one season in the VHLM."],
     prefix: ["Prefix", "The season tag every new player gets automatically, such as S107. It tells you your VHL draft class, and your player retires automatically 8 seasons later (S107 retires after S115)."],
     waivers: ["Waivers", "The portal page where new players express interest in joining a VHLM team."],
-    sim: ["Sim", "A simulated game or day of games. Results are posted on the forum and portal."]
+    sim: ["Sim", "The daily simulation of a set of games. Results are posted on the forum and Discord."],
+    pension: ["Pension", "Like Welfare, but pays 5 TPE and caps the week at 11. Unlocks once you've had two players reach 700+ TPE."],
+    store: ["Player Store", "Where you spend your player's bank balance, which comes from your contracts, on TPE boosts and build fixes."],
+    depreciation: ["Depreciation", "From your 6th VHL season, your attributes drop a little each off-season. Your TPE doesn't."],
   },
 
   tasks: {
@@ -878,49 +883,64 @@ const DATA = {
   ],
 
   earn: [
-    { id:"pt", label:"Point tasks", blurb:"Worth 6 capped TPE, half your weekly cap. You can claim only one per week, and Welfare and Affiliate PT count as that one.", items:[
+    { id:"pt", label:"Point tasks", blurb:"Worth 6 capped TPE, half your weekly cap. You can claim one per week, and Welfare or Pension counts as that one.", items:[
       { name:"Media Spot", tpe:"6", kind:"capped", req:"500+ words, VHL-related", text:"An article about anything in the league: a draft class, a game, a trade.",
         how:"Longer articles pay for more weeks: 1,000 words covers 2 weeks, 1,500 covers 3, and 2,000 covers 4 (the maximum). Claim one week at a time. Interviewing a player or GM is an easy way to build word count.", link:[F+"/forum/89-media-spots/","Media Spots forum"] },
-      { name:"Graphic or Video", tpe:"6", kind:"capped", req:"VHL-related, with real effort", text:"Graphics are reviewed more strictly than articles. A low-effort piece may only earn 4 or 5 TPE.",
-        how:"Graphics may use at most one AI-generated element, such as a background.", link:[F+"/forum/108-graphicsvideos/","Graphics/Videos forum"] },
+      { name:"Graphic or Video", tpe:"6", kind:"capped", req:"VHL-related, with real effort", text:"Graphics are reviewed more strictly than articles. A low-effort piece may only earn 4 or 5 TPE. Graphics can't be split across several weeks.",
+        how:"Generative AI may be used for one element only, such as the background, and you must describe how you used it in your post.", link:[F+"/forum/108-graphicsvideos/","Graphics/Videos forum"] },
       { name:"Podcast", tpe:"6", kind:"capped", req:"10+ minutes, VHL-related", text:"Often called the easiest full task, if you're comfortable being heard publicly.",
         how:"Longer podcasts and shows with several hosts have their own rules for multi-week claims.", link:[F+"/topic/25912-podcast-guidelines/","Podcast guidelines"] },
       { name:"Welfare / Pension", tpe:"4–5", kind:"capped", req:"One button click", text:"For weeks you can't do a point task. Welfare pays 4 TPE. Pension pays 5 and is unlocked once you've had two players reach 700+ TPE.",
-        how:"Click the button on Player Management. Welfare lowers your capped limit for that week from 12 to 10; Pension lowers it to 11. As a first-gen player you'll be claiming Welfare, so plan around 4 TPE.", link:[F+"/topic/31991-vhl-rule-book/","VHL Rule Book, section 10"] },
-      { name:"Affiliate PT", tpe:"6", kind:"capped", req:"A point task done in the SBA or EFL", text:"Claim it in a week you don't do a VHL point task.",
-        how:"You must claim it during the same week you completed it in the partner league." }
+        how:"Click the button on Player Management. Welfare lowers your capped limit for that week from 12 to 10; Pension lowers it to 11. As a first-gen player you'll be claiming Welfare, so plan around 4 TPE.", link:[F+"/topic/31991-vhl-rule-book/","VHL Rule Book, section 10"] }
     ]},
-    { id:"sup", label:"Supplemental", blurb:"Fill the other half of your cap, up to 6 capped TPE a week. You can submit one of each VHL.com type per week.", items:[
-      { name:"Press Conference", tpe:"2", kind:"capped", req:"Answer 6 questions", text:"The quickest capped TPE there is. Answering 3 questions earns 1 TPE.",
-        how:"Your team posts questions each week. A sentence or two per answer is enough.", link:[F+"/forum/393-press-conferences/","Press Conferences forum"] },
+    { id:"sup", label:"Supplemental", blurb:"Fill the other half of your cap, up to 6 capped TPE a week. You can make up to two VHL.com or VHL.com Radio submissions a week, and each task is claimed in the week you do it.", items:[
+      { name:"Press Conference", tpe:"2", kind:"capped", req:"Answer 6 questions", text:"The quickest capped TPE there is. Answering 3 questions earns 1 TPE, and 6 earns 2.",
+        how:"Answer your team's questions, ask questions in other players' press conferences, or answer questions asked in yours. A sentence or two per answer is enough.", link:[F+"/forum/393-press-conferences/","Press Conferences forum"] },
       { name:"Trivia", tpe:"2", kind:"capped", req:"2 questions, 1 TPE each", text:"Answered on the portal. A claim button appears once you get one right.",
-        how:"See the trivia section below for where to find answers.", link:[P+"/fantasy/trivia/","Trivia on the portal"] },
+        how:"Not sure where to look? Trivia help is in the More tab.", link:[P+"/fantasy/trivia/","Trivia on the portal"] },
       { name:"VHL.com Article", tpe:"2", kind:"capped", req:"150+ words", text:"A short VHL-related write-up. Easy even if you don't love writing.", link:[F+"/forum/78-vhlcom-articles/","VHL.com Articles forum"] },
-      { name:"VHL.com Graphic", tpe:"2", kind:"capped", req:"VHL-related graphic", text:"Can be simpler than a point-task graphic, like a player card.", link:[F+"/forum/538-vhlcom-graphics/","VHL.com Graphics forum"] },
-      { name:"VHL.com Radio", tpe:"3", kind:"capped", req:"5+ minute podcast", text:"The best-paying supplemental task, but it still counts toward your weekly cap.", link:[F+"/forum/92-vhlcom-radio/","VHL.com Radio forum"] },
-      { name:"Reviewing", tpe:"1–2", kind:"capped", req:"75+ word review", text:"A constructive review of someone else's article, graphic or podcast.", check:true,
-        how:"The older tutorial lists 1 TPE per review, up to 2 a week. Confirm the current value with your GM." },
-      { name:"Game Recap", tpe:"1–2", kind:"capped", req:"75+ words on one game", text:"Summarize a game from the daily sim threads.", check:true,
-        how:"You can't recap a game your player played in or one involving a team you manage. The older tutorial lists 1 TPE per recap, up to 2 a week; confirm the current value." }
+      { name:"VHL.com Graphic", tpe:"2", kind:"capped", req:"A simple VHL-related graphic", text:"Simpler than a point-task graphic. A player card is the classic example.", link:[F+"/forum/538-vhlcom-graphics/","VHL.com Graphics forum"] },
+      { name:"VHL.com Radio", tpe:"3", kind:"capped", req:"A short podcast, a few minutes long", text:"Pays 3 TPE, the most of any VHL.com task. It still counts toward your weekly cap.", link:[F+"/forum/92-vhlcom-radio/","VHL.com Radio forum"] },
+      { name:"Affiliate VHL.com Replacement", tpe:"2", kind:"capped", req:"A task in a partner league", text:"A submission in a partner league (SSL, PBE, ISFL or SBA) can replace one of your VHL.com submissions.",
+        how:"It counts toward your two VHL.com submissions for the week. SBA seasonal tasks have their own claiming steps, explained in the rule book.", link:[F+"/topic/31991-vhl-rule-book/","VHL Rule Book, section 10.2"] },
+      { name:"Reviewing", tpe:"1 each", kind:"capped", req:"75+ word review, up to 2 a week", text:"Constructive feedback on another member's point task. Each review is worth 1 TPE, and you can claim two a week.",
+        how:"Write at least 75 words of genuine, constructive feedback, then claim it like any other task." },
+      { name:"Game Recap", tpe:"1 each", kind:"capped", req:"75+ words on one game, up to 2 a week", text:"A summary of a game simmed in any VHL league or official tournament. Each recap is worth 1 TPE, and you can claim two a week.",
+        how:"You can't recap a game your player played in or one involving a team you manage." },
+      { name:"League Job", tpe:"varies", kind:"capped", icon:"case", req:"A role on the league staff", text:"Jobs that keep the league running pay capped TPE every week. Simmers, for example, earn 8 a week.",
+        how:"Openings are posted in the Job Interviews forum. In a normal week, job pay is capped TPE you can use however you like." }
     ]},
     { id:"unc", label:"Uncapped", blurb:"No weekly limit. These stack on top of your 12 capped TPE.", items:[
       { name:"Practice Facility", tpe:"2", kind:"uncapped", req:"Weekly button click", text:"Free TPE every week that doesn't touch your cap. Never skip it.", link:[P+"/players/playermgmt","Player Management"] },
-      { name:"Fantasy Zone", tpe:"0–4", kind:"uncapped", req:"Weekly predictions", text:"Pick the winners of the week's VHL and VHLM games through a quick form.", link:[F+"/forum/87-vhl-fantasy-zone/","Fantasy Zone forum"] },
-      { name:"VHFL", tpe:"1–6", kind:"uncapped", req:"Once per season", text:"Draft a 6-player fantasy team (3 F, 2 D, 1 G) in a 6-team group. Everyone earns something.", link:[F+"/forum/282-victory-hockey-fantasy-league/","VHFL forum"] },
+      { name:"Fantasy Zone", tpe:"0–4", kind:"uncapped", req:"Weekly predictions", text:"Predict the week's winners and statistical leaders through a quick form.", link:[F+"/forum/87-vhl-fantasy-zone/","Fantasy Zone forum"] },
+      { name:"VHFL", tpe:"1–6", kind:"uncapped", req:"Sign up in the off-season", text:"Draft a fantasy team of VHL players against 5 other members. Everyone earns something.", link:[F+"/forum/282-victory-hockey-fantasy-league/","VHFL forum"] },
       { name:"Super Coach", tpe:"1–6", kind:"uncapped", req:"Once per season", text:"Pick 3 F, 2 D and 1 G within a budget and compete against everyone who enters.", link:[F+"/forum/805-vhl-super-coach/","Super Coach forum"] },
       { name:"Award Predictions", tpe:"1 each", kind:"uncapped", req:"Before the season", text:"Predict every VHL award winner and earn 1 TPE per correct pick.", link:[P+"/tools/predictions","Predictions"] },
       { name:"Trivia Question Submission", tpe:"1–2", kind:"uncapped", req:"Submit questions", text:"1 TPE per trivia question you submit, up to 2.", link:[F+"/topic/135300-trivia-question-submission-thread/","Submission thread"] }
     ]},
-    { id:"bonus", label:"Bonuses & store", blurb:"One-time and occasional TPE. First-generation players get some extras worth grabbing early.", items:[
+    { id:"bonus", label:"Bonuses", blurb:"One-time and occasional TPE. First-generation players get extras worth grabbing early.", items:[
       { name:"First-Generation Bonus", tpe:"10", kind:"uncapped", req:"First player, at 100 TPE", text:"A reward for reaching 100 TPE on your first player.",
         how:"Comment \"+10 [player name]\" in the bonus thread, then claim Uncapped → Other → First Gen Bonus with that comment's link.", link:[F+"/topic/49868-first-generation-bonus/","First-Generation Bonus thread"] },
       { name:"Graduation Bonus", tpe:"10", kind:"uncapped", req:"Reaching the VHL", text:"Applied automatically when you graduate from the VHLM. Nothing to claim." },
-      { name:"Training Camp", tpe:"10", kind:"uncapped", req:"Under VHL contract", text:"Every offseason, click the Training Camp button during training camp week.", link:[P+"/players/playermgmt","Player Management"] },
-      { name:"Store: The First Generation", tpe:"5", kind:"uncapped", req:"First-gen only, before rookie season ends", text:"Bought with your player's in-game money in the player store.", link:[F+"/topic/63668-store-purchases-claiming/","Store claiming instructions"] },
-      { name:"Store: First-Gen Doubles", tpe:"+6", kind:"uncapped", req:"First-gen only, used with a point task", text:"Adds 6 uncapped TPE on top of a point task. Must be used before your rookie season ends.", link:[P+"/store/","Player store"] },
+      { name:"Training Camp", tpe:"10", kind:"uncapped", req:"Signed to a VHL team", text:"Each pre-season, any player signed to a VHL team can claim their team's Training Camp.", link:[P+"/players/playermgmt","Player Management"] },
       { name:"Recruit a Friend", tpe:"up to 15", kind:"uncapped", req:"Your recruit hits milestones", text:"1 TPE when they reach 100 TPE, 4 at 250, and 10 at 500.", link:[F+"/topic/57499-recruit-a-friend-tpe-rewards/","Recruitment rewards"] },
-      { name:"Other store items", tpe:"varies", kind:"capped", req:"Player store", text:"Free Week (6 capped, replaces a point task), PT Doubles (+6 uncapped with a point task), Full Doubles (doubles capped TPE up to 12), and uncapped TPE packages.", link:[P+"/store/","Player store"] },
       { name:"Donations", tpe:"varies", kind:"uncapped", req:"5, 10 or 15 CAD per season", text:"Unlocks 1, 2 or 3 rewards: a full free week (12 capped), 5 uncapped TPE, a doubles week, or $1M store cash.", link:[F+"/forum/214-vhl-donations/","Donations forum"] }
+    ]},
+    { id:"store", label:"Player Store", blurb:"Spend your player's bank balance on TPE boosts and build fixes. The balance comes from your contracts: each season's salary is added at the start of that season, and the league sometimes gives extra cash for special occasions.", items:[
+      { name:"The First Generation", tpe:"5", kind:"uncapped", req:"$500,000, once per career", text:"5 TPE for first-generation players. Use it before the end of your VHL rookie season.",
+        how:"Also open to returning members who haven't had a player in the past 3 seasons and have no carryover.", link:[P+"/store/","Player Store"] },
+      { name:"First Gen Doubles", tpe:"+6", kind:"uncapped", req:"$1,000,000, once per career", text:"6 uncapped TPE on top of a point task. First-gen only, and it must be used before the end of your VHL rookie season.",
+        how:"It doesn't apply to Welfare.", link:[P+"/store/","Player Store"] },
+      { name:"Free Week", tpe:"6", kind:"capped", req:"$1,000,000, twice per season", text:"6 TPE in place of your weekly point task." },
+      { name:"PT Doubles Week", tpe:"+6", kind:"uncapped", req:"$2,000,000, twice per season", text:"6 uncapped TPE on top of a point task. It doesn't apply to Welfare." },
+      { name:"Full Doubles Week", tpe:"up to 12", kind:"uncapped", req:"$4,000,000, once per season", text:"Doubles all the capped TPE you earn that week, for up to 12 extra uncapped TPE. It doesn't apply to Welfare." },
+      { name:"Point Task and VHL.com Upgrades", tpe:"+1", kind:"capped", req:"$1,000,000 each, once per season", text:"Adds 1 TPE to your weekly point task, or to your VHL.com article, player card or radio podcast. Each lasts 8 weeks." },
+      { name:"Uncapped TPE Packages", tpe:"5–20", kind:"uncapped", req:"$2,000,000 to $6,000,000, once per season", text:"Adds 1, 2 or 4 TPE to each of 5 VHL.com submissions that season ($2,000,000, $3,500,000 or $6,000,000). Unused TPE doesn't carry over." },
+      { name:"Award Prediction Multiplier", tpe:"×2 or ×3", kind:"uncapped", req:"$1,500,000 or $3,000,000, before VHL game 20", text:"Doubles or triples your award prediction points for the season." },
+      { name:"Position Switch", tpe:null, req:"$7,000,000, once per career", text:"Switch between forward and defense. Off-season only." },
+      { name:"TPA Recall and TPA Reroll", tpe:null, req:"$500,000 recall; first reroll free", text:"Fix a build mistake: move up to 10 TPA out of one attribute, or reset your whole build in the off-season.", how:"Full details are in the Build tab, under Made a mistake?" },
+      { name:"Experience Points", tpe:null, req:"$500,000 to $3,000,000, once per season", text:"Adds 1, 3 or 10 points straight to your player's Experience rating. This isn't TPE." },
+      { name:"Late-career items", tpe:null, req:"From your 6th VHL season", text:"Soften depreciation: the 'Jaromir Jagr' ($7,000,000) protects one attribute for a season; Still Kicking ($8,000,000) and Old But Not Forgotten ($12,000,000) reduce it in your 7th and 8th seasons." }
     ]}
   ],
 
@@ -1007,7 +1027,8 @@ const DATA = {
     { name:"Why (and How to) Join the VHL", type:"Beginner Guide", mode:"Forum", url:F+"/topic/142556-why-and-how-to-join-the-vhl/", used:"First-week steps and joining a VHLM team." },
     { name:"How to Create a Player", type:"Beginner Guide", mode:"Forum", url:F+"/topic/50373-how-to-create-a-player/", used:"Player creation." },
     { name:"How to Update with VHL Portal", type:"Beginner Guide", mode:"Forum", url:F+"/topic/50312-how-to-update-with-vhl-portal/", used:"Claim approval and pending updates." },
-    { name:"VHL Rule Book", type:"Rules", mode:"Forum", url:F+"/topic/31991-vhl-rule-book/", used:"Section 10 covers earning TPE, including Welfare and Pension." },
+    { name:"VHL Rule Book", type:"Rules", mode:"Forum", url:F+"/topic/31991-vhl-rule-book/", used:"Sections 10, 12 and 13: earning TPE, creating a player, position changes, career length and retirement." },
+    { name:"Player Store", type:"Rules", mode:"Portal", url:P+"/store/", used:"Store items, prices and limits." },
     { name:"Help for Finding Trivia Answers", type:"Trivia", mode:"Forum", url:F+"/topic/120402-help-for-finding-trivia-answers/", used:"The trivia section." },
     { name:"Alex's Guide to Building", type:"Build Guide", mode:"Forum", url:F+"/topic/117307-alexs-guide-to-building/", used:"Not summarized here yet." },
     { name:"New Player TPE Checklist Guide", type:"TPE Guide", mode:"Forum", url:F+"/topic/123960-new-player-tpe-checklist-guide/", used:"Not summarized here yet." },
@@ -1056,6 +1077,7 @@ const ICONS = {
   flag:'<path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/>',
   book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  case:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 13h18"/>',
   back:'<path d="M19 12H5M11 6l-6 6 6 6"/>'
 };
 const icon = (n, cls = "ic") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[n] || ""}</svg>`;
@@ -1602,8 +1624,8 @@ function renderEarn(){
   $("#earnCards").innerHTML = g.items.map(t => {
     const extra = (t.how || t.link) ? `<details><summary>How to do it</summary>${t.how ? `<p>${esc(t.how)}</p>` : ""}${t.link ? `<p>${ext(t.link[0], t.link[1])}</p>` : ""}</details>` : "";
     return `<article class="task ${t.kind === "uncapped" ? "unc" : ""}">
-      <div class="top"><span class="ti">${icon(iconFor(t.name))}</span><h4>${esc(t.name)}</h4><div class="big">${esc(t.tpe)}<span>TPE</span></div></div>
-      <div class="req">${esc(t.req)} <span class="tag ${t.kind}">${t.kind === "capped" ? "Capped" : "Uncapped"}</span>${t.check ? ' <span class="tag check-it">Confirm value</span>' : ""}</div>
+      <div class="top"><span class="ti">${icon(t.icon || (g.id === "store" ? "card" : iconFor(t.name)))}</span><h4>${esc(t.name)}</h4>${t.tpe != null ? `<div class="big ${String(t.tpe).length > 4 ? "long" : ""}">${esc(t.tpe)}<span>TPE</span></div>` : ""}</div>
+      <div class="req">${esc(t.req)} ${t.kind ? `<span class="tag ${t.kind}">${t.kind === "capped" ? "Capped" : "Uncapped"}</span>` : ""}${t.check ? ' <span class="tag check-it">Confirm value</span>' : ""}</div>
       <p>${esc(t.text)}</p>${extra}</article>`;
   }).join("");
 }
